@@ -1,4 +1,4 @@
-# ICS-Fall23-Fudan-Website
+# ICS-Fall24-Fudan-Website
 
 ## Install
 

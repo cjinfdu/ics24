@@ -1,9 +1,9 @@
 nav:
   Home: /
   Staff: /staff/
-  Github: https://github.com/cjinfdu/ics
+  Github: https://github.com/cjinfdu/ics24
 
-projects_url: https://github.com/cjinfdu/ics
+projects_url: https://github.com/cjinfdu/ics24
 
 customize:
     gravatar:
@@ -36,7 +36,7 @@ rss: false
 # Plugins
 plugins:
     disqus_shortname: # Disqus Comments Shortname
-    google_analytics: # enter the tracking ID for your Google Analytics
+    google_analytics24: # enter the tracking ID for your Google Analytics24
 
 # Miscellaneous
 miscellaneous:
