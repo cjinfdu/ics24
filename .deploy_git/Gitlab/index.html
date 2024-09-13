@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="Lab0 -- GitLab 实验介绍  你需要学会使用一些基本的git功能。 这个实验非强制性要求，但学会使用git是大有裨益的  实验指引  进入课堂  你需要注册一个github账号 点击加入github classroom 你将显示如下页面：    1   选择和你对应的学号&#x2F;姓名 完成后：    2   这个链接是你的远程仓库（你只能访问自己的，需要保持github的登录状态）  创建本">
+<meta property="og:type" content="article">
+<meta property="og:title" content="COMP130201.02 计算机系统基础">
+<meta property="og:url" content="https://cjinfdu.github.io/ics24/Gitlab/index.html">
+<meta property="og:site_name" content="COMP130201.02 计算机系统基础">
+<meta property="og:description" content="Lab0 -- GitLab 实验介绍  你需要学会使用一些基本的git功能。 这个实验非强制性要求，但学会使用git是大有裨益的  实验指引  进入课堂  你需要注册一个github账号 点击加入github classroom 你将显示如下页面：    1   选择和你对应的学号&#x2F;姓名 完成后：    2   这个链接是你的远程仓库（你只能访问自己的，需要保持github的登录状态）  创建本">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cjinfdu.github.io/ics24/Gitlab/1.png">
+<meta property="og:image" content="https://cjinfdu.github.io/ics24/Gitlab/2.png">
+<meta property="article:published_time" content="2024-09-12T06:55:50.000Z">
+<meta property="article:modified_time" content="2024-09-12T06:55:50.000Z">
+<meta property="article:author" content="FDUICS-2024助教组">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cjinfdu.github.io/ics24/Gitlab/1.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/ics24/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/ics24/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/ics24/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>COMP130201.02 计算机系统基础</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ics24/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/ics24/">Home</a></li><!--
+     --><!--
+       --><li><a href="/ics24/staff/">Staff</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/cjinfdu/ics">Github</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/ics24/ICS%E5%AE%9E%E9%AA%8C%E5%85%A5%E9%97%A8%E6%89%8B%E5%86%8C/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://cjinfdu.github.io/ics24/Gitlab/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://cjinfdu.github.io/ics24/Gitlab/&text="><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://cjinfdu.github.io/ics24/Gitlab/&is_video=false&description="><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: https://cjinfdu.github.io/ics24/Gitlab/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://cjinfdu.github.io/ics24/Gitlab/&name=&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://cjinfdu.github.io/ics24/Gitlab/&t="><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lab0----gitlab"><span class="toc-number">1.</span> <span class="toc-text">Lab0 -- GitLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">实验介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%BC%95"><span class="toc-number">1.2.</span> <span class="toc-text">实验指引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.3.</span> <span class="toc-text">#参考资料</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">FDUICS-2024助教组</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-09-12T06:55:50.000Z" class="dt-published" itemprop="datePublished">2024-09-12</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content e-content" itemprop="articleBody">
+    <h1 id="lab0----gitlab">Lab0 -- GitLab</h1>
+<h2 id="实验介绍">实验介绍</h2>
+<ul>
+<li>你需要学会使用一些基本的git功能。</li>
+<li>这个实验非强制性要求，但学会使用git是大有裨益的</li>
+</ul>
+<h2 id="实验指引">实验指引</h2>
+<ul>
+<li>进入课堂
+<ul>
+<li><p>你需要注册一个<a
+target="_blank" rel="noopener" href="https://github.com/">github</a>账号</p></li>
+<li><p>点击加入<a target="_blank" rel="noopener" href="https://classroom.github.com/a/VxWMuuOe">github
+classroom</a></p></li>
+<li><p>你将显示如下页面：</p></li>
+</ul>
+<figure>
+<img src="1.png" alt="1" />
+<figcaption aria-hidden="true">1</figcaption>
+</figure>
+<ul>
+<li><p>选择和你对应的学号/姓名</p></li>
+<li><p>完成后：</p></li>
+</ul>
+<figure>
+<img src="2.png" alt="2" />
+<figcaption aria-hidden="true">2</figcaption>
+</figure>
+<ul>
+<li>这个链接是你的远程仓库（你只能访问自己的，需要保持github的登录状态）</li>
+</ul></li>
+<li>创建本地仓库（你也可以直接点进链接，直接更新远程仓库，但是推荐使用本地仓库）
+<ul>
+<li>打开IDE（以vscode为例）</li>
+<li>创建并打开本次实验的文件夹</li>
+<li>在终端运行<code>git clone xxxx</code>(将xxxx替换为刚刚获取的链接)，你会发现文件夹下有本次lab的内容</li>
+</ul></li>
+<li>修改本地仓库
+<ul>
+<li>你只需要成功上传一个文件，可以是任何内容（例如对本课程的期待？）</li>
+</ul></li>
+<li>上传！
+<ul>
+<li><p>在终端运行以下指令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br><span class="line">git commit -m &quot;xxx(可以是你的提交注释)&quot;</span><br><span class="line">git push</span><br></pre></td></tr></table></figure></li>
+<li><p>你也可以使用vscode自带的提交功能</p></li>
+</ul></li>
+</ul>
+<h2 id="参考资料">#参考资料</h2>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV12L41147r7?vd_source=4c29bc15f944e68c9ed01279da29e70e">github
+classroom的使用</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/ics24/">Home</a></li>
+        
+          <li><a href="/ics24/staff/">Staff</a></li>
+        
+          <li><a target="_blank" rel="noopener" href="https://github.com/cjinfdu/ics">Github</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#lab0----gitlab"><span class="toc-number">1.</span> <span class="toc-text">Lab0 -- GitLab</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.1.</span> <span class="toc-text">实验介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%BC%95"><span class="toc-number">1.2.</span> <span class="toc-text">实验指引</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">1.3.</span> <span class="toc-text">#参考资料</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://cjinfdu.github.io/ics24/Gitlab/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://cjinfdu.github.io/ics24/Gitlab/&text="><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://cjinfdu.github.io/ics24/Gitlab/&is_video=false&description="><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=&body=Check out this article: https://cjinfdu.github.io/ics24/Gitlab/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://cjinfdu.github.io/ics24/Gitlab/&title="><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://cjinfdu.github.io/ics24/Gitlab/&name=&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://cjinfdu.github.io/ics24/Gitlab/&t="><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2024
+    FDUICS-2024助教组
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/ics24/">Home</a></li><!--
+     --><!--
+       --><li><a href="/ics24/staff/">Staff</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="https://github.com/cjinfdu/ics">Github</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/ics24/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
