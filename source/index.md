@@ -13,16 +13,17 @@ School of Computer Science, Fudan University
 
 ## News
 
-- **[Sep 11, 2024]** [Gitlab](Gitlab) is released.
-- **[Sep 11, 2024]** [ICS实验入门手册](ICS实验入门手册) is released.
-- **[Sep 11, 2024]** Course Website is online.
+<!-- - **[Sep 19, 2024]** [Gitlab](Gitlab) is released. -->
+- **[Sep 14, 2024]** [ICS实验入门手册](ICS实验入门手册) is released.
+- **[Sep 14 2024]** Course Website is online.
 
 ## Schedule
 
 | Num  | Date       | Subject                       | Assignment                                          |
 | :--- | :--------- | :---------------------------- | :-------------------------------------------------- |
 | 01   | 09/06/2024 | 数的表示 I                     |                                                     |
-| 02   | 09/11/2024 | 环境配置 & Gitlab              | [Lab0-Gitlab](Gitlab)                               |
+| 02   | 09/12/2024 | 环境配置                       |                                                     |
+| 03   | 09/13/2024 | 数的表示 II                    |                                                     |
 ---
 ```cpp
 #include <stdio.h>
