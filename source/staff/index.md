@@ -71,24 +71,25 @@ title: staff
 </div>
 </div>
 <div style="flex: 1; display: flex; align-self: flex-start;">
-<div><image src=".JPG" style="width: 90px; height: 90px; border-radius:4%!important; margin-right: 1rem!important;"></image></div>
+<div><image src="houze.jpg" style="width: 90px; height: 90px; border-radius:4%!important; margin-right: 1rem!important;"></image></div>
 <div style="flex: 1;">
   <h3 style="margin-top: 0; margin-bottom: 0rem; color: #0e419c">徐厚泽</h3>
   <p style="margin-block-start: 0em; margin-block-end: 0em; font-size=14px; color: #6c757d;">22307110054@m.fudan.edu.cn</p>
+  <p>🔀 GitLab</p>
 </div>
 </div>
 </div>
 
 <div style="display: flex; margin-bottom: 4.5rem!important; margin-top: 2rem">
 <div style="flex: 1; display: flex; align-self: flex-start; padding-right: 25px;">
-<div><image src=".jpg" style="width: 90px; height: 90px; border-radius:4%!important; margin-right: 1rem!important;"></image></div>
+<div><image src="yuchen.jpg" style="width: 90px; height: 90px; border-radius:4%!important; margin-right: 1rem!important;"></image></div>
 <div style="flex: 1;">
   <h3 style="margin-top: 0; margin-bottom: 0rem; color: #0e419c">王雨晨</h3>
   <p style="margin-block-start: 0em; margin-block-end: 0em; font-size=14px; color: #6c757d;">21307130314@m.fudan.edu.cn</p>
 </div>
 </div>
 <div style="flex: 1; display: flex; align-self: flex-start;">
-<div><image src=".jpg" style="width: 90px; height: 90px; border-radius:4%!important; margin-right: 1rem!important;"></image></div>
+<div><image src="zenghao.jpg" style="width: 90px; height: 90px; border-radius:4%!important; margin-right: 1rem!important;"></image></div>
 <div style="flex: 1;">
   <h3 style="margin-top: 0; margin-bottom: 0rem; color: #0e419c">李增昊</h3>
   <p style="margin-block-start: 0em; margin-block-end: 0em; font-size=14px; color: #6c757d;">22307130108@m.fudan.edu.cn</p>
