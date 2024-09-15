@@ -25,7 +25,36 @@ School of Computer Science, Fudan University
 | 02   | 09/12/2024 | 环境配置                       |                                                     |
 | 03   | 09/13/2024 | 数的表示 II                    |                                                     |
 ---
+
 ```cpp
+#include <iostream>
+#include <coroutine>
+
+struct task
+{
+    struct promise_type
+    {
+        task get_return_object() { return {}; }
+        std::suspend_never initial_suspend() { return {}; }
+        std::suspend_never final_suspend() noexcept { return {}; }
+        void return_void() {}
+        void unhandled_exception() {}
+    };
+};
+
+task hello()
+{
+    std::cout << "Hello, ICS 2024!" << std::endl;
+    co_return;
+}
+
+int main()
+{
+    hello();
+}
+```
+
+<!-- ```cpp
 #include <stdio.h>
 
 void trans(int M, int N, int A[M][N], int B[N][M])
@@ -49,7 +78,7 @@ int main()
     printf("try it, and wait for a year\n");
     trans(256, 256, A, B);
 }
-```
+``` -->
 
 <!--
 ```cpp
