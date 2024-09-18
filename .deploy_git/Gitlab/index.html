@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://cjinfdu.github.io/ics24/GitLab/9.png">
 <meta property="og:image" content="https://cjinfdu.github.io/ics24/GitLab/11.png">
 <meta property="article:published_time" content="2024-09-14T06:59:14.522Z">
-<meta property="article:modified_time" content="2024-09-18T08:02:36.452Z">
+<meta property="article:modified_time" content="2024-09-18T11:44:57.814Z">
 <meta property="article:author" content="FDUICS-2024助教组">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cjinfdu.github.io/ics24/GitLab/3.png">
@@ -155,14 +155,14 @@
       
         <time datetime="2024-09-14T06:59:14.522Z" class="dt-published" itemprop="datePublished">2024-09-14</time>
         
-        (Updated: <time datetime="2024-09-18T08:02:36.452Z" class="dt-updated" itemprop="dateModified">2024-09-18</time>)
+        (Updated: <time datetime="2024-09-18T11:44:57.814Z" class="dt-updated" itemprop="dateModified">2024-09-18</time>)
         
       
     </div>
 
 
         <!-- 
-          (Updated: <time datetime="2024-09-18T08:02:36.452Z" class="dt-updated" itemprop="dateModified">2024-09-18</time>)
+          (Updated: <time datetime="2024-09-18T11:44:57.814Z" class="dt-updated" itemprop="dateModified">2024-09-18</time>)
          -->
       </p>
       
@@ -194,16 +194,31 @@
 <ul>
 <li>在 github classroom 中接受作业</li>
 <li>将作业内容 clone 至本地（虚拟机）</li>
-<li>修改本地仓库，上传一个任意文件，并推送至远程仓库</li>
+<li>修改本地仓库，上传一个文件，并推送至远程仓库</li>
 </ul>
 </li>
 <li><p>（非必需，但推荐）简单学习一下 git 的常用指令</p>
+</li>
+<li><p><strong>完成本次作业需要一次成功的commit，提交内容见下文</strong></p>
 </li>
 </ul>
 <h2 id="三、实验指引"><a href="#三、实验指引" class="headerlink" title="三、实验指引"></a>三、实验指引</h2><ul>
 <li><p>git 的安装</p>
 <ul>
-<li>参考<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git">这个网站</a></li>
+<li><p>参考<a target="_blank" rel="noopener" href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git">这个网站</a></p>
+</li>
+<li><p>本课程只需要在linux环境下安装git，具体流程为：</p>
+<ul>
+<li><p>打开终端，更新软件包列表：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装 Git：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>验证安装是否成功：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git --version</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><p>你需要注册一个 <a target="_blank" rel="noopener" href="https://github.com/">github</a> 账号</p>
@@ -270,14 +285,23 @@
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone xxxx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(将 xxxx 替换为刚刚获取的 SSH)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">git <span class="built_in">clone</span> 指令用于将远程仓库克隆到本地</span></span><br></pre></td></tr></table></figure>
 
 <p><img src="/ics24/GitLab/8.png"></p>
-</li>
-</ul>
 <p>你会发现当前目录下有一个文件夹</p>
-<p>  <img src="/ics24/GitLab/10.png"></p>
+<p><img src="/ics24/GitLab/10.png"></p>
+</li>
+<li><p><strong>NOTE:</strong> 如果你是第一次使用git，你需要配置你的用户信息：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的姓名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的邮箱地址&quot;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><code>user.name</code>：设置提交者的姓名。</li>
+<li><code>user.email</code>：设置提交者的邮箱。</li>
+</ul>
+<p>例如：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;Li Hua&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;lihua@example.com&quot;</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 </li>
 <li><p>修改本地仓库（vscode 打开）<br><img src="/ics24/GitLab/9.png"></p>
 <ul>
-<li>你只需要成功上传一个文件，可以是任何内容（例如一个简单的 helloworld.c，或是对本课程的期待？）（但最好不要是 .doc&#x2F;.docx 文件，文本文件推荐上传 .md 文件）</li>
+<li>你需要成功上传一个文件，格式为.pdf&#x2F;.md，内容可以是对这门课的期待<del>或者是一只猫猫？</del></li>
 </ul>
 </li>
 <li><p>上传！</p>

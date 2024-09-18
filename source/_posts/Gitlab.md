@@ -22,15 +22,36 @@ email: 22307110054@m.fudan.edu.cn
 * github classroom 相关（也是今后 lab 的发布与提交流程）：
   * 在 github classroom 中接受作业
   * 将作业内容 clone 至本地（虚拟机）
-  * 修改本地仓库，上传一个任意文件，并推送至远程仓库
+  * 修改本地仓库，上传一个文件，并推送至远程仓库
 
 * （非必需，但推荐）简单学习一下 git 的常用指令
+
+* **完成本次作业需要一次成功的commit，提交内容见下文**
 
 ## 三、实验指引
 
 * git 的安装
   
   * 参考[这个网站](https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%AE%89%E8%A3%85-Git)
+
+  * 本课程只需要在linux环境下安装git，具体流程为：
+    * 打开终端，更新软件包列表：
+
+      ```bash
+      sudo apt update
+      ```
+
+    * 安装 Git：
+
+      ```bash
+      sudo apt install git
+      ```
+
+    * 验证安装是否成功：
+
+      ```bash
+      git --version
+      ```
 
 * 你需要注册一个 [github](https://github.com/) 账号
 * github 配置 **ssh key**
@@ -122,13 +143,30 @@ email: 22307110054@m.fudan.edu.cn
 
     ![](8.png)
 
-  你会发现当前目录下有一个文件夹
+    你会发现当前目录下有一个文件夹
 
     ![](10.png)
 
+  * **NOTE:** 如果你是第一次使用git，你需要配置你的用户信息：
+
+    ```bash
+    git config --global user.name "你的姓名"
+    git config --global user.email "你的邮箱地址"
+    ```
+
+    * `user.name`：设置提交者的姓名。
+    * `user.email`：设置提交者的邮箱。
+
+    例如：
+
+    ```bash
+    git config --global user.name "Li Hua"
+    git config --global user.email "lihua@example.com"
+    ```
+
 * 修改本地仓库（vscode 打开）
   ![](9.png)
-  * 你只需要成功上传一个文件，可以是任何内容（例如一个简单的 helloworld.c，或是对本课程的期待？）（但最好不要是 .doc/.docx 文件，文本文件推荐上传 .md 文件）
+  * 你需要成功上传一个文件，格式为.pdf/.md，内容可以是对这门课的期待~~或者是一只猫猫？~~
 
 * 上传！
   * 你需要先在终端进入克隆下来的文件夹
