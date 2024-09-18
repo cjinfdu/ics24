@@ -1611,6 +1611,7 @@ code {
   color: #757575;
   font-size: 0.9em;
   transform: scale(1);
+  display: none;
 }
 .highlight figcaption a {
   float: right;
