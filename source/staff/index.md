@@ -83,7 +83,6 @@ title: staff
   <p style="margin-block-start: 0em; margin-block-end: 0em; font-size=14px; color: #6c757d;">22307130440@m.fudan.edu.cn</p>
   <p>🌐 Website</p>
   <p>💣 BombLab</p>
-  <p>愉悦前行——始终勇往直前</p>
 </div>
 </div>
 </div>
