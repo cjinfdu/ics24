@@ -1,5 +1,7 @@
 ---
 title: ICS Lab0-GitLab
+author: 徐厚泽
+email: 22307110054@m.fudan.edu.cn
 date: 2024-09-18
 ---
 
