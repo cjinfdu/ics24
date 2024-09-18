@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://cjinfdu.github.io/ics24/GitLab/9.png">
 <meta property="og:image" content="https://cjinfdu.github.io/ics24/GitLab/11.png">
 <meta property="article:published_time" content="2024-09-14T06:59:14.522Z">
-<meta property="article:modified_time" content="2024-09-18T07:09:08.043Z">
+<meta property="article:modified_time" content="2024-09-18T07:25:26.737Z">
 <meta property="article:author" content="FDUICS-2024助教组">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cjinfdu.github.io/ics24/GitLab/3.png">
@@ -210,10 +210,7 @@ key。如果你以后希望将本地的仓库推送到远程，只要在本地�
 <li><p>2.检查是否已经存在 ssh key。终端运行：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ls ~/.ssh</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">列出 ~/.ssh 目录下的所有内容，相当于查看 ~/.ssh 目录是否存在</span></span><br></pre></td></tr></table></figure>
 <p>如果输出如下， 则跳到第 4 步</p>
-<figure>
-<img src="3.png" alt="3" />
-<figcaption aria-hidden="true">3</figcaption>
-</figure>
+<p><img src="3.png" /></p>
 <p>若显示 <code>No such file or directory</code>，则继续进行第 3
 步</p></li>
 <li><p>3.生成 ssh key。终端运行</p>
@@ -221,36 +218,27 @@ key。如果你以后希望将本地的仓库推送到远程，只要在本地�
 <li><p>4.获取 ssh key 公钥内容（id_rsa.pub）</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash"><span class="built_in">cat</span> 命令用于连接文件并打印到标准输出设备</span></span><br></pre></td></tr></table></figure>
 <p>如下图所示：</p>
-<figure>
-<img src="4.png" alt="4" />
-<figcaption aria-hidden="true">4</figcaption>
-</figure>
+<p><img src="4.png" /></p>
 <p>复制该内容（从 ssh-rsa 开始）</p></li>
 <li><p>5.github 账号上添加公钥</p>
 <ul>
 <li>点击进入 settings - SSH and GPG keys</li>
 </ul>
-<figure>
-<img src="5.png" alt="5" />
-<figcaption aria-hidden="true">5</figcaption>
-</figure>
+<p><img src="5.png" /></p>
 <ul>
 <li>点击 "New SSH keys"，将刚刚复制的公钥粘贴，并给它起个名字，例如
 wsl-key</li>
 </ul></li>
 <li><p>6.验证是否成功</p>
-<figure>
-<img src="6.png" alt="6" />
-<figcaption aria-hidden="true">6</figcaption>
-</figure></li>
+<p><img src="6.png" /></p></li>
 </ul></li>
 <li><p>进入课堂</p>
 <ul>
 <li><p>点击加入 <a target="_blank" rel="noopener" href="https://classroom.github.com/a/S5MWFPp9">github
 classroom</a></p></li>
-<li><p>你将显示如下页面： <img src="1.png" alt="1" /></p></li>
+<li><p>你将显示如下页面： <img src="1.png" /></p></li>
 <li><p>选择和你对应的学号/姓名</p></li>
-<li><p>完成后： <img src="2.png" alt="2" /></p></li>
+<li><p>完成后： <img src="2.png" /></p></li>
 <li><p>这个链接是你的远程仓库（你只能访问自己的，需要保持 github
 的登录状态）</p></li>
 </ul></li>
@@ -259,23 +247,14 @@ classroom</a></p></li>
 <li><p>打开 wsl，新建一个 lab 文件夹</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入默认文件夹</span></span><br><span class="line">mkdir lab0</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">创建名为 lab0 的文件夹（你也可以在此之前创建一个总的课程文件夹，进入之后创建每个 lab 的文件夹）</span></span><br><span class="line">cd lab0</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">进入 lab0 文件夹</span></span><br></pre></td></tr></table></figure></li>
 <li><p>在网页中访问刚刚获取的链接，点击 "Code" 下的 "SSH"，复制</p>
-<figure>
-<img src="7.png" alt="7" />
-<figcaption aria-hidden="true">7</figcaption>
-</figure></li>
+<p><img src="7.png" /></p></li>
 <li><p>运行</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone xxxx</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">(将 xxxx 替换为刚刚获取的 SSH)</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">git <span class="built_in">clone</span> 指令用于将远程仓库克隆到本地</span></span><br></pre></td></tr></table></figure>
-<figure>
-<img src="8.png" alt="8" />
-<figcaption aria-hidden="true">8</figcaption>
-</figure></li>
+<p><img src="8.png" /></p></li>
 </ul>
 <p>你会发现当前目录下有一个文件夹</p>
-<figure>
-<img src="10.png" alt="10" />
-<figcaption aria-hidden="true">10</figcaption>
-</figure></li>
-<li><p>修改本地仓库（vscode 打开） <img src="9.png" alt="9" /></p>
+<p><img src="10.png" /></p></li>
+<li><p>修改本地仓库（vscode 打开） <img src="9.png" /></p>
 <ul>
 <li>你只需要成功上传一个文件，可以是任何内容（例如一个简单的
 helloworld.c，或是对本课程的期待？）（但最好不要是 .doc/.docx
@@ -283,8 +262,7 @@ helloworld.c，或是对本课程的期待？）（但最好不要是 .doc/.docx
 </ul></li>
 <li><p>上传！</p>
 <ul>
-<li><p>你需要先在终端进入克隆下来的文件夹 <img src="11.png"
-alt="11" /></p></li>
+<li><p>你需要先在终端进入克隆下来的文件夹 <img src="11.png" /></p></li>
 <li><p>在终端运行以下指令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">提交当前文件夹下的所有更改到暂存区</span></span><br><span class="line">git commit -m &quot;xxx(可以是你的提交注释)&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将暂存区的所有更改提交到本地仓库</span></span><br><span class="line">git push</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将本地仓库推送到远程</span></span><br></pre></td></tr></table></figure></li>
 <li><p>你也可以使用 vscode 自带的提交功能</p></li>
