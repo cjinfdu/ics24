@@ -27,7 +27,7 @@ School of Computer Science, Fudan University
 | 03   | 09/13/2024 | 数的表示 II                    |                                                     |
 | 04   | 09/19/2024 | GitLab                       | [Lab0-GitLab](GitLab) (Due: 09/25/2024)              |
 | 05   | 09/20/2024 | 机器码 I                      |                                                     |
-| 06   | 09/26/2024 | DataLab发布                   | [Lab1-DataLab](DataLab) (Due: 10/09/2024)           |
+| 06   | 09/26/2024 | DataLab发布                   | [Lab1-DataLab](DataLab) (Due: 10/10/2024)           |
 ---
 
 ```cpp
