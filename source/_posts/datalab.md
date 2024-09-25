@@ -1,4 +1,6 @@
-# ICS2024 Lab1-DataLab
+---
+title: DataLab
+---
 
 > Deadline: 2024.10.10 8:00AM
 
@@ -215,7 +217,7 @@ git push
 
 * http://csapp.cs.cmu.edu/3e/labs.html （lab 来源，本实验相较原文件有改动）
 
-* 本文档编写时参考了 22, 23 年的实验文档 。
+* 本文档编写时参考了22, 23年的实验文档。
 
 * 负责助教:
   * 伊凡 21307130047@m.fudan.edu.cn
