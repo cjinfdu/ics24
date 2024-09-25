@@ -20,7 +20,7 @@ CSAPP 第一章配套实验。
 
 ### （1）下载
 
-从 `github classroom` 拉取`ICS2024_datalab` 文件夹，其中的内容就是本次实验用到的的文件了，拉取指令如下：
+从 [github classroom](https://classroom.github.com/a/dZIir3U_) 拉取`ICS2024_datalab` 文件夹，其中的内容就是本次实验用到的的文件了，拉取指令如下：
 
 ```shell
 git clone xxx  # 将 xxx 替换为对应链接
