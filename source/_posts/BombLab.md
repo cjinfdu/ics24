@@ -447,7 +447,7 @@ $ cat password.txt - | ./bomb
 
 * 2023ICS BombLab：
 
-<img src="meme.png" style="width: 320px; height: 320px;display: flex; justify-content: center; align-items: center;">
+<img src="meme.jpg" style="width: 320px; height: 320px;display: flex; justify-content: center; align-items: center;">
 
 
 
