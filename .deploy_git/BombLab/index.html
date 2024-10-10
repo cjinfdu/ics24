@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Deadline：2024-10-23 23:59:59  一、实验简介CSAPP 第三章配套实验。 本学期，我们对 CSAPP 的经典 BombLab 进行了全面再次升级（包括剧情）。你将综合运用 x86 汇编语言 &#x2F; Linux &#x2F; gdb &#x2F; 数据结构 等的相关知识，解决一系列挑战，提升逆向工程技能。 本次 Lab 由两个部分组成：  一个互动式 gdb 教程">
+    <meta name="description" content="Deadline：2024-10-30 23:59:59  一、实验简介 CSAPP 第三章配套实验。 本学期，我们对 CSAPP 的经典 BombLab 进行了全面再次升级（包括剧情）。你将综合运用 x86 汇编语言 &#x2F; Linux &#x2F; gdb &#x2F; 数据结构 等的相关知识，解决一系列挑战，提升逆向工程技能。 本次 Lab 由两个部分组成：  一个互动式 gdb 教程：gdb-tutor 一个包">
 <meta property="og:type" content="article">
 <meta property="og:title" content="BombLab">
 <meta property="og:url" content="https://cjinfdu.github.io/ics24/BombLab/index.html">
 <meta property="og:site_name" content="COMP130201.02 计算机系统基础">
-<meta property="og:description" content="Deadline：2024-10-23 23:59:59  一、实验简介CSAPP 第三章配套实验。 本学期，我们对 CSAPP 的经典 BombLab 进行了全面再次升级（包括剧情）。你将综合运用 x86 汇编语言 &#x2F; Linux &#x2F; gdb &#x2F; 数据结构 等的相关知识，解决一系列挑战，提升逆向工程技能。 本次 Lab 由两个部分组成：  一个互动式 gdb 教程">
+<meta property="og:description" content="Deadline：2024-10-30 23:59:59  一、实验简介 CSAPP 第三章配套实验。 本学期，我们对 CSAPP 的经典 BombLab 进行了全面再次升级（包括剧情）。你将综合运用 x86 汇编语言 &#x2F; Linux &#x2F; gdb &#x2F; 数据结构 等的相关知识，解决一系列挑战，提升逆向工程技能。 本次 Lab 由两个部分组成：  一个互动式 gdb 教程：gdb-tutor 一个包">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://cjinfdu.github.io/ics24/BombLab/cfg.png">
 <meta property="og:image" content="https://cjinfdu.github.io/ics24/BombLab/meme.jpg">
 <meta property="og:image" content="https://cjinfdu.github.io/ics24/BombLab/PlotAdvices.png">
 <meta property="article:published_time" content="2024-10-09T15:35:23.670Z">
-<meta property="article:modified_time" content="2024-10-09T23:54:36.217Z">
+<meta property="article:modified_time" content="2024-10-10T01:42:24.530Z">
 <meta property="article:author" content="FDUICS-2024助教组">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://cjinfdu.github.io/ics24/BombLab/cfg.png">
@@ -100,7 +100,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">一、实验简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E5%89%A7%E6%83%85"><span class="toc-number">2.</span> <span class="toc-text">二、实验剧情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">三、实验内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E5%8A%A8%E5%BC%8F-gdb-%E6%95%99%E7%A8%8B-gdb-tutor"><span class="toc-number">3.1.</span> <span class="toc-text">互动式 gdb 教程 gdb-tutor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-bomb"><span class="toc-number">3.2.</span> <span class="toc-text">二进制炸弹 bomb++</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">四、实验步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8F%90%E4%BA%A4%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">五、提交事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82"><span class="toc-number">5.1.</span> <span class="toc-text">内容要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95"><span class="toc-number">5.2.</span> <span class="toc-text">提交方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E5%88%86"><span class="toc-number">5.3.</span> <span class="toc-text">评分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">6.</span> <span class="toc-text">六、实验指导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">6.1.</span> <span class="toc-text">动态分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">6.2.</span> <span class="toc-text">静态分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E6%B1%87%E7%BC%96"><span class="toc-number">6.2.1.</span> <span class="toc-text">反汇编</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E6%B1%87%E7%BC%96"><span class="toc-number">6.2.2.</span> <span class="toc-text">阅读汇编</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="toc-number">6.2.2.1.</span> <span class="toc-text">条件判断</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="toc-number">6.2.2.2.</span> <span class="toc-text">循环结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#switch-case-%E7%BB%93%E6%9E%84"><span class="toc-number">6.2.2.3.</span> <span class="toc-text">switch case 结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%92%E5%BD%92"><span class="toc-number">6.2.2.4.</span> <span class="toc-text">递归</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#struct"><span class="toc-number">6.2.2.5.</span> <span class="toc-text">struct</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#C-%E8%99%9A%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.2.6.</span> <span class="toc-text">C++虚函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%AE%9E%E9%AA%8C%E5%B8%AE%E5%8A%A9"><span class="toc-number">6.3.</span> <span class="toc-text">其他实验帮助</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%AE%A1%E9%81%93"><span class="toc-number">6.3.1.</span> <span class="toc-text">重定向与管道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%9C%E8%B6%85%E7%BA%B2%E2%80%9D%E7%9A%84%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4"><span class="toc-number">6.3.2.</span> <span class="toc-text">“超纲”的汇编指令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-amp-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text">七、参考资料 &amp; 推荐资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%AE%9E%E9%AA%8C%E5%BD%A9%E8%9B%8B"><span class="toc-number">8.</span> <span class="toc-text">八、实验彩蛋</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">一、实验简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%AE%9E%E9%AA%8C%E5%89%A7%E6%83%85"><span class="toc-number">2.</span> <span class="toc-text">二、实验剧情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">三、实验内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E5%8A%A8%E5%BC%8F-gdb-%E6%95%99%E7%A8%8B-gdb-tutor"><span class="toc-number">3.1.</span> <span class="toc-text">互动式 gdb 教程 gdb-tutor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-bomb"><span class="toc-number">3.2.</span> <span class="toc-text">二进制炸弹 bomb++</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">四、实验步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E6%8F%90%E4%BA%A4%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">五、提交事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82"><span class="toc-number">5.1.</span> <span class="toc-text">内容要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95"><span class="toc-number">5.2.</span> <span class="toc-text">提交方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E5%88%86"><span class="toc-number">5.3.</span> <span class="toc-text">评分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">6.</span> <span class="toc-text">六、实验指导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">6.1.</span> <span class="toc-text">动态分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">6.2.</span> <span class="toc-text">静态分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E6%B1%87%E7%BC%96"><span class="toc-number">6.2.1.</span> <span class="toc-text">反汇编</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E6%B1%87%E7%BC%96"><span class="toc-number">6.2.2.</span> <span class="toc-text">阅读汇编</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="toc-number">6.2.2.1.</span> <span class="toc-text">条件判断</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="toc-number">6.2.2.2.</span> <span class="toc-text">循环结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#switch-case-%E7%BB%93%E6%9E%84"><span class="toc-number">6.2.2.3.</span> <span class="toc-text">switch case 结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%92%E5%BD%92"><span class="toc-number">6.2.2.4.</span> <span class="toc-text">递归</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#struct"><span class="toc-number">6.2.2.5.</span> <span class="toc-text">struct</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c%E8%99%9A%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.2.6.</span> <span class="toc-text">C++虚函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%AE%9E%E9%AA%8C%E5%B8%AE%E5%8A%A9"><span class="toc-number">6.3.</span> <span class="toc-text">其他实验帮助</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%AE%A1%E9%81%93"><span class="toc-number">6.3.1.</span> <span class="toc-text">重定向与管道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E7%BA%B2%E7%9A%84%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4"><span class="toc-number">6.3.2.</span> <span class="toc-text">“超纲”的汇编指令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text">七、参考资料 &amp; 推荐资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E5%AE%9E%E9%AA%8C%E5%BD%A9%E8%9B%8B"><span class="toc-number">8.</span> <span class="toc-text">八、实验彩蛋</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -135,34 +135,59 @@
 
   <div class="content" itemprop="articleBody">
     <blockquote>
-<p>Deadline：2024-10-23 23:59:59</p>
+<p>Deadline：2024-10-30 23:59:59</p>
 </blockquote>
-<h2 id="一、实验简介"><a href="#一、实验简介" class="headerlink" title="一、实验简介"></a>一、实验简介</h2><p>CSAPP 第三章配套实验。</p>
-<p>本学期，我们对 CSAPP 的经典 BombLab 进行了全面再次升级（包括剧情）。你将综合运用 x86 汇编语言 &#x2F; Linux &#x2F; gdb &#x2F; 数据结构 等的相关知识，解决一系列挑战，提升逆向工程技能。</p>
+<h2 id="一实验简介">一、实验简介</h2>
+<p>CSAPP 第三章配套实验。</p>
+<p>本学期，我们对 CSAPP 的经典 BombLab
+进行了全面再次升级（包括剧情）。你将综合运用 x86 汇编语言 / Linux / gdb
+/ 数据结构 等的相关知识，解决一系列挑战，提升逆向工程技能。</p>
 <p>本次 Lab 由两个部分组成：</p>
 <ul>
 <li>一个互动式 gdb 教程：gdb-tutor</li>
 <li>一个包含若干个关卡的二进制炸弹：bomb++</li>
 </ul>
 <p>你的目标是拆除炸弹，无伤通过 bomb++ 的所有关卡。</p>
-<h2 id="二、实验剧情"><a href="#二、实验剧情" class="headerlink" title="二、实验剧情"></a>二、实验剧情</h2><blockquote>
-<p>前排提醒：剧情内容仅为增加实验趣味性所设，<strong>对解题本身毫无影响</strong>！（也就是说如果不愿意看，可以直接在 <code>config.txt</code> 中将 <code>story_mode</code> 设定为 false）</p>
+<h2 id="二实验剧情">二、实验剧情</h2>
+<blockquote>
+<p>前排提醒：剧情内容仅为增加实验趣味性所设，<strong>对解题本身毫无影响</strong>！（也就是说如果不愿意看，可以直接在
+<code>config.txt</code> 中将 <code>story_mode</code> 设定为 false）</p>
 </blockquote>
-<p>2034 年，人工智能（AI）已深入渗透人类生活的每个角落，所有设备都由<strong>中央智能实体（CIE）</strong>所控制。一天，作为全球顶尖科学家之一的你，收到来自 CIE 的紧急消息：一个由古早设计者植入的“炸弹”——隐藏在系统核心代码中的病毒——已经在所有 AI 系统中传播，预计将在 14 天后引爆，可能引发全球性的混乱。</p>
-<p>你的使命是回到 2024 年，在第一个带病毒的 AI 设备出现的时刻，从根源解决这枚“炸弹”。你必须深入“炸弹”的汇编代码，寻找若干口令来关闭“炸弹”。在这一过程中，你将不断发现被隐藏的真相……</p>
-<h2 id="三、实验内容"><a href="#三、实验内容" class="headerlink" title="三、实验内容"></a>三、实验内容</h2><h3 id="互动式-gdb-教程-gdb-tutor"><a href="#互动式-gdb-教程-gdb-tutor" class="headerlink" title="互动式 gdb 教程 gdb-tutor"></a>互动式 gdb 教程 gdb-tutor</h3><blockquote>
+<p>2034
+年，人工智能（AI）已深入渗透人类生活的每个角落，所有设备都由<strong>中央智能实体（CIE）</strong>所控制。一天，作为全球顶尖科学家之一的你，收到来自
+CIE
+的紧急消息：一个由古早设计者植入的“炸弹”——隐藏在系统核心代码中的病毒——已经在所有
+AI 系统中传播，预计将在 14 天后引爆，可能引发全球性的混乱。</p>
+<p>你的使命是回到 2024 年，在第一个带病毒的 AI
+设备出现的时刻，从根源解决这枚“炸弹”。你必须深入“炸弹”的汇编代码，寻找若干口令来关闭“炸弹”。在这一过程中，你将不断发现被隐藏的真相……</p>
+<h2 id="三实验内容">三、实验内容</h2>
+<h3 id="互动式-gdb-教程-gdb-tutor">互动式 gdb 教程 gdb-tutor</h3>
+<blockquote>
 <p>本部分不占分，也不要求必须完成。</p>
 </blockquote>
-<p>在挑战 BombLab 时，gdb 是一个非常有用的工具。为了降低本 Lab 的上手难度，并帮助大家掌握 gdb，认识这一强大的工具，我们编写了这个互动式的 gdb 教程。</p>
-<p>使用方法：直接执行 <code>./gdb-tutor</code>，教程源码见 <code>gdb-tutor.c</code>。</p>
-<h3 id="二进制炸弹-bomb"><a href="#二进制炸弹-bomb" class="headerlink" title="二进制炸弹 bomb++"></a>二进制炸弹 bomb++</h3><p>这是一个包含若干关卡的可执行文件。只有你输入满足条件的关卡口令时，才能通过该关卡，到达下一个关卡。如果口令错误，炸弹就会爆炸！（程序会打印爆炸信息并立刻退出）</p>
-<p>你的目标是找到所有关卡的正确口令，让炸弹成功解除。炸弹制造者不小心给出了 <code>main.cpp</code> ，其中包含了 bomb++ 的主要流程，你可以参考这个源文件了解炸弹的大致逻辑。</p>
-<p>如果炸弹爆炸，它将会输出 <code>BOOM!!!</code> 并退出。通过每一关后都会有通关提示（并输出一段剧情）；在通关后，它将会输出 <code>Cool! your skill on Reverse Engineering is great.</code> （和普通结局剧情）；而通关真结局后，它将会输出 <code>You are really a Master of Reverse Engineering!</code> （与真结局剧情）。（详见 <code>main.cpp</code>）</p>
+<p>在挑战 BombLab 时，gdb 是一个非常有用的工具。为了降低本 Lab
+的上手难度，并帮助大家掌握
+gdb，认识这一强大的工具，我们编写了这个互动式的 gdb 教程。</p>
+<p>使用方法：直接执行 <code>./gdb-tutor</code>，教程源码见
+<code>gdb-tutor.c</code>。</p>
+<h3 id="二进制炸弹-bomb">二进制炸弹 bomb++</h3>
+<p>这是一个包含若干关卡的可执行文件。只有你输入满足条件的关卡口令时，才能通过该关卡，到达下一个关卡。如果口令错误，炸弹就会爆炸！（程序会打印爆炸信息并立刻退出）</p>
+<p>你的目标是找到所有关卡的正确口令，让炸弹成功解除。炸弹制造者不小心给出了
+<code>main.cpp</code> ，其中包含了 bomb++
+的主要流程，你可以参考这个源文件了解炸弹的大致逻辑。</p>
+<p>如果炸弹爆炸，它将会输出 <code>BOOM!!!</code>
+并退出。通过每一关后都会有通关提示（并输出一段剧情）；在通关后，它将会输出
+<code>Cool! your skill on Reverse Engineering is great.</code>
+（和普通结局剧情）；而通关真结局后，它将会输出
+<code>You are really a Master of Reverse Engineering!</code>
+（与真结局剧情）。（详见 <code>main.cpp</code>）</p>
 <blockquote>
-<p>炸弹会读取 <code>fail.txt</code> 并在爆炸时打印其内容，如果你想要很酷炫的爆炸，可以自行修改 <code>fail.txt</code> 或直接将其删去。本次实验附赠一只可爱猫猫～</p>
+<p>炸弹会读取 <code>fail.txt</code>
+并在爆炸时打印其内容，如果你想要很酷炫的爆炸，可以自行修改
+<code>fail.txt</code> 或直接将其删去。本次实验附赠一只可爱猫猫～</p>
 </blockquote>
 <p>实验各个关卡涉及的知识大致如下：</p>
-<ol>
+<ol type="1">
 <li>函数调用</li>
 <li>循环</li>
 <li>分支</li>
@@ -171,33 +196,53 @@
 <li>单调栈</li>
 </ol>
 <p>Secret. ████</p>
-<p>请注意，Secret 的解锁条件在第三关中进行了提示，或许你能在 <code>main.cpp</code> 的某个函数中发现一些违和之处……</p>
+<p>请注意，Secret 的解锁条件在第三关中进行了提示，或许你能在
+<code>main.cpp</code> 的某个函数中发现一些违和之处……</p>
 <blockquote>
 <p><strong>关于 config.txt</strong></p>
-<ol>
-<li><p>本次 BombLab 采用了个性化答案制度，即：每个人的答案会依据自己的学号发生变化。<strong>请务必填写自己的学号！</strong></p>
-<p>这一操作位于 <code>phase_0</code> 中，<strong>这个函数中的所有内容都和 bomb++ 的内容无关！不需要阅读！不需要阅读！！不需要阅读！！！</strong>（其中包括了各种 <code>EVP</code> 开头的函数）</p>
-<p>另外，助教会根据每个人的学号来判断答案，如果漏填学号或者填错学号导致的错误，助教一概不负责！</p>
-</li>
-<li><p>为了便利，本次 BombLab 提供了<strong>跳题</strong>选项！在 <code>config.txt</code> 中设置 <code>test_phase</code>，bomb++ 只会来测试相应的关卡。</p>
-<p>例如：第 3 关卡关，你可以将 <code>test_pahse</code> 设置为 <code>1, 2, 4, 5, 6</code>, 然后运行 <code>./bomb</code> 即可跳过3。</p>
-<p>请确保在提交时，<code>config.txt</code> 中，<code>test_phase</code> 被设置为 <code>1, 2, 3, 4, 5, 6</code>，以便助教们直接测试你的答案。</p>
-</li>
-<li><p>关于剧情模式：<del>两位助教讨论了一整晚想出来的剧情</del> 剧情模式是为了增加做实验过程中的乐趣所设，我们真心希望大家写 Lab 时能乐在其中！当然，如果你觉得剧情模式的大段输出影响到了你正常解题，可以在 <code>config.txt</code> 中将 <code>story_mode</code> 设置为 false。</p>
-<p>请确保在提交时，<code>config.txt</code> 中，<code>story_mode</code> 被设置为 <code>false</code>。</p>
-</li>
+<ol type="1">
+<li><p>本次 BombLab
+采用了个性化答案制度，即：每个人的答案会依据自己的学号发生变化。<strong>请务必填写自己的学号！</strong></p>
+<p>这一操作位于 <code>phase_0</code>
+中，<strong>这个函数中的所有内容都和 bomb++
+的内容无关！不需要阅读！不需要阅读！！不需要阅读！！！</strong>（其中包括了各种
+<code>EVP</code> 开头的函数）</p>
+<p>另外，助教会根据每个人的学号来判断答案，如果漏填学号或者填错学号导致的错误，助教一概不负责！</p></li>
+<li><p>为了便利，本次 BombLab 提供了<strong>跳题</strong>选项！在
+<code>config.txt</code> 中设置 <code>test_phase</code>，bomb++
+只会来测试相应的关卡。</p>
+<p>例如：第 3 关卡关，你可以将 <code>test_pahse</code> 设置为
+<code>1, 2, 4, 5, 6</code>, 然后运行 <code>./bomb</code> 即可跳过3。</p>
+<p>请确保在提交时，<code>config.txt</code> 中，<code>test_phase</code>
+被设置为
+<code>1, 2, 3, 4, 5, 6</code>，以便助教们直接测试你的答案。</p></li>
+<li><p>关于剧情模式：<del>两位助教讨论了一整晚想出来的剧情</del>
+剧情模式是为了增加做实验过程中的乐趣所设，我们真心希望大家写 Lab
+时能乐在其中！当然，如果你觉得剧情模式的大段输出影响到了你正常解题，可以在
+<code>config.txt</code> 中将 <code>story_mode</code> 设置为 false。</p>
+<p>请确保在提交时，<code>config.txt</code> 中，<code>story_mode</code>
+被设置为 <code>false</code>。</p></li>
 </ol>
 </blockquote>
-<h2 id="四、实验步骤"><a href="#四、实验步骤" class="headerlink" title="四、实验步骤"></a>四、实验步骤</h2><ul>
+<h2 id="四实验步骤">四、实验步骤</h2>
+<ul>
 <li>完整阅读本实验文档、从 github classroom 上拉取实验仓库</li>
 <li>跟随 gdb-tutor 学习 gdb 的基础使用方法</li>
-<li>按需求配置 <code>config.txt</code>，包括需要测试的关卡、是否选择开启剧情模式、学号</li>
+<li>按需求配置
+<code>config.txt</code>，包括需要测试的关卡、是否选择开启剧情模式、学号</li>
 <li>使用静态分析与动态分析方法分析 bomb++，尽力找出正确的口令</li>
 <li>编写实验报告，并在 github classroom 上提交</li>
 </ul>
-<h2 id="五、提交事项"><a href="#五、提交事项" class="headerlink" title="五、提交事项"></a>五、提交事项</h2><h3 id="内容要求"><a href="#内容要求" class="headerlink" title="内容要求"></a>内容要求</h3><p>在项目的<strong>根目录</strong>下，需要有<strong>实验报告</strong> <code>lab2_&lt;学号&gt;.pdf</code>（要求转为 pdf 格式）以及<strong>正确口令</strong> <code>password.txt</code>。注意，<code>password.txt</code> 需要满足可以用重定向秒杀 bomb++ 的要求（我们会在后面介绍什么是重定向），我们会用这个来判断你通过了几关。</p>
+<h2 id="五提交事项">五、提交事项</h2>
+<h3 id="内容要求">内容要求</h3>
+<p>在项目的<strong>根目录</strong>下，需要有<strong>实验报告</strong>
+<code>lab2_&lt;学号&gt;.pdf</code>（要求转为 pdf
+格式）以及<strong>正确口令</strong>
+<code>password.txt</code>。注意，<code>password.txt</code>
+需要满足可以用重定向秒杀 bomb++
+的要求（我们会在后面介绍什么是重定向），我们会用这个来判断你通过了几关。</p>
 <p>你的实验报告应包含以下内容：</p>
-<ol>
+<ol type="1">
 <li>姓名和学号</li>
 <li>每个关卡的推演过程（重点），如你推测的函数的功能</li>
 <li>拆弹成功的截图（请关闭剧情模式进行截图）</li>
@@ -206,20 +251,23 @@
 </ol>
 <blockquote>
 <p><strong>关于实验报告</strong></p>
-<p>实验报告是用来判断你是否 <strong>独立思考</strong> 来解决本次 Lab 的。</p>
+<p>实验报告是用来判断你是否 <strong>独立思考</strong> 来解决本次 Lab
+的。</p>
 <p>我们不希望看到冗长或表意混乱的报告，请一定不要把报告写成论文 QaQ</p>
 </blockquote>
-<h3 id="提交方法"><a href="#提交方法" class="headerlink" title="提交方法"></a>提交方法</h3><p>在终端运行以下指令：</p>
+<h3 id="提交方法">提交方法</h3>
+<p>在终端运行以下指令：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">注：需要在仓库的根目录进行操作</span></span><br><span class="line">git add password.txt lab2_&lt;学号&gt;.pdf</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">e.g. git add password.txt lab2_23307130000.pdf</span></span><br><span class="line">git commit -m &quot;xxx(可以是你的提交注释)&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将暂存区的所有更改提交到本地仓库</span></span><br><span class="line">git tag &quot;final&quot;</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">对最后一个 commit，请添加 tag: final</span></span><br><span class="line">git push</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">将本地仓库推送到远程</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="评分"><a href="#评分" class="headerlink" title="评分"></a>评分</h3><table>
+<h3 id="评分">评分</h3>
+<table>
 <thead>
 <tr>
 <th>项目</th>
 <th>分值</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>提交格式正确</td>
 <td>5%</td>
 </tr>
@@ -235,7 +283,8 @@
 <td>实验报告</td>
 <td>10%</td>
 </tr>
-</tbody></table>
+</tbody>
+</table>
 <p>另：抄袭倒扣分！！勿谓言之不预。</p>
 <blockquote>
 <p><strong>反卷斗士の承诺</strong></p>
@@ -249,16 +298,39 @@
 <li>迟交 4 天：-70%</li>
 <li>迟交 5 天及以上：-100%</li>
 </ul>
-<h2 id="六、实验指导"><a href="#六、实验指导" class="headerlink" title="六、实验指导"></a>六、实验指导</h2><p>本题本质上是一道<strong>逆向工程</strong>题，需要你在没有源代码的情况下复原程序编写者的意图与程序的逻辑。你可能会好奇，我们为什么要学习逆向工程、学习汇编：作为科班 CS 学生，你需要知道自己写出来的程序到底会变成什么样子，到底如何运行，这样你才能知道如何写出更好的程序——正是这些底层的细节将科班程序员和培训班程序员区分开来。这个 Lab 将会帮助你搞清楚机器码 &#x2F; 汇编语言具体而言如何运作。</p>
-<p>除此以外，这个 Lab 还会带你入门逆向工程。逆向工程作为信息安全的一个研究领域，有着许多有趣的应用领域——注册机、软件破解、游戏安全（如修改器、外挂）……除了这些看起来很恶意的应用场景以外，逆向工程一个非常重要的作用就是帮助白帽黑客们找到程序的漏洞，发掘程序的安全问题。不过，最纯粹的逆向工程热爱者，往往是出于自己的好奇心来逆向闭源的软件——这玩意到底怎么实现的？</p>
-<p>如果你对逆向工程感兴趣，可以试着从 <strong>CTF（Capture The Flag）</strong> 竞赛开始。逆向工程是 CTF 竞赛的一个主要领域，比赛中出题人会用各种语言、工具编写赛题，试图隐藏程序的逻辑。参赛者需要使用各种工具、结合各种资料来还原程序逻辑。在比赛与练习中，你会接触到各种软件开发技术（如 python、rust、golang、android……）、各种编码和密码学算法（如 Base64、TEA、RC4……），了解其底层的实现原理。我们学校也有相应的社团 &#x2F; CTF 战队——信息网络安全协会&#x2F;六星战队，大家可以了解一下哦~</p>
+<h2 id="六实验指导">六、实验指导</h2>
+<p>本题本质上是一道<strong>逆向工程</strong>题，需要你在没有源代码的情况下复原程序编写者的意图与程序的逻辑。你可能会好奇，我们为什么要学习逆向工程、学习汇编：作为科班
+CS
+学生，你需要知道自己写出来的程序到底会变成什么样子，到底如何运行，这样你才能知道如何写出更好的程序——正是这些底层的细节将科班程序员和培训班程序员区分开来。这个
+Lab 将会帮助你搞清楚机器码 / 汇编语言具体而言如何运作。</p>
+<p>除此以外，这个 Lab
+还会带你入门逆向工程。逆向工程作为信息安全的一个研究领域，有着许多有趣的应用领域——注册机、软件破解、游戏安全（如修改器、外挂）……除了这些看起来很恶意的应用场景以外，逆向工程一个非常重要的作用就是帮助白帽黑客们找到程序的漏洞，发掘程序的安全问题。不过，最纯粹的逆向工程热爱者，往往是出于自己的好奇心来逆向闭源的软件——这玩意到底怎么实现的？</p>
+<p>如果你对逆向工程感兴趣，可以试着从 <strong>CTF（Capture The
+Flag）</strong> 竞赛开始。逆向工程是 CTF
+竞赛的一个主要领域，比赛中出题人会用各种语言、工具编写赛题，试图隐藏程序的逻辑。参赛者需要使用各种工具、结合各种资料来还原程序逻辑。在比赛与练习中，你会接触到各种软件开发技术（如
+python、rust、golang、android……）、各种编码和密码学算法（如
+Base64、TEA、RC4……），了解其底层的实现原理。我们学校也有相应的社团 / CTF
+战队——信息网络安全协会/六星战队，大家可以了解一下哦~</p>
 <p>在逆向工程中，分析方法可以大致归类为两类：动态分析与静态分析。简单来说，动态分析就是运行程序、观察其行为；静态分析就是借助可执行文件中的信息与数据（如机器码）还原程序逻辑。在本节中，我们会分别介绍动态分析、静态分析的方法与工具，然后再介绍一些别的小工具。</p>
-<h3 id="动态分析"><a href="#动态分析" class="headerlink" title="动态分析"></a>动态分析</h3><p>最简单的动态分析就是直接运行程序。你可以试试引爆炸弹先。</p>
-<p>正经的动态分析就是使用 <code>gdb</code>（全称为 GNU Debugger）等调试工具进行动态调试。动态调试的坏处是可能会一不小心让程序“跑飞了”，错过你想要观察的代码；而好处就是你可以直观地看到程序运行时，各种数据的实际值。</p>
+<h3 id="动态分析">动态分析</h3>
+<p>最简单的动态分析就是直接运行程序。你可以试试引爆炸弹先。</p>
+<p>正经的动态分析就是使用 <code>gdb</code>（全称为 GNU
+Debugger）等调试工具进行动态调试。动态调试的坏处是可能会一不小心让程序“跑飞了”，错过你想要观察的代码；而好处就是你可以直观地看到程序运行时，各种数据的实际值。</p>
 <p>至于如何使用，请参考 <code>gdb-tutor</code>。</p>
-<p>你可以去网上找一个 gdb cheetsheet（小抄），方便你查找想用的指令。我们也给出一个挺好的英文教程：<a target="_blank" rel="noopener" href="https://users.umiacs.umd.edu/~tdumitra/courses/ENEE757/Fall15/misc/gdb_tutorial.html">Tudor‘s gdb crash course</a>。或者可以直接在 Linux 环境下 <code>man gdb</code>（man 为 manual 的缩写，是用来查看系统命令和程序的手册页的命令）查看 gdb 的完整文档。</p>
+<p>你可以去网上找一个 gdb
+cheetsheet（小抄），方便你查找想用的指令。我们也给出一个挺好的英文教程：<a
+target="_blank" rel="noopener" href="https://users.umiacs.umd.edu/~tdumitra/courses/ENEE757/Fall15/misc/gdb_tutorial.html">Tudor‘s
+gdb crash course</a>。或者可以直接在 Linux 环境下
+<code>man gdb</code>（man 为 manual
+的缩写，是用来查看系统命令和程序的手册页的命令）查看 gdb
+的完整文档。</p>
 <p>以下为一些 gdb 的常用指令：</p>
 <table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 59%" />
+<col style="width: 22%" />
+</colgroup>
 <thead>
 <tr>
 <th>命令（缩写）</th>
@@ -266,7 +338,8 @@
 <th>示例</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>tab</td>
 <td>命令或关键字补全</td>
 <td></td>
@@ -294,12 +367,12 @@
 <tr>
 <td>print (p)</td>
 <td>打印数据，可以指定格式，也可以指定寄存器、内存、变量等</td>
-<td>p &#x2F;x *($rsp+8)</td>
+<td>p /x *($rsp+8)</td>
 </tr>
 <tr>
 <td>display (disp)</td>
 <td>指定的内容和print一样，不过可以重复展示</td>
-<td>display &#x2F;5i $pc</td>
+<td>display /5i $pc</td>
 </tr>
 <tr>
 <td>info (i)</td>
@@ -319,58 +392,80 @@
 <tr>
 <td>examine (x)</td>
 <td>代码检查，后跟具体地址，可以指定输出的方式和格式</td>
-<td>x &#x2F;10i $pc</td>
+<td>x /10i $pc</td>
 </tr>
 <tr>
 <td>call</td>
 <td>在gdb中进行函数调用（很神奇的功能）</td>
-<td>call printf(“\n”)</td>
+<td>call printf("")</td>
 </tr>
 <tr>
 <td>backtrace (bt)</td>
 <td>查看调用栈，即函数调用的情况</td>
 <td>bt</td>
 </tr>
-</tbody></table>
-<h3 id="静态分析"><a href="#静态分析" class="headerlink" title="静态分析"></a>静态分析</h3><h4 id="反汇编"><a href="#反汇编" class="headerlink" title="反汇编"></a>反汇编</h4><p>我们回顾一下C程序的编译过程：源代码 -&gt; 汇编代码 -&gt; 机器码，中间两步分别称为<strong>编译</strong>与<strong>汇编</strong>。</p>
+</tbody>
+</table>
+<h3 id="静态分析">静态分析</h3>
+<h4 id="反汇编">反汇编</h4>
+<p>我们回顾一下C程序的编译过程：源代码 -&gt; 汇编代码 -&gt;
+机器码，中间两步分别称为<strong>编译</strong>与<strong>汇编</strong>。</p>
 <p>在源代码到汇编代码的过程中，编译器作了许多的优化、也删去了很多源代码中的信息，比如局部变量名等等……而汇编代码和机器码则是几乎等价的，汇编语言是机器码的助记符。</p>
 <p>因此，有工具能帮我们将可执行文件中的机器码转化为汇编代码也就不足为奇了，这种工具被称为<strong>反汇编器</strong>。至于汇编代码到源代码，这种工具也存在，但由于本次实验旨在帮助大家熟悉汇编代码，因此在本次实验中我们不会介绍它们。我们这里介绍一个非常经典且常用的反汇编器——objdump。</p>
-<p>我们在命令行中输入 <code>objdump -d ./bomb &gt; bomb.S</code> 就可以获得反汇编文件 <code>bomb.S</code>。</p>
-<p><code>objdump --help</code> 会打印出 objdump 的所有用法，并且会给出精简的解释。<code>man objdump</code> 会打印出详尽的解释。</p>
+<p>我们在命令行中输入 <code>objdump -d ./bomb &gt; bomb.S</code>
+就可以获得反汇编文件 <code>bomb.S</code>。</p>
+<p><code>objdump --help</code> 会打印出 objdump
+的所有用法，并且会给出精简的解释。<code>man objdump</code>
+会打印出详尽的解释。</p>
 <blockquote>
 <p><strong>关于 objdump</strong></p>
-<p>你可以尝试在 <code>objdump</code> 后加上 <code>-D</code> 和&#x2F;或 <code>-x</code> 和&#x2F;或 <code>-C</code>，就像上面出现的 <code>-d</code> 一样。你可以通过搜索或读文档的方式了解这会导致什么后果；TA 相信这几个参数会对你的实验有很大帮助！</p>
+<p>你可以尝试在 <code>objdump</code> 后加上 <code>-D</code> 和/或
+<code>-x</code> 和/或 <code>-C</code>，就像上面出现的 <code>-d</code>
+一样。你可以通过搜索或读文档的方式了解这会导致什么后果；TA
+相信这几个参数会对你的实验有很大帮助！</p>
 </blockquote>
 <blockquote>
-<p><strong>X86 &#x2F; AMD64 汇编语言的格式</strong></p>
-<p>在 CSAPP 课本上，有一个拓展框介绍了两种汇编语言的格式—— AT&amp;T 以及 Intel。</p>
+<p><strong>X86 / AMD64 汇编语言的格式</strong></p>
+<p>在 CSAPP 课本上，有一个拓展框介绍了两种汇编语言的格式—— AT&amp;T 以及
+Intel。</p>
 <p>他们最显著的区别有两个（当然还有别的区别，见课本）：</p>
 <ul>
 <li>两者的源操作数和目的操作数顺序相反</li>
-<li>AT&amp;T 中寄存器需要加上 <code>%</code> 前缀，而 Intel 语法则不用。</li>
+<li>AT&amp;T 中寄存器需要加上 <code>%</code> 前缀，而 Intel
+语法则不用。</li>
 </ul>
-<p>本课程上课教学时使用的语法是 AT&amp;T，这也是 objdump 默认使用的语法。但我们同样推荐你试试 Intel 语法，因为这是安全研究人员更常用的一种语法。想让 objdump 输出语法变为 Intel，只需要给 objdump 添加参数 <code>-M intel</code>。</p>
+<p>本课程上课教学时使用的语法是 AT&amp;T，这也是 objdump
+默认使用的语法。但我们同样推荐你试试 Intel
+语法，因为这是安全研究人员更常用的一种语法。想让 objdump 输出语法变为
+Intel，只需要给 objdump 添加参数 <code>-M intel</code>。</p>
 </blockquote>
-<h4 id="阅读汇编"><a href="#阅读汇编" class="headerlink" title="阅读汇编"></a>阅读汇编</h4><p>在拿到汇编代码文件后，我们就需要通过分析它来理解程序的逻辑。如果是一个简短的函数，或许汇编也就几十行；但你很有可能会遇到百来行的函数。如何应对这种复杂的代码？</p>
-<p>我们介绍一种理解汇编代码的方法，叫做 <strong>CFG（Control Flow Graph，控制流图）</strong>。显然，汇编代码中没有 if-else &#x2F; for loop &#x2F; while loop 这样的结构，而只有各种 jump 和 conditional jump。很容易想到，我们可以把各种 jump 指令把它们的目标用一个箭头连起来，来让代码变得稍微好看懂一点。不过，我们还可以做得更加好一些：</p>
-<p><img src="/ics24/BombLab/cfg.png"></p>
-<p>这是一个伪代码的例子，我们同样可以将这个方法运用到汇编语言中。构造 CFG 的基础方法很简单：我们只需要把不含跳转代码当作一个 Block，然后把 Block 们连接起来即可。你可以在草稿纸上使用这个方法，将函数的跳转逻辑理清楚。不要小看了 CFG 的作用，亲自试试吧，或许你会从此觉得读汇编语言也不过如此。</p>
-<p>另外一种推荐的技巧是……<strong>将汇编代码打印出来</strong>。没错，虽然我知道手写代码一定是痛苦的体验，但在纸上阅读汇编语言代码确实是一种推荐的方法。这是因为，汇编语言的阅读可能需要大量的标注，在纸上标记会方便很多。不过也请注意，bomb++ 的汇编代码很长，包含了许多不会执行或与实验无关的函数。你可以只在遇到应付不了的关卡时才选择把看不懂的那些函数打印出来。</p>
+<h4 id="阅读汇编">阅读汇编</h4>
+<p>在拿到汇编代码文件后，我们就需要通过分析它来理解程序的逻辑。如果是一个简短的函数，或许汇编也就几十行；但你很有可能会遇到百来行的函数。如何应对这种复杂的代码？</p>
+<p>我们介绍一种理解汇编代码的方法，叫做 <strong>CFG（Control Flow
+Graph，控制流图）</strong>。显然，汇编代码中没有 if-else / for loop /
+while loop 这样的结构，而只有各种 jump 和 conditional
+jump。很容易想到，我们可以把各种 jump
+指令把它们的目标用一个箭头连起来，来让代码变得稍微好看懂一点。不过，我们还可以做得更加好一些：</p>
+<p><img src="cfg.png" /></p>
+<p>这是一个伪代码的例子，我们同样可以将这个方法运用到汇编语言中。构造
+CFG 的基础方法很简单：我们只需要把不含跳转代码当作一个 Block，然后把
+Block
+们连接起来即可。你可以在草稿纸上使用这个方法，将函数的跳转逻辑理清楚。不要小看了
+CFG 的作用，亲自试试吧，或许你会从此觉得读汇编语言也不过如此。</p>
+<p>另外一种推荐的技巧是……<strong>将汇编代码打印出来</strong>。没错，虽然我知道手写代码一定是痛苦的体验，但在纸上阅读汇编语言代码确实是一种推荐的方法。这是因为，汇编语言的阅读可能需要大量的标注，在纸上标记会方便很多。不过也请注意，bomb++
+的汇编代码很长，包含了许多不会执行或与实验无关的函数。你可以只在遇到应付不了的关卡时才选择把看不懂的那些函数打印出来。</p>
 <p>下面给出一些常见结构的汇编代码：</p>
-<h5 id="条件判断"><a href="#条件判断" class="headerlink" title="条件判断"></a>条件判断</h5><p>C 语言：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (array == <span class="number">0</span>) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure>
-
-<p>汇编语言：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">endbr64 </span><br><span class="line">test   %rdi,%rdi                       # 让函数第一个参数和自己作与运算</span><br><span class="line">je     11cb &lt;for_sum(int*, int)+0x22&gt;  # 若结果为 0，则跳转；相当于判断参数是否为 0，为 0 则跳转     </span><br></pre></td></tr></table></figure>
-
-<h5 id="循环结构"><a href="#循环结构" class="headerlink" title="循环结构"></a>循环结构</h5><p>C 语言：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; ++i) s += array[i];</span><br></pre></td></tr></table></figure>
-
-<p>汇编语言：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov    $0x0,%eax                       # 初始化自增条件变量 i = 0</span><br><span class="line">mov    $0x0,%edx                       # 初始化总和 s = 0</span><br><span class="line">cmp    %esi,%eax                       # 判断条件变量是否满足条件 i &lt; size ?</span><br><span class="line">jge    11d0 &lt;for_sum(int*, int)+0x27&gt;  # 大于或等于则跳出循环</span><br><span class="line">add    (%rdi,%eax,4),%edx              # 用 i 进行数组索引 base + i*4 =&gt; array[i]; s += array[i]</span><br><span class="line">add    $0x1,%eax                       # 自增 i++</span><br><span class="line">jmp    11bc &lt;for_sum(int*, int)+0x13&gt;  # 回到比较的地方</span><br></pre></td></tr></table></figure>
-
-<h5 id="switch-case-结构"><a href="#switch-case-结构" class="headerlink" title="switch case 结构"></a>switch case 结构</h5><ol>
-<li>打表：如果 case 的不同条件比较紧凑规律（比如 0、1、2、3……），则将 case 的条件作为索引、对应的地址（可能是地址偏移量）作为值，创建一个表格存放在内存中。</li>
+<h5 id="条件判断">条件判断</h5>
+<p>C 语言： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (array == <span class="number">0</span>) <span class="keyword">return</span>;</span><br></pre></td></tr></table></figure></p>
+<p>汇编语言： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">endbr64 </span><br><span class="line">test   %rdi,%rdi                       # 让函数第一个参数和自己作与运算</span><br><span class="line">je     11cb &lt;for_sum(int*, int)+0x22&gt;  # 若结果为 0，则跳转；相当于判断参数是否为 0，为 0 则跳转     </span><br></pre></td></tr></table></figure></p>
+<h5 id="循环结构">循环结构</h5>
+<p>C 语言： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; size; ++i) s += array[i];</span><br></pre></td></tr></table></figure></p>
+<p>汇编语言： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mov    $0x0,%eax                       # 初始化自增条件变量 i = 0</span><br><span class="line">mov    $0x0,%edx                       # 初始化总和 s = 0</span><br><span class="line">cmp    %esi,%eax                       # 判断条件变量是否满足条件 i &lt; size ?</span><br><span class="line">jge    11d0 &lt;for_sum(int*, int)+0x27&gt;  # 大于或等于则跳出循环</span><br><span class="line">add    (%rdi,%eax,4),%edx              # 用 i 进行数组索引 base + i*4 =&gt; array[i]; s += array[i]</span><br><span class="line">add    $0x1,%eax                       # 自增 i++</span><br><span class="line">jmp    11bc &lt;for_sum(int*, int)+0x13&gt;  # 回到比较的地方</span><br></pre></td></tr></table></figure></p>
+<h5 id="switch-case-结构">switch case 结构</h5>
+<ol type="1">
+<li>打表：如果 case 的不同条件比较紧凑规律（比如
+0、1、2、3......），则将 case
+的条件作为索引、对应的地址（可能是地址偏移量）作为值，创建一个表格存放在内存中。</li>
 </ol>
 <table>
 <thead>
@@ -379,7 +474,8 @@
 <th>addr</th>
 </tr>
 </thead>
-<tbody><tr>
+<tbody>
+<tr>
 <td>0</td>
 <td>0x1000</td>
 </tr>
@@ -395,69 +491,109 @@
 <td>3</td>
 <td>0x1010</td>
 </tr>
-</tbody></table>
-<ol start="2">
-<li>类似 if else 嵌套：如果 case 比较稀疏，则通过采用连续的比较和条件跳转指令</li>
+</tbody>
+</table>
+<ol start="2" type="1">
+<li>类似 if else 嵌套：如果 case
+比较稀疏，则通过采用连续的比较和条件跳转指令</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">cmp    $0x61,%dil</span><br><span class="line">je     1224 &lt;switch_case2(char)+0x1c&gt;</span><br><span class="line">cmp    $0x7a,%dil</span><br><span class="line">je     1227 &lt;switch_case2(char)+0x1f&gt;</span><br><span class="line">cmp    $0xa,%dil</span><br><span class="line">je     122b &lt;switch_case2(char)+0x23&gt;</span><br><span class="line">lea    0x1(%rdi),%eax</span><br><span class="line">retq</span><br></pre></td></tr></table></figure>
-
-<h5 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h5><p>函数内部调用了函数本身，需要注意对 callee-save 寄存器的保存和使用</p>
-<p>C 语言：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">recursion</span><span class="params">(<span class="type">int</span> x)</span></span>&#123; <span class="comment">// 求斐波那契数</span></span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">2</span>) <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">recursion</span>(x<span class="number">-1</span>) + <span class="built_in">recursion</span>(x<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>汇编语言：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">000000000000122c &lt;recursion(int)&gt;:</span><br><span class="line">push   %rbp                       # 保存 rbp</span><br><span class="line">push   %rbx                       # 保存 ebx</span><br><span class="line">mov    %edi,%ebx                  # 保存第一个参数 x，因为 x 和 rdi 寄存器后续函数都要使用，因此将 x 保存在新的寄存器中（这里是 ebx），防止后续的函数将 rdi 中存放的 x 覆盖掉，而 ebx 因为是 callee-save，因此提前保存了它</span><br><span class="line">cmp    $0x1,%edi</span><br><span class="line">jle    1258 &lt;recursion(int)+0x2c&gt; # 小于等于 1 则跳转，相当于 x &lt; 2</span><br><span class="line">lea    -0x1(%rdi),%edi            # x-1</span><br><span class="line">callq  122c &lt;recursion(int)&gt;      # recursion(x-1)</span><br><span class="line">mov    %eax,%ebp                  # 将得到的返回值放在 rbp 中，因为 rbp 是 callee-save，要提前保存</span><br><span class="line">lea    -0x2(%rbx),%edi            # x-2，这里也用到了 x，因此需要提前保存x</span><br><span class="line">callq  122c &lt;recursion(int)&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<h5 id="struct"><a href="#struct" class="headerlink" title="struct"></a>struct</h5><p>内部变量按顺序排列，需要对齐</p>
+<h5 id="递归">递归</h5>
+<p>函数内部调用了函数本身，需要注意对 callee-save 寄存器的保存和使用</p>
+<p>C 语言： <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">recursion</span><span class="params">(<span class="type">int</span> x)</span></span>&#123; <span class="comment">// 求斐波那契数</span></span><br><span class="line">    <span class="keyword">if</span> (x &lt; <span class="number">2</span>) <span class="keyword">return</span> x;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">recursion</span>(x<span class="number">-1</span>) + <span class="built_in">recursion</span>(x<span class="number">-2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>汇编语言： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">000000000000122c &lt;recursion(int)&gt;:</span><br><span class="line">push   %rbp                       # 保存 rbp</span><br><span class="line">push   %rbx                       # 保存 ebx</span><br><span class="line">mov    %edi,%ebx                  # 保存第一个参数 x，因为 x 和 rdi 寄存器后续函数都要使用，因此将 x 保存在新的寄存器中（这里是 ebx），防止后续的函数将 rdi 中存放的 x 覆盖掉，而 ebx 因为是 callee-save，因此提前保存了它</span><br><span class="line">cmp    $0x1,%edi</span><br><span class="line">jle    1258 &lt;recursion(int)+0x2c&gt; # 小于等于 1 则跳转，相当于 x &lt; 2</span><br><span class="line">lea    -0x1(%rdi),%edi            # x-1</span><br><span class="line">callq  122c &lt;recursion(int)&gt;      # recursion(x-1)</span><br><span class="line">mov    %eax,%ebp                  # 将得到的返回值放在 rbp 中，因为 rbp 是 callee-save，要提前保存</span><br><span class="line">lea    -0x2(%rbx),%edi            # x-2，这里也用到了 x，因此需要提前保存x</span><br><span class="line">callq  122c &lt;recursion(int)&gt;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
+<h5 id="struct">struct</h5>
+<p>内部变量按顺序排列，需要对齐</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    <span class="type">char</span> a = <span class="string">&#x27;y&#x27;</span>;             <span class="comment">// root     </span></span><br><span class="line">    <span class="type">unsigned</span> b = <span class="number">2333</span>;        <span class="comment">// root+0x4 虽然之前的 char 只占了 1 个字节，但是 unsigned 需要 4 字节对齐</span></span><br><span class="line">    <span class="type">float</span> c = <span class="number">123.123</span>;        <span class="comment">// root+0x8，0xb-0xf 之间的数值为 0</span></span><br><span class="line">    <span class="type">double</span> d = <span class="number">1930.1231313</span>;  <span class="comment">// root+0x10 虽然之前的 float 只占了 4 个字节，但是 double 需要 8 字节对齐</span></span><br><span class="line">&#125; node;</span><br></pre></td></tr></table></figure>
-
-<h5 id="C-虚函数"><a href="#C-虚函数" class="headerlink" title="C++虚函数"></a>C++虚函数</h5><p>类的非静态函数调用时，默认第一个参数是指向该对象的指针 <strong>this</strong></p>
-<p>每一个类有唯一的一个虚函数表（vtable，其中只包含虚函数的指针），不是每个对象都有一个 vtable，恰恰是每个同一个类的对象都有一个指针，这个指针指向该类的 vtable（当然，前提是这个类包含虚函数）。那么，每个对象只额外增加了一个指针的大小。</p>
+<h5 id="c虚函数">C++虚函数</h5>
+<p>类的非静态函数调用时，默认第一个参数是指向该对象的指针
+<strong>this</strong></p>
+<p>每一个类有唯一的一个虚函数表（vtable，其中只包含虚函数的指针），不是每个对象都有一个
+vtable，恰恰是每个同一个类的对象都有一个指针，这个指针指向该类的
+vtable（当然，前提是这个类包含虚函数）。那么，每个对象只额外增加了一个指针的大小。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">mov    $0x8,%edi                            </span><br><span class="line">callq  1090 &lt;operator new(unsigned long)@plt&gt;  # 申请了 8 个字节的空间</span><br><span class="line">mov    %rax,%rbx                               # 保存该空闲空间的起始地址，即指向对象的指针</span><br><span class="line">mov    %rax,%rdi</span><br><span class="line">callq  158c &lt;B::B()&gt;                           # 调用初始化函数，进行初始化，第一个参数为空闲空间的起始地址，即指向对象的指针 this</span><br><span class="line">                                               # 对象已经创建好</span><br><span class="line">mov    (%rbx),%rax                             # 对象的内容只包含一个指针，这条指令通过 this 指针获取对象的内容，即类的 vtable 的起始地址</span><br><span class="line">mov    (%rax),%rdx                             # 根据类的 vtable 起始地址获取要调用的函数的地址</span><br><span class="line">mov    $0x2,%esi                               # 函数的第二个参数为 2</span><br><span class="line">mov    %rax,%rdi</span><br><span class="line">callq  *%rdx                                   # 调用 rdx 位置处的函数（* 号只是做标识用，并非取地址），参数分别为对象的地址（this）和 2</span><br></pre></td></tr></table></figure>
-
-<h3 id="其他实验帮助"><a href="#其他实验帮助" class="headerlink" title="其他实验帮助"></a>其他实验帮助</h3><h4 id="重定向与管道"><a href="#重定向与管道" class="headerlink" title="重定向与管道"></a>重定向与管道</h4><p>上过 C 语言和 C++ 的大家应该知道，命令行程序有三个默认打开的“流”，分别是 stdin，stdout 以及 stderr。在我们运行命令行程序时，标准输入就是我们敲进去的东西，而程序打印东西到 stdout 或者 stderr，其实就是打印到命令行上。</p>
-<p>在学习 C 或 C++ 的文件操作的时候，会发现一个很巧的事情——文件读写用到的 API，和标准输入输出用的那些 API 其实都差不多，这是因为文件和标准输入输出本来就是一样的。在 Linux 系统中，<strong>一切皆文件</strong>。不仅传统意义上的文本文件、多媒体文件等普通文件是文件，套接字（网络接口）、键盘鼠标设备等等都是文件，可以用统一的一套文件 API 进行处理。</p>
-<p>这种设计不仅带来了极大的统一性，也带来了极大的便捷性。本节介绍的 iostream 重定向和 pipes 管道就与这种设计有关。</p>
-<p>既然 stdin 和 stdout 也是<strong>文件流</strong>，那么我们当然可以把他们<strong>重定向</strong>到一个普通文件！我们让一个文件被定向到一个程序的标准输入，或者让一个程序的标准输出定向到一个文件当中。前者我们使用 <code>&lt; file</code>，后者我们使用 <code>&gt; file</code>，如下所示：</p>
+<h3 id="其他实验帮助">其他实验帮助</h3>
+<h4 id="重定向与管道">重定向与管道</h4>
+<p>上过 C 语言和 C++
+的大家应该知道，命令行程序有三个默认打开的“流”，分别是 stdin，stdout
+以及
+stderr。在我们运行命令行程序时，标准输入就是我们敲进去的东西，而程序打印东西到
+stdout 或者 stderr，其实就是打印到命令行上。</p>
+<p>在学习 C 或 C++
+的文件操作的时候，会发现一个很巧的事情——文件读写用到的
+API，和标准输入输出用的那些 API
+其实都差不多，这是因为文件和标准输入输出本来就是一样的。在 Linux
+系统中，<strong>一切皆文件</strong>。不仅传统意义上的文本文件、多媒体文件等普通文件是文件，套接字（网络接口）、键盘鼠标设备等等都是文件，可以用统一的一套文件
+API 进行处理。</p>
+<p>这种设计不仅带来了极大的统一性，也带来了极大的便捷性。本节介绍的
+iostream 重定向和 pipes 管道就与这种设计有关。</p>
+<p>既然 stdin 和 stdout
+也是<strong>文件流</strong>，那么我们当然可以把他们<strong>重定向</strong>到一个普通文件！我们让一个文件被定向到一个程序的标准输入，或者让一个程序的标准输出定向到一个文件当中。前者我们使用
+<code>&lt; file</code>，后者我们使用
+<code>&gt; file</code>，如下所示：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">echo</span> hello &gt; hello.txt  		 <span class="comment"># 把stdout重定向到hello.txt中</span></span><br><span class="line">$ <span class="built_in">cat</span> hello.txt</span><br><span class="line">hello</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cat</span> &lt; hello.txt    					 <span class="comment"># 把hello.txt重定向到cat的标准输入</span></span><br><span class="line">hello</span><br><span class="line"></span><br><span class="line">$ <span class="built_in">cat</span> &lt; hello.txt &gt; hello2.txt <span class="comment"># 同时重定向cat的标准输入和标准输出</span></span><br><span class="line">$ <span class="built_in">cat</span> hello2.txt</span><br><span class="line">hello</span><br></pre></td></tr></table></figure>
-
-<p>如果你找到了所有的正确口令，那么把它们写到一个文本文件 <code>password.txt</code> 中，那么使用 <code>./bomb &lt; password.txt</code> 就可以直接通过所有的关卡。</p>
-<p>除此以外，还有更加便利的 <strong>管道</strong> 操作，可以帮助我们将两个程序的输入和输出相连接，也就是构造一条虚拟的管道。这种神奇的操作是通过 <code>|</code> 来完成的：</p>
+<p>如果你找到了所有的正确口令，那么把它们写到一个文本文件
+<code>password.txt</code> 中，那么使用
+<code>./bomb &lt; password.txt</code> 就可以直接通过所有的关卡。</p>
+<p>除此以外，还有更加便利的 <strong>管道</strong>
+操作，可以帮助我们将两个程序的输入和输出相连接，也就是构造一条虚拟的管道。这种神奇的操作是通过
+<code>|</code> 来完成的：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> 1.txt            <span class="comment"># 假设我们有这么一个文件</span></span><br><span class="line">GODEL</span><br><span class="line">ESCHER</span><br><span class="line">BACH</span><br><span class="line">$ <span class="built_in">cat</span> 1.txt | <span class="built_in">tail</span> -n1 <span class="comment"># 打印 1.txt 的最后一行</span></span><br><span class="line">BACH</span><br><span class="line">$ <span class="built_in">cat</span> 1.txt | grep CH  <span class="comment"># 寻找 1.txt 中带有 CH 的行</span></span><br><span class="line">ESCHER</span><br><span class="line">BACH</span><br></pre></td></tr></table></figure>
-
-<p>利用这两种操作，我们可以方便地处理BombLab的输入。我们知道 <code>cat</code> 是打开文件，也知道标准输入同样也是一个文件，因此我们可以用 <code>cat -</code> 打开标准输入文件，这时候 <code>cat</code> 就相当于一个 <code>echo</code>，可以复读我们说的话：</p>
+<p>利用这两种操作，我们可以方便地处理BombLab的输入。我们知道
+<code>cat</code>
+是打开文件，也知道标准输入同样也是一个文件，因此我们可以用
+<code>cat -</code> 打开标准输入文件，这时候 <code>cat</code>
+就相当于一个 <code>echo</code>，可以复读我们说的话：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> -</span><br><span class="line">Hello, world!</span><br><span class="line">Hello, world!</span><br></pre></td></tr></table></figure>
-
 <p>除此以外，cat 还可以打开多个文件，如下所示：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> 1.txt</span><br><span class="line">hello</span><br><span class="line">$ <span class="built_in">cat</span> 2.txt</span><br><span class="line">world</span><br><span class="line">$ <span class="built_in">cat</span> 1.txt 2.txt</span><br><span class="line">hello</span><br><span class="line">world</span><br></pre></td></tr></table></figure>
-
-<p>如果你在做 BombLab 时，已经找到了前面某些阶段的口令，不想在后续步骤中再一遍遍重新输入它们的话，就可以将已知的口令写入一个文本文件中，然后用 <code>cat</code> 打开那个文本文件以及标准输入，然后利用管道机制将这两个文件的内容导向 bomb++ 的输入：</p>
+<p>如果你在做 BombLab
+时，已经找到了前面某些阶段的口令，不想在后续步骤中再一遍遍重新输入它们的话，就可以将已知的口令写入一个文本文件中，然后用
+<code>cat</code>
+打开那个文本文件以及标准输入，然后利用管道机制将这两个文件的内容导向
+bomb++ 的输入：</p>
 <figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">cat</span> password.txt - | ./bomb</span><br></pre></td></tr></table></figure>
-
-<p>使用这种操作时注意，由于 bomb++ 每一阶段都会重新读取一行，所以文件结尾多出的换行符会导致 bomb++ 下一阶段读到一个寂寞，从而导致炸弹爆炸。因此，你的口令文件的末尾，应该<strong>有且仅有</strong>一个空行。</p>
+<p>使用这种操作时注意，由于 bomb++
+每一阶段都会重新读取一行，所以文件结尾多出的换行符会导致 bomb++
+下一阶段读到一个寂寞，从而导致炸弹爆炸。因此，你的口令文件的末尾，应该<strong>有且仅有</strong>一个空行。</p>
 <blockquote>
 <p><strong>文件拓展名</strong></p>
-<p>熟悉 Windows 的各位同学一定对诸如 <code>.exe</code> <code>.docx</code> <code>.xls</code> <code>.png</code> <code>.jpeg</code> 等拓展名见惯不惯了，Windows 系统会通过文件名中的这些后缀来判断如何打开这个程序。</p>
-<p>不过在使用 Linux 时，通常不需要你为文件加上拓展名，这是因为 Linux 系统往往通过文件头中的<strong>魔数</strong>来区分文件类型。因此，我们在这里为文本文件标上 <code>.txt</code> 后缀类似于注释一样，是为了让大家看得更清楚一些。</p>
+<p>熟悉 Windows 的各位同学一定对诸如 <code>.exe</code>
+<code>.docx</code> <code>.xls</code> <code>.png</code>
+<code>.jpeg</code> 等拓展名见惯不惯了，Windows
+系统会通过文件名中的这些后缀来判断如何打开这个程序。</p>
+<p>不过在使用 Linux 时，通常不需要你为文件加上拓展名，这是因为 Linux
+系统往往通过文件头中的<strong>魔数</strong>来区分文件类型。因此，我们在这里为文本文件标上
+<code>.txt</code> 后缀类似于注释一样，是为了让大家看得更清楚一些。</p>
 </blockquote>
-<h4 id="“超纲”的汇编指令"><a href="#“超纲”的汇编指令" class="headerlink" title="“超纲”的汇编指令"></a>“超纲”的汇编指令</h4><p>大家在实验过程中，或许会遇到一些课上没有讲过的汇编指令，我们在这里介绍一下其中一个。</p>
-<p><code>endbr64</code>：一种用于防御 ROP（Return Oriented Programming）攻击的机制 —— CET（Control-flow Enforcement）的一部分，但大多的 CPU 现在还没有实装，因此它们执行到这条指令时会直接略过。本次实验并不涉及相关的内容，你也可以直接略过。<del>如果对二进制漏洞攻防感兴趣，大家也可以关注信息网络安全协会的相关活动。</del></p>
-<p>如果遇到其他没见过的汇编指令，我们建议自己查询互联网。如果你有钻研的精神，欢迎你试着查询 Intel 的官方手册 <a target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/architecture-and-technology/64-ia-32-architectures-software-developer-vol-1-manual.html">英特尔® 64 位和 IA-32 架构开发人员手册</a>（5000 行），真正理解这个指令的细节。在查询这种奇厚无比的手册时，请一定记得利用好目录以及搜索功能。</p>
-<h2 id="七、参考资料-amp-推荐资料"><a href="#七、参考资料-amp-推荐资料" class="headerlink" title="七、参考资料 &amp; 推荐资料"></a>七、参考资料 &amp; 推荐资料</h2><ul>
-<li><a target="_blank" rel="noopener" href="http://csapp.cs.cmu.edu/3e/labs.html">http://csapp.cs.cmu.edu/3e/labs.html</a> 原版 Lab</li>
+<h4 id="超纲的汇编指令">“超纲”的汇编指令</h4>
+<p>大家在实验过程中，或许会遇到一些课上没有讲过的汇编指令，我们在这里介绍一下其中一个。</p>
+<p><code>endbr64</code>：一种用于防御 ROP（Return Oriented
+Programming）攻击的机制 —— CET（Control-flow
+Enforcement）的一部分，但大多的 CPU
+现在还没有实装，因此它们执行到这条指令时会直接略过。本次实验并不涉及相关的内容，你也可以直接略过。<del>如果对二进制漏洞攻防感兴趣，大家也可以关注信息网络安全协会的相关活动。</del></p>
+<p>如果遇到其他没见过的汇编指令，我们建议自己查询互联网。如果你有钻研的精神，欢迎你试着查询
+Intel 的官方手册 <a
+target="_blank" rel="noopener" href="https://www.intel.cn/content/www/cn/zh/architecture-and-technology/64-ia-32-architectures-software-developer-vol-1-manual.html">英特尔®
+64 位和 IA-32 架构开发人员手册</a>（5000
+行），真正理解这个指令的细节。在查询这种奇厚无比的手册时，请一定记得利用好目录以及搜索功能。</p>
+<h2 id="七参考资料-推荐资料">七、参考资料 &amp; 推荐资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://csapp.cs.cmu.edu/3e/labs.html"
+class="uri">http://csapp.cs.cmu.edu/3e/labs.html</a> 原版 Lab</li>
 <li>本实验参考 22、23 年的实验开发</li>
-<li><a target="_blank" rel="noopener" href="https://bbs.kanxue.com/homepage-category-835440-293.htm">从汇编角度学习 C&#x2F;C++ - 看雪</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://bbs.kanxue.com/homepage-category-835440-293.htm">从汇编角度学习
+C/C++ - 看雪</a></li>
 </ul>
-<h2 id="八、实验彩蛋"><a href="#八、实验彩蛋" class="headerlink" title="八、实验彩蛋"></a>八、实验彩蛋</h2><ul>
+<h2 id="八实验彩蛋">八、实验彩蛋</h2>
+<ul>
 <li>2023ICS BombLab：</li>
 </ul>
-<img src="meme.jpg" style="width: 320px; height: 320px;display: flex; justify-content: center; align-items: center;">
-
-
-
+<p><img src="meme.jpg" style="width: 320px; height: 320px;display: flex; justify-content: center; align-items: center;"></p>
 <ul>
 <li><p>曾经可能会出现的剧情</p>
-<img src="PlotAdvices.png" style="width: 400px; display: flex; justify-content: center; align-items: center;"></li>
+<p><img src="PlotAdvices.png" style="width: 400px; display: flex; justify-content: center; align-items: center;"></p></li>
 </ul>
 
   </div>
@@ -483,7 +619,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">一、实验简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%9E%E9%AA%8C%E5%89%A7%E6%83%85"><span class="toc-number">2.</span> <span class="toc-text">二、实验剧情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">三、实验内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E5%8A%A8%E5%BC%8F-gdb-%E6%95%99%E7%A8%8B-gdb-tutor"><span class="toc-number">3.1.</span> <span class="toc-text">互动式 gdb 教程 gdb-tutor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-bomb"><span class="toc-number">3.2.</span> <span class="toc-text">二进制炸弹 bomb++</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">四、实验步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%8F%90%E4%BA%A4%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">五、提交事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82"><span class="toc-number">5.1.</span> <span class="toc-text">内容要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95"><span class="toc-number">5.2.</span> <span class="toc-text">提交方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E5%88%86"><span class="toc-number">5.3.</span> <span class="toc-text">评分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">6.</span> <span class="toc-text">六、实验指导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">6.1.</span> <span class="toc-text">动态分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">6.2.</span> <span class="toc-text">静态分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E6%B1%87%E7%BC%96"><span class="toc-number">6.2.1.</span> <span class="toc-text">反汇编</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E6%B1%87%E7%BC%96"><span class="toc-number">6.2.2.</span> <span class="toc-text">阅读汇编</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="toc-number">6.2.2.1.</span> <span class="toc-text">条件判断</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="toc-number">6.2.2.2.</span> <span class="toc-text">循环结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#switch-case-%E7%BB%93%E6%9E%84"><span class="toc-number">6.2.2.3.</span> <span class="toc-text">switch case 结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%92%E5%BD%92"><span class="toc-number">6.2.2.4.</span> <span class="toc-text">递归</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#struct"><span class="toc-number">6.2.2.5.</span> <span class="toc-text">struct</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#C-%E8%99%9A%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.2.6.</span> <span class="toc-text">C++虚函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%AE%9E%E9%AA%8C%E5%B8%AE%E5%8A%A9"><span class="toc-number">6.3.</span> <span class="toc-text">其他实验帮助</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%AE%A1%E9%81%93"><span class="toc-number">6.3.1.</span> <span class="toc-text">重定向与管道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E2%80%9C%E8%B6%85%E7%BA%B2%E2%80%9D%E7%9A%84%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4"><span class="toc-number">6.3.2.</span> <span class="toc-text">“超纲”的汇编指令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-amp-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text">七、参考资料 &amp; 推荐资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E5%AE%9E%E9%AA%8C%E5%BD%A9%E8%9B%8B"><span class="toc-number">8.</span> <span class="toc-text">八、实验彩蛋</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">一、实验简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E5%AE%9E%E9%AA%8C%E5%89%A7%E6%83%85"><span class="toc-number">2.</span> <span class="toc-text">二、实验剧情</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E5%AE%9E%E9%AA%8C%E5%86%85%E5%AE%B9"><span class="toc-number">3.</span> <span class="toc-text">三、实验内容</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%92%E5%8A%A8%E5%BC%8F-gdb-%E6%95%99%E7%A8%8B-gdb-tutor"><span class="toc-number">3.1.</span> <span class="toc-text">互动式 gdb 教程 gdb-tutor</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E7%82%B8%E5%BC%B9-bomb"><span class="toc-number">3.2.</span> <span class="toc-text">二进制炸弹 bomb++</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">4.</span> <span class="toc-text">四、实验步骤</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E6%8F%90%E4%BA%A4%E4%BA%8B%E9%A1%B9"><span class="toc-number">5.</span> <span class="toc-text">五、提交事项</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82"><span class="toc-number">5.1.</span> <span class="toc-text">内容要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E6%96%B9%E6%B3%95"><span class="toc-number">5.2.</span> <span class="toc-text">提交方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%84%E5%88%86"><span class="toc-number">5.3.</span> <span class="toc-text">评分</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E5%AE%9E%E9%AA%8C%E6%8C%87%E5%AF%BC"><span class="toc-number">6.</span> <span class="toc-text">六、实验指导</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">6.1.</span> <span class="toc-text">动态分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E5%88%86%E6%9E%90"><span class="toc-number">6.2.</span> <span class="toc-text">静态分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%8D%E6%B1%87%E7%BC%96"><span class="toc-number">6.2.1.</span> <span class="toc-text">反汇编</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%98%85%E8%AF%BB%E6%B1%87%E7%BC%96"><span class="toc-number">6.2.2.</span> <span class="toc-text">阅读汇编</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E5%88%A4%E6%96%AD"><span class="toc-number">6.2.2.1.</span> <span class="toc-text">条件判断</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%BE%AA%E7%8E%AF%E7%BB%93%E6%9E%84"><span class="toc-number">6.2.2.2.</span> <span class="toc-text">循环结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#switch-case-%E7%BB%93%E6%9E%84"><span class="toc-number">6.2.2.3.</span> <span class="toc-text">switch case 结构</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%80%92%E5%BD%92"><span class="toc-number">6.2.2.4.</span> <span class="toc-text">递归</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#struct"><span class="toc-number">6.2.2.5.</span> <span class="toc-text">struct</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#c%E8%99%9A%E5%87%BD%E6%95%B0"><span class="toc-number">6.2.2.6.</span> <span class="toc-text">C++虚函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%AE%9E%E9%AA%8C%E5%B8%AE%E5%8A%A9"><span class="toc-number">6.3.</span> <span class="toc-text">其他实验帮助</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E5%90%91%E4%B8%8E%E7%AE%A1%E9%81%93"><span class="toc-number">6.3.1.</span> <span class="toc-text">重定向与管道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%B6%85%E7%BA%B2%E7%9A%84%E6%B1%87%E7%BC%96%E6%8C%87%E4%BB%A4"><span class="toc-number">6.3.2.</span> <span class="toc-text">“超纲”的汇编指令</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99-%E6%8E%A8%E8%8D%90%E8%B5%84%E6%96%99"><span class="toc-number">7.</span> <span class="toc-text">七、参考资料 &amp; 推荐资料</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E5%AE%9E%E9%AA%8C%E5%BD%A9%E8%9B%8B"><span class="toc-number">8.</span> <span class="toc-text">八、实验彩蛋</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
