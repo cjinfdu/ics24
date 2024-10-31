@@ -13,6 +13,7 @@ School of Computer Science, Fudan University
 
 ## News
 
+- **[Oct 31, 2024]** [StackLab](StackLab) is released.
 - **[Oct 9, 2024]** [BombLab](BombLab) is released.
 - **[Sep 25, 2024]** [DataLab](DataLab) is released.
 - **[Sep 18, 2024]** [GitLab](GitLab) is released.
@@ -30,7 +31,14 @@ School of Computer Science, Fudan University
 | 05   | 09/20/2024 | 机器码 I                      |                                                     |
 | 06   | 09/26/2024 | DataLab发布                   | [Lab1-DataLab](DataLab) (Due: 10/10/2024)           |
 | 07   | 09/27/2024 | 机器码 II                     |                                                     |
-| 08   | 10/10/2024 | BombLab发布                   | [Lab2BombLab](BombLab) (Due: 10/31/2024)            |
+| 08   | 10/10/2024 | BombLab发布                   | [Lab2BombLab](BombLab) (Due: 10/30/2024)            |
+| 09   | 10/11/2023 | 机器码 III                    |                                                     |
+| 10   | 10/17/2023 | DataLab面试                   |                                                     |
+| 11   | 10/18/2023 | 机器码 IV                     |                                                     |
+| 12   | 10/24/2023 | BombLab答疑                   |                                                     |
+| 13   | 10/25/2023 | 处理器 I                      |                                                     |
+| 14   | 10/31/2023 | StackLab发布                  | [Lab3-StackLab](StackLab) (Due: 11/21/2024)         |
+
 ---
 
 ```cpp
