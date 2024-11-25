@@ -13,6 +13,7 @@ School of Computer Science, Fudan University
 
 ## News
 
+- **[Nov 25, 2024]** [FinalPJ](FinalPJ) is released.
 - **[Oct 31, 2024]** [StackLab](StackLab) is released.
 - **[Oct 9, 2024]** [BombLab](BombLab) is released.
 - **[Sep 25, 2024]** [DataLab](DataLab) is released.
@@ -32,13 +33,20 @@ School of Computer Science, Fudan University
 | 06   | 09/26/2024 | DataLab发布                   | [Lab1-DataLab](DataLab) (Due: 10/10/2024)           |
 | 07   | 09/27/2024 | 机器码 II                     |                                                     |
 | 08   | 10/10/2024 | BombLab发布                   | [Lab2BombLab](BombLab) (Due: 10/30/2024)            |
-| 09   | 10/11/2023 | 机器码 III                    |                                                     |
-| 10   | 10/17/2023 | DataLab面试                   |                                                     |
-| 11   | 10/18/2023 | 机器码 IV                     |                                                     |
-| 12   | 10/24/2023 | BombLab答疑                   |                                                     |
-| 13   | 10/25/2023 | 处理器 I                      |                                                     |
-| 14   | 10/31/2023 | StackLab发布                  | [Lab3-StackLab](StackLab) (Due: 11/21/2024)         |
-
+| 09   | 10/11/2024 | 机器码 III                    |                                                     |
+| 10   | 10/17/2024 | DataLab面试                   |                                                     |
+| 11   | 10/18/2024 | 机器码 IV                     |                                                     |
+| 12   | 10/24/2024 | BombLab答疑                   |                                                     |
+| 13   | 10/25/2024 | 处理器 I                      |                                                     |
+| 14   | 10/31/2024 | StackLab发布                  | [Lab3-StackLab](StackLab) (Due: 11/22/2024)         |
+| 15   | 11/01/2024 | 处理器 II                     |                                                     |
+| 16   | 11/07/2024 | StackLab答疑                  |                                                     |
+| 17   | 11/08/2024 | 优化 I                        |                                                     |
+| 18   | 11/14/2024 | BombLab讲解+面试               |                                                     |
+| 19   | 11/15/2024 | 优化 II                       |                                                     |
+| 20   | 11/21/2024 | StackLab答疑                  |                                                     |
+| 21   | 11/22/2023 | 存储器 I                      |                                                     |
+| 22   | 11/25/2024 | Final Project发布             | [Final Project](FinalPJ) (Due: 12/26/2024)          |
 ---
 
 ```cpp

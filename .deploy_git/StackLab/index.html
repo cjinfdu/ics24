@@ -6,20 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="Deadline：2024-11-20 23:59:59  〇、实验简介栈帧相关实验。 本学期，我们将金老师ICS第三个Lab回炉重造，添加更多讲解，以加深各位同学对栈帧的理解，并探索一些相关应用，丰富同学们的知识面。 本次Lab由三个部分组成：  尝试在含有漏洞的程序中实现任意代码执行 学习 Canary 机制，了解栈溢出的防御 尝试使用栈帧完成更多有意思的功能（参考资料：2022年Kiera">
+    <meta name="description" content="Deadline：2024-11-22 23:59:59  〇、实验简介 栈帧相关实验。 本学期，我们将金老师ICS第三个Lab回炉重造，添加更多讲解，以加深各位同学对栈帧的理解，并探索一些相关应用，丰富同学们的知识面。 本次Lab由三个部分组成：  尝试在含有漏洞的程序中实现任意代码执行 学习 Canary 机制，了解栈溢出的防御 尝试使用栈帧完成更多有意思的功能（参考资料：2022年Kier">
 <meta property="og:type" content="article">
 <meta property="og:title" content="StackLab">
 <meta property="og:url" content="https://cjinfdu.github.io/ics24/StackLab/index.html">
 <meta property="og:site_name" content="COMP130201.02 计算机系统基础">
-<meta property="og:description" content="Deadline：2024-11-20 23:59:59  〇、实验简介栈帧相关实验。 本学期，我们将金老师ICS第三个Lab回炉重造，添加更多讲解，以加深各位同学对栈帧的理解，并探索一些相关应用，丰富同学们的知识面。 本次Lab由三个部分组成：  尝试在含有漏洞的程序中实现任意代码执行 学习 Canary 机制，了解栈溢出的防御 尝试使用栈帧完成更多有意思的功能（参考资料：2022年Kiera">
+<meta property="og:description" content="Deadline：2024-11-22 23:59:59  〇、实验简介 栈帧相关实验。 本学期，我们将金老师ICS第三个Lab回炉重造，添加更多讲解，以加深各位同学对栈帧的理解，并探索一些相关应用，丰富同学们的知识面。 本次Lab由三个部分组成：  尝试在含有漏洞的程序中实现任意代码执行 学习 Canary 机制，了解栈溢出的防御 尝试使用栈帧完成更多有意思的功能（参考资料：2022年Kier">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://organicprogrammer.com/images/stack_contents.png">
 <meta property="og:image" content="https://cjinfdu.github.io/ics24/StackLab/task3_result.gif">
 <meta property="article:published_time" content="2024-10-31T05:08:26.212Z">
-<meta property="article:modified_time" content="2024-11-01T09:00:11.565Z">
+<meta property="article:modified_time" content="2024-11-25T07:56:53.321Z">
 <meta property="article:author" content="FDUICS-2024助教组">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://organicprogrammer.com/images/stack_contents.png">
+<meta name="twitter:image" content="https://cjinfdu.github.io/ics24/StackLab/task3_result.gif">
     
     
         
@@ -71,6 +70,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/ics24/FinalPJ/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
         
         <li><a class="icon" href="/ics24/BombLab/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
         
@@ -99,7 +100,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%87%E3%80%81%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">〇、实验简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8D%B1%E9%99%A9%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">一、危险的计算器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RCE-%E6%94%BB%E5%87%BB"><span class="toc-number">2.1.</span> <span class="toc-text">RCE 攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.2.</span> <span class="toc-text">栈溢出漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E%E5%88%B0%E5%8A%AB%E6%8C%81%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E6%B5%81"><span class="toc-number">2.3.</span> <span class="toc-text">从栈溢出漏洞到劫持程序控制流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%8A%AB%E6%8C%81%E4%BA%86%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E6%B5%81%E4%B9%8B%E5%90%8E"><span class="toc-number">2.4.</span> <span class="toc-text">在劫持了程序控制流之后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">2.5.</span> <span class="toc-text">实验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.5.1.</span> <span class="toc-text">实验步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA"><span class="toc-number">2.5.2.</span> <span class="toc-text">提示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B9%8B%E5%90%8E%E7%9A%84%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">2.6.</span> <span class="toc-text">实验之后的思考题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%A0%88%E6%BA%A2%E5%87%BA%E7%9A%84%E9%98%B2%E5%BE%A1"><span class="toc-number">3.</span> <span class="toc-text">二、栈溢出的防御</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%A0%88%E5%B8%A7%E7%9A%84%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8%EF%BC%88%E5%8D%8F%E7%A8%8B%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">三、栈帧的更多应用（协程）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">4.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%9D%E5%AD%98%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-number">4.2.</span> <span class="toc-text">上下文保存与恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%9B%9E%E9%80%80%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">4.3.</span> <span class="toc-text">基于上下文回退的异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E7%9A%84%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88%E5%8D%8F%E7%A8%8B%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">基于上下文切换的生成器（协程）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">4.5.</span> <span class="toc-text">协程的一些实际应用</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">〇、实验简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%8D%B1%E9%99%A9%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">一、危险的计算器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rce-%E6%94%BB%E5%87%BB"><span class="toc-number">2.1.</span> <span class="toc-text">RCE 攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.2.</span> <span class="toc-text">栈溢出漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E%E5%88%B0%E5%8A%AB%E6%8C%81%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E6%B5%81"><span class="toc-number">2.3.</span> <span class="toc-text">从栈溢出漏洞到劫持程序控制流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%8A%AB%E6%8C%81%E4%BA%86%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E6%B5%81%E4%B9%8B%E5%90%8E"><span class="toc-number">2.4.</span> <span class="toc-text">在劫持了程序控制流之后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">2.5.</span> <span class="toc-text">实验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.5.1.</span> <span class="toc-text">实验步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA"><span class="toc-number">2.5.2.</span> <span class="toc-text">提示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B9%8B%E5%90%8E%E7%9A%84%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">2.6.</span> <span class="toc-text">实验之后的思考题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%A0%88%E6%BA%A2%E5%87%BA%E7%9A%84%E9%98%B2%E5%BE%A1"><span class="toc-number">3.</span> <span class="toc-text">二、栈溢出的防御</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%A0%88%E5%B8%A7%E7%9A%84%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8%E5%8D%8F%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">三、栈帧的更多应用（协程）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">4.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%9D%E5%AD%98%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-number">4.2.</span> <span class="toc-text">上下文保存与恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%9B%9E%E9%80%80%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">4.3.</span> <span class="toc-text">基于上下文回退的异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E7%9A%84%E7%94%9F%E6%88%90%E5%99%A8%E5%8D%8F%E7%A8%8B"><span class="toc-number">4.4.</span> <span class="toc-text">基于上下文切换的生成器（协程）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">4.5.</span> <span class="toc-text">协程的一些实际应用</span></a></li></ol></li></ol>
     </div>
   </span>
 </div>
@@ -134,9 +135,10 @@
 
   <div class="content" itemprop="articleBody">
     <blockquote>
-<p>Deadline：2024-11-20 23:59:59</p>
+<p>Deadline：2024-11-22 23:59:59</p>
 </blockquote>
-<h2 id="〇、实验简介"><a href="#〇、实验简介" class="headerlink" title="〇、实验简介"></a>〇、实验简介</h2><p>栈帧相关实验。</p>
+<h2 id="实验简介">〇、实验简介</h2>
+<p>栈帧相关实验。</p>
 <p>本学期，我们将金老师ICS第三个Lab回炉重造，添加更多讲解，以加深各位同学对栈帧的理解，并探索一些相关应用，丰富同学们的知识面。</p>
 <p>本次Lab由三个部分组成：</p>
 <ul>
@@ -144,166 +146,245 @@
 <li>学习 Canary 机制，了解栈溢出的防御</li>
 <li>尝试使用栈帧完成更多有意思的功能（参考资料：2022年Kieray Lab）</li>
 </ul>
-<h2 id="一、危险的计算器"><a href="#一、危险的计算器" class="headerlink" title="一、危险的计算器"></a>一、危险的计算器</h2><h3 id="RCE-攻击"><a href="#RCE-攻击" class="headerlink" title="RCE 攻击"></a>RCE 攻击</h3><p>电影中的黑客神通广大，能神不知鬼不觉地“黑”掉各种计算机系统，他们是如何做到的？</p>
+<h2 id="一危险的计算器">一、危险的计算器</h2>
+<h3 id="rce-攻击">RCE 攻击</h3>
+<p>电影中的黑客神通广大，能神不知鬼不觉地“黑”掉各种计算机系统，他们是如何做到的？</p>
 <p>首先，我们需要认识一下“黑”掉一个系统到底是指什么，对于黑客来说，有许多种不同的攻击效果（或者说漏洞）：</p>
 <ul>
-<li>RCE (Remote Code Execution)：远程代码执行，即攻击者可以在远程服务器上执行任意代码；</li>
-<li>DoS (Denial of Service)：拒绝服务，即攻击者可以让服务器无法正常工作；</li>
-<li>MITM (Man-In-The-Middle)：中间人攻击，即攻击者可以在通信过程中窃取信息；</li>
+<li>RCE (Remote Code
+Execution)：远程代码执行，即攻击者可以在远程服务器上执行任意代码；</li>
+<li>DoS (Denial of
+Service)：拒绝服务，即攻击者可以让服务器无法正常工作；</li>
+<li>MITM
+(Man-In-The-Middle)：中间人攻击，即攻击者可以在通信过程中窃取信息；</li>
 <li>……</li>
 </ul>
 <p>其中，攻击者最为喜闻乐见的就是RCE，因为这意味着他们可以在服务器上执行任意程序代码，做任何自己想做的事。比如，他可以把网站服务器托管的网站的首页改成自己的名字；又比如，他可以在上面运行自己的挖矿程序，借用他人计算机的算力帮自己牟利。</p>
 <p>一个最简单的RCE漏洞形如：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">read(<span class="number">0</span>, input, <span class="number">20</span>);</span><br><span class="line">system(input);</span><br></pre></td></tr></table></figure>
-
-<p>这段代码读取用户输入，并调用了 <code>system</code> 函数。<code>system</code> 函数的功能是执行一条shell指令，比如 <code>system(&quot;ls&quot;)</code> 就会相当于在命令行上输入 <code>ls</code> 以显示当前目录下的文件。</p>
-<p>这个程序在本地运行时，显然没什么问题，但如果这个 input 字符串来源于网络，这意味着攻击者可以通过输入恶意指令来执行任意代码。比如，当类似于这段代码的程序运行在一个服务器上时，攻击者只要想办法控制input为 <code>rm -rf /</code> 就可以删除服务器上的所有文件。</p>
+<p>这段代码读取用户输入，并调用了 <code>system</code>
+函数。<code>system</code> 函数的功能是执行一条shell指令，比如
+<code>system("ls")</code> 就会相当于在命令行上输入 <code>ls</code>
+以显示当前目录下的文件。</p>
+<p>这个程序在本地运行时，显然没什么问题，但如果这个 input
+字符串来源于网络，这意味着攻击者可以通过输入恶意指令来执行任意代码。比如，当类似于这段代码的程序运行在一个服务器上时，攻击者只要想办法控制input为
+<code>rm -rf /</code> 就可以删除服务器上的所有文件。</p>
 <p>所以，RCE 通常就是指“在目标机器上执行任意shell指令”。</p>
-<h3 id="栈溢出漏洞"><a href="#栈溢出漏洞" class="headerlink" title="栈溢出漏洞"></a>栈溢出漏洞</h3><p>栈溢出漏洞是一种常见且经典的漏洞，破坏力非常强大——它经常可以使攻击者达成 RCE。</p>
-<p>栈溢出漏洞在C语言当中非常常见，主要是因为使用 C 语言时非常容易漏掉对数组边界和 buffer 大小的检查。比如，下面这段代码：</p>
+<h3 id="栈溢出漏洞">栈溢出漏洞</h3>
+<p>栈溢出漏洞是一种常见且经典的漏洞，破坏力非常强大——它经常可以使攻击者达成
+RCE。</p>
+<p>栈溢出漏洞在C语言当中非常常见，主要是因为使用 C
+语言时非常容易漏掉对数组边界和 buffer
+大小的检查。比如，下面这段代码：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> buffer[<span class="number">20</span>];</span><br><span class="line">gets(buffer);</span><br></pre></td></tr></table></figure>
-
-<p>这段代码使用了 <code>gets</code> 函数，它会读取用户输入并存储到 <code>buffer</code> 中。然而，<code>gets</code> 函数并不会检查用户输入的长度，如果用户输入的长度超过了 <code>buffer</code> 的大小，就会导致多余的数据“溢出”到栈上的其他位置，导致其他数据被干扰。这就是栈溢出的定义。</p>
-<h3 id="从栈溢出漏洞到劫持程序控制流"><a href="#从栈溢出漏洞到劫持程序控制流" class="headerlink" title="从栈溢出漏洞到劫持程序控制流"></a>从栈溢出漏洞到劫持程序控制流</h3><p>之所以栈溢出漏洞如此危险，是因为它可以被利用来劫持程序的控制流。我们来回忆一下，栈上有哪些数据？</p>
-<p><img src="https://organicprogrammer.com/images/stack_contents.png"></p>
+<p>这段代码使用了 <code>gets</code> 函数，它会读取用户输入并存储到
+<code>buffer</code> 中。然而，<code>gets</code>
+函数并不会检查用户输入的长度，如果用户输入的长度超过了
+<code>buffer</code>
+的大小，就会导致多余的数据“溢出”到栈上的其他位置，导致其他数据被干扰。这就是栈溢出的定义。</p>
+<h3 id="从栈溢出漏洞到劫持程序控制流">从栈溢出漏洞到劫持程序控制流</h3>
+<p>之所以栈溢出漏洞如此危险，是因为它可以被利用来劫持程序的控制流。我们来回忆一下，栈上有哪些数据？</p>
+<p><img
+src="https://organicprogrammer.com/images/stack_contents.png" /></p>
 <p>注意到，其中有一个重要的数据：返回地址。当函数调用结束时，程序会跳转到这个返回地址继续执行。</p>
 <p>如果攻击者栈溢出的数据控制了这个返回地址，他就可以决定程序接下来返回到哪里，从而控制程序的执行流程。</p>
-<h3 id="在劫持了程序控制流之后"><a href="#在劫持了程序控制流之后" class="headerlink" title="在劫持了程序控制流之后"></a>在劫持了程序控制流之后</h3><p>“决定程序接下来执行哪个函数”，这听起来是不是很像我们之前说的RCE？没错，这就是栈溢出漏洞的危险之处：它可以被利用来实现任意代码执行。试想，如果程序中存在一个调用 <code>system(&quot;/bin/sh&quot;)</code> 函数的地方，我们只需要把对应的地址填到栈上返回地址的位置，就可以控制程序去调用 <code>system(&quot;/bin/sh&quot;)</code>，从而获取一个 shell 达成 RCE。</p>
-<p>聪明的你可能会问：并不是所有的程序都会调用 <code>system(&quot;/bin/sh&quot;)</code> 或是类似的函数，这种情况怎么办呢？我们现在仅仅能够控制程序接下来执行哪个地址的代码，离执行任意的shell指令还有一段距离。</p>
+<h3 id="在劫持了程序控制流之后">在劫持了程序控制流之后</h3>
+<p>“决定程序接下来执行哪个函数”，这听起来是不是很像我们之前说的RCE？没错，这就是栈溢出漏洞的危险之处：它可以被利用来实现任意代码执行。试想，如果程序中存在一个调用
+<code>system("/bin/sh")</code>
+函数的地方，我们只需要把对应的地址填到栈上返回地址的位置，就可以控制程序去调用
+<code>system("/bin/sh")</code>，从而获取一个 shell 达成 RCE。</p>
+<p>聪明的你可能会问：并不是所有的程序都会调用
+<code>system("/bin/sh")</code>
+或是类似的函数，这种情况怎么办呢？我们现在仅仅能够控制程序接下来执行哪个地址的代码，离执行任意的shell指令还有一段距离。</p>
 <p>这个时候就需要进行“构造”了，攻击者在利用漏洞时，需要利用好一切可以利用的资源，包括但不限于：当前寄存器中的数据、内存中的机器码和数据等等。</p>
-<p>比如，我们知道 <code>rdi</code> 寄存器是用来传递第一个参数的寄存器。如果我们劫持程序控制流到 <code>foo(int a)</code> 函数，其实就相当于调用了 <code>foo(&lt;当前rdi值&gt;)</code>。</p>
+<p>比如，我们知道 <code>rdi</code>
+寄存器是用来传递第一个参数的寄存器。如果我们劫持程序控制流到
+<code>foo(int a)</code> 函数，其实就相当于调用了
+<code>foo(&lt;当前rdi值&gt;)</code>。</p>
 <p>又比如，我们不一定要控制程序去返回到某个函数（的起始位置），而可以控制程序返回到某个函数的中间。如果有这样一个函数：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">foo</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">        system(<span class="string">&quot;/bin/sh&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>看上去这个函数没有任何用。但其中包含的 <code>system(&quot;/bin/sh&quot;)</code> 片段可以为我们所用：我们可以直接控制程序执行 if 内的代码。</p>
-<h3 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h3><p>在本次试验中，我们给出了一个简单但包含有漏洞的计算器程序，它会读取用户输入的表达式，包上 <code>echo $(())</code> 后调用 <code>system</code> 函数来计算表达式的结果。</p>
-<p>你的任务是：利用栈溢出漏洞，控制程序执行 <code>./malware</code> 。这个“恶意程序”会检测自己的父进程调用，如果发现自己由 <code>bash-calc</code> 调用，就会输出 <code>You have successfully detonated the bomb! Congratulations!</code>，表示你已经成功完成了任务。</p>
-<h4 id="实验步骤"><a href="#实验步骤" class="headerlink" title="实验步骤"></a>实验步骤</h4><ol>
-<li>阅读 <code>bash-calc.c</code> 源代码，理解程序的逻辑，找到漏洞所在函数，计算出溢出所需要的字符数；</li>
-<li>使用 <code>gdb</code> 调试程序，将断点设置在漏洞所在函数的 <code>ret</code> 语句处，观察此时各个寄存器的值；</li>
-<li>结合你的观察，构造一个恰当的 payload，使得程序执行 <code>./malware</code>；</li>
+<p>看上去这个函数没有任何用。但其中包含的 <code>system("/bin/sh")</code>
+片段可以为我们所用：我们可以直接控制程序执行 if 内的代码。</p>
+<h3 id="实验">实验</h3>
+<p>在本次试验中，我们给出了一个简单但包含有漏洞的计算器程序，它会读取用户输入的表达式，包上
+<code>echo $(())</code> 后调用 <code>system</code>
+函数来计算表达式的结果。</p>
+<p>你的任务是：利用栈溢出漏洞，控制程序执行 <code>./malware</code>
+。这个“恶意程序”会检测自己的父进程调用，如果发现自己由
+<code>bash-calc</code> 调用，就会输出
+<code>You have successfully detonated the bomb! Congratulations!</code>，表示你已经成功完成了任务。</p>
+<h4 id="实验步骤">实验步骤</h4>
+<ol type="1">
+<li>阅读 <code>bash-calc.c</code>
+源代码，理解程序的逻辑，找到漏洞所在函数，计算出溢出所需要的字符数；</li>
+<li>使用 <code>gdb</code> 调试程序，将断点设置在漏洞所在函数的
+<code>ret</code> 语句处，观察此时各个寄存器的值；</li>
+<li>结合你的观察，构造一个恰当的 payload，使得程序执行
+<code>./malware</code>；</li>
 </ol>
-<h4 id="提示"><a href="#提示" class="headerlink" title="提示"></a>提示</h4><ul>
-<li><p>不同输入函数的“截断”不同，截断指的是输入函数在读取到哪些字符时会停止读取。比如，<code>gets</code> 函数会读取到换行符为止，所以它也会读入 <code>\0</code> 这种非常特殊的字符。具体可以参照 <a target="_blank" rel="noopener" href="https://xuanxuanblingbling.github.io/ctf/pwn/2020/12/16/input/">CTF中常见的C语言输入函数截断属性总结</a></p>
-</li>
-<li><p>一个示例的构造payload的方法：</p>
-</li>
+<h4 id="提示">提示</h4>
+<ul>
+<li><p>不同输入函数的“截断”不同，截断指的是输入函数在读取到哪些字符时会停止读取。比如，<code>gets</code>
+函数会读取到换行符为止，所以它也会读入 <code>\0</code>
+这种非常特殊的字符。具体可以参照 <a
+target="_blank" rel="noopener" href="https://xuanxuanblingbling.github.io/ctf/pwn/2020/12/16/input/">CTF中常见的C语言输入函数截断属性总结</a></p></li>
+<li><p>一个示例的构造payload的方法：</p></li>
 </ul>
-<p>假设buffer距离返回地址的偏移为0x10，且我们想让程序返回到地址 <code>0x4005d6</code>，则我们可以编写一个如下的 Python 程序：</p>
+<p>假设buffer距离返回地址的偏移为0x10，且我们想让程序返回到地址
+<code>0x4005d6</code>，则我们可以编写一个如下的 Python 程序：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">payload = <span class="string">b&#x27;A&#x27;</span> * <span class="number">0x10</span> + <span class="string">b&#x27;\xd6\x05\x40\x00\x00\x00\x00\x00&#x27;</span></span><br><span class="line">sys.stdout.buffer.write(payload)</span><br></pre></td></tr></table></figure>
-
 <p>然后在终端中执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 payload.py | ./bash-calc</span><br></pre></td></tr></table></figure>
-
 <p>或者直接将 payload 写入文件，然后使用重定向机制：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python3 payload.py &gt; payload</span><br><span class="line">./bash-calc &lt; payload</span><br></pre></td></tr></table></figure>
-
-<p>后者可以帮助你在使用gdb时更好地调试，比如在gdb中执行 <code>run &lt; payload</code> 就可以使用终端的重定向语法。</p>
+<p>后者可以帮助你在使用gdb时更好地调试，比如在gdb中执行
+<code>run &lt; payload</code> 就可以使用终端的重定向语法。</p>
 <ul>
-<li>我们的目标类似于执行 <code>system(&quot;./malware&quot;)</code>，如果你已经构造成功了 payload 使程序执行 <code>system(&quot;./malware&quot;)</code>，但程序在 <code>system</code> 函数的内部崩溃了，这在我们的预期内。</li>
+<li>我们的目标类似于执行
+<code>system("./malware")</code>，如果你已经构造成功了 payload
+使程序执行 <code>system("./malware")</code>，但程序在
+<code>system</code> 函数的内部崩溃了，这在我们的预期内。</li>
 </ul>
-<p>造成这种情况的原因是：<code>system</code> 内部某些汇编语句对栈的对齐要求很高，如果没有对齐至 0x10，就会导致程序崩溃。如果你使用gdb进行调试，你就可以看到这几条非常“挑剔”的汇编指令。</p>
-<p>在正常执行一个函数时，<code>rsp</code> 寄存器是向 0x10 对齐的；调用某一个函数时使用的是 <code>call</code> 指令，会往栈上压入一个8字节的返回地址（这里就破坏了对齐），然后跳转到函数的起始位置。因此，每个函数都会假设自己刚刚被调用时，<code>rsp</code> 寄存器是不向 0x10 对齐的。</p>
-<p>然而，我们通过劫持返回地址调用某个函数时，我们并没有使用 <code>call</code> 指令，而是直接跳转到了函数的开头。这就导致函数开始时，栈反而向 0x10 对齐了，这破坏了 <code>system</code> 函数的假设，导致程序崩溃。</p>
-<p>解决办法很简单：<strong>不要直接调用 <code>system</code> 函数，而是调用一个中间函数，并且跳过函数开头的一条 <code>push rbp</code> 指令。</strong>这类似于手动破坏栈的对齐，使得 <code>system</code> 函数可以正常执行。关于这个解决方法的原理分析，我们留作思考题。</p>
-<h3 id="实验之后的思考题"><a href="#实验之后的思考题" class="headerlink" title="实验之后的思考题"></a>实验之后的思考题</h3><p>除了在报告描述你的攻击流程之外，你还需要在报告中回答以下问题：</p>
-<p><strong>Problem 1.1</strong> 实验任务中导致溢出的函数早就成为了一个臭名昭著的函数，现如今几乎没有人会再使用它。但即使在 2024 年的今天，我们依然会看到许许多多的栈溢出、堆溢出漏洞。请你思考一下，还有什么其他的场景、函数会导致溢出？你自己是否在编程中遇到过栈溢出的情况？</p>
-<p><strong>Problem 1.2</strong> 提示中提到了一个解决方案：<strong>不要直接调用 <code>system</code> 函数，而是调用一个中间函数，并且跳过函数开头的一条 <code>push rbp</code> 指令。</strong>这类似于手动破坏栈的对齐，使得 <code>system</code> 函数可以正常执行。请你思考一下，为什么这样做可以解决问题？</p>
-<h2 id="二、栈溢出的防御"><a href="#二、栈溢出的防御" class="headerlink" title="二、栈溢出的防御"></a>二、栈溢出的防御</h2><p>有一种针对于栈溢出的防御机制被广泛部署于各种软件中，也早已被作为编译器的默认选项。</p>
-<p>在这个任务中，我们需要你重新编译 <code>bash-calc.c</code>，通过阅读汇编代码的方式，理解这种防御机制的原理。</p>
+<p>造成这种情况的原因是：<code>system</code>
+内部某些汇编语句对栈的对齐要求很高，如果没有对齐至
+0x10，就会导致程序崩溃。如果你使用gdb进行调试，你就可以看到这几条非常“挑剔”的汇编指令。</p>
+<p>在正常执行一个函数时，<code>rsp</code> 寄存器是向 0x10
+对齐的；调用某一个函数时使用的是 <code>call</code>
+指令，会往栈上压入一个8字节的返回地址（这里就破坏了对齐），然后跳转到函数的起始位置。因此，每个函数都会假设自己刚刚被调用时，<code>rsp</code>
+寄存器是不向 0x10 对齐的。</p>
+<p>然而，我们通过劫持返回地址调用某个函数时，我们并没有使用
+<code>call</code>
+指令，而是直接跳转到了函数的开头。这就导致函数开始时，栈反而向 0x10
+对齐了，这破坏了 <code>system</code> 函数的假设，导致程序崩溃。</p>
+<p>解决办法很简单：<strong>不要直接调用 <code>system</code>
+函数，而是调用一个中间函数，并且跳过函数开头的一条 <code>push rbp</code>
+指令。</strong>这类似于手动破坏栈的对齐，使得 <code>system</code>
+函数可以正常执行。关于这个解决方法的原理分析，我们留作思考题。</p>
+<h3 id="实验之后的思考题">实验之后的思考题</h3>
+<p>除了在报告描述你的攻击流程之外，你还需要在报告中回答以下问题：</p>
+<p><strong>Problem 1.1</strong>
+实验任务中导致溢出的函数早就成为了一个臭名昭著的函数，现如今几乎没有人会再使用它。但即使在
+2024
+年的今天，我们依然会看到许许多多的栈溢出、堆溢出漏洞。请你思考一下，还有什么其他的场景、函数会导致溢出？你自己是否在编程中遇到过栈溢出的情况？</p>
+<p><strong>Problem 1.2</strong>
+提示中提到了一个解决方案：<strong>不要直接调用 <code>system</code>
+函数，而是调用一个中间函数，并且跳过函数开头的一条 <code>push rbp</code>
+指令。</strong>这类似于手动破坏栈的对齐，使得 <code>system</code>
+函数可以正常执行。请你思考一下，为什么这样做可以解决问题？</p>
+<h2 id="二栈溢出的防御">二、栈溢出的防御</h2>
+<p>有一种针对于栈溢出的防御机制被广泛部署于各种软件中，也早已被作为编译器的默认选项。</p>
+<p>在这个任务中，我们需要你重新编译
+<code>bash-calc.c</code>，通过阅读汇编代码的方式，理解这种防御机制的原理。</p>
 <p>你可以使用这条指令来重新编译一个 <code>bash-calc-my</code>：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -no-pie -o bash-calc-my bash-calc.c</span><br></pre></td></tr></table></figure>
-
 <p>在编译以后，你可以通过两种方式来探索这种防御机制：</p>
-<ol>
+<ol type="1">
 <li>借助gdb动态调试，使用刚刚的 payload 攻击程序，观察程序的行为；</li>
 <li>借助objdump静态分析，观察程序新增加的汇编代码，通过搜索等手段理解其意义。</li>
 </ol>
 <p>你需要在实验报告中描述你对这种防御机制原理的理解，并尝试回答一个问题：</p>
-<p><strong>Problem 2.1</strong> 这种防御机制是否能够彻底“防御”栈溢出漏洞？</p>
-<h2 id="三、栈帧的更多应用（协程）"><a href="#三、栈帧的更多应用（协程）" class="headerlink" title="三、栈帧的更多应用（协程）"></a>三、栈帧的更多应用（协程）</h2><p>在前两项任务中，我们已经加深了对程序运行时的栈帧的认识，接下来，我们使用栈帧和一定的汇编语言，来给C语言实现一些更加现代的功能吧。</p>
+<p><strong>Problem 2.1</strong>
+这种防御机制是否能够彻底“防御”栈溢出漏洞？</p>
+<h2 id="三栈帧的更多应用协程">三、栈帧的更多应用（协程）</h2>
+<p>在前两项任务中，我们已经加深了对程序运行时的栈帧的认识，接下来，我们使用栈帧和一定的汇编语言，来给C语言实现一些更加现代的功能吧。</p>
 <p>在本实验中，你可以在Task3文件夹下，使用<code>make clean &amp;&amp; make</code>来编译代码，使用<code>./program</code>来运行代码。</p>
-<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><blockquote>
+<h3 id="前言">前言</h3>
+<blockquote>
 <p>在本实验中，你并不需要清晰地知道进程和线程的区别。你可以理解为一个进程可以开启多个线程，让CPU的不同核心同时计算不同的功能。</p>
 </blockquote>
 <p>如果在程序运行的过程中，我们直接将PC（%rip）的值修改到某个指定地址，那程序大概率是不能正常运行的。比如我们尝试编译这样一个简单的二分查找C语言程序：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="type">int</span> arr[] = &#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">8</span>, <span class="number">13</span>, <span class="number">21</span>, <span class="number">34</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">binSearch</span><span class="params">(<span class="type">int</span> dest)</span>&#123;</span><br><span class="line">    <span class="keyword">register</span> <span class="type">int</span> l=<span class="number">0</span>, r=<span class="number">7</span>;</span><br><span class="line">    <span class="keyword">register</span> <span class="type">int</span> result = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(l&lt;=r)&#123;</span><br><span class="line">        <span class="type">int</span> mid = (l+r)&gt;&gt;<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span>(arr[mid]&lt;dest)l=mid+<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(arr[mid]&gt;dest)r=mid<span class="number">-1</span>;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            result = mid;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(result == <span class="number">-1</span>) result = l;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;=<span class="number">35</span>;++i)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, binSearch(i));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;\n&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>它的main函数反汇编后如下：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">0000000000001202 &lt;main&gt;:</span><br><span class="line">    1202:	f3 0f 1e fa          	endbr64 </span><br><span class="line">    1206:	55                   	push   %rbp</span><br><span class="line">    1207:	48 89 e5             	mov    %rsp,%rbp</span><br><span class="line">    120a:	48 83 ec 10          	sub    $0x10,%rsp</span><br><span class="line">    120e:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%rbp)</span><br><span class="line">    1215:	eb 21                	jmp    1238 &lt;main+0x36&gt;</span><br><span class="line">    1217:	8b 45 fc             	mov    -0x4(%rbp),%eax</span><br><span class="line">    121a:	89 c7                	mov    %eax,%edi</span><br><span class="line">    121c:	e8 48 ff ff ff       	call   1169 &lt;binSearch&gt;</span><br><span class="line">    1221:	89 c6                	mov    %eax,%esi</span><br><span class="line">    1223:	48 8d 3d da 0d 00 00 	lea    0xdda(%rip),%rdi        # 2004 &lt;_IO_stdin_used+0x4&gt;</span><br><span class="line">    122a:	b8 00 00 00 00       	mov    $0x0,%eax</span><br><span class="line">    122f:	e8 3c fe ff ff       	call   1070 &lt;printf@plt&gt;</span><br><span class="line">    1234:	83 45 fc 01          	addl   $0x1,-0x4(%rbp)</span><br><span class="line">    1238:	83 7d fc 23          	cmpl   $0x23,-0x4(%rbp)</span><br><span class="line">    123c:	7e d9                	jle    1217 &lt;main+0x15&gt;</span><br><span class="line">    123e:	bf 0a 00 00 00       	mov    $0xa,%edi</span><br><span class="line">    1243:	e8 18 fe ff ff       	call   1060 &lt;putchar@plt&gt;</span><br><span class="line">    1248:	90                   	nop</span><br><span class="line">    1249:	c9                   	leave  </span><br><span class="line">    124a:	c3                   	ret    </span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>Problem 3.1</strong> 在运行main函数时，内存-0x4(%rbp)处是什么？1217位置的mov语句是为了做什么？</p>
-<p><strong>Problem 3.2</strong> 二分查找函数中我们使用了<code>register int</code>保留字，这告诉编译器要把变量存到寄存器而不是内存中，这样做有什么好处<sup>1</sup>？正因如此，在执行完二分查找函数中的<strong>算法部分</strong>，希望返回主函数时，能否直接修改%rip的值到1221而不做其他事情？还缺少什么步骤？</p>
+<p><strong>Problem 3.1</strong>
+在运行main函数时，内存-0x4(%rbp)处是什么？1217位置的mov语句是为了做什么？</p>
+<p><strong>Problem 3.2</strong>
+二分查找函数中我们使用了<code>register int</code>保留字，这告诉编译器要把变量存到寄存器而不是内存中，这样做有什么好处<sup>1</sup>？正因如此，在执行完二分查找函数中的<strong>算法部分</strong>，希望返回主函数时，能否直接修改%rip的值到1221而不做其他事情？还缺少什么步骤？</p>
 <blockquote>
 <p>[1]实际上在现代编译器中，你不需要自己手写register关键字。开启优化后，编译器会自动安排变量的位置，找到最优化的一种策略，这基本是现代编译器必备的操作。</p>
 </blockquote>
-<h3 id="上下文保存与恢复"><a href="#上下文保存与恢复" class="headerlink" title="上下文保存与恢复"></a>上下文保存与恢复</h3><p>打开Linux终端，输入<code>top -H</code>指令（按下q退出），看看当前电脑上正在运行的线程有多少个？再输入<code>cat /proc/cpuinfo | grep processor</code>，看看你的电脑的CPU有多少个线程？</p>
+<h3 id="上下文保存与恢复">上下文保存与恢复</h3>
+<p>打开Linux终端，输入<code>top -H</code>指令（按下q退出），看看当前电脑上正在运行的线程有多少个？再输入<code>cat /proc/cpuinfo | grep processor</code>，看看你的电脑的CPU有多少个线程？</p>
 <p>在大部分情况下，系统中正在运行的线程数量都比CPU的线程数要多，但是你可以试试播放同时多个视频、音频、下载文件、编辑文档、QQ微信接收消息、显示动态壁纸……CPU可以“同时”做到这些事情。想要实现这个效果，自然不能让一个程序线程独占一个CPU，也就是——限制线程能连续在CPU上运行的时间，时间用完后<strong>切换</strong>到一个其它的线程继续运行。只要这个连续运行时间足够短，在我们看起来，电脑就是在同时进行所有工作。</p>
 <p>上面这段文字暗含了一些信息：电脑需要保存一个线程“<strong>执行到什么状态了</strong>”，这样它下次继续运行该线程时可以直接从暂停的位置继续。我们将这个<strong>执行的状态</strong>称之为<strong>上下文</strong>，这两种操作分别称为<strong>保存上下文</strong>和<strong>恢复上下文</strong>，记为save和restore。本实验我们将这些操作限制在同一个进程内，同学们不需要考虑硬件和操作系统层面的内容。</p>
-<p><strong>Problem 3.3</strong> 结合Problem3.2，为了让程序能在跳转到指定位置后正常运行，我们除了修改%rip，还需要复原__的状态。所以，save操作需要将这些信息记录到内存中。</p>
+<p><strong>Problem 3.3</strong>
+结合Problem3.2，为了让程序能在跳转到指定位置后正常运行，我们除了修改%rip，还需要复原__的状态。所以，save操作需要将这些信息记录到内存中。</p>
 <p>我们在这里规定save操作不记录函数的栈帧。想象一下用户在函数中申请了一个16MB的数组，如果save记录栈帧，一次调用就需要将整个数组都复制一遍，低效且浪费空间。</p>
 <p>实际上，对于当前save和restore的定义，我们还有两个需要考虑的方面。对于如下的伪代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">funcA:</span><br><span class="line">    x = 0</span><br><span class="line">    save()</span><br><span class="line">    x = 1</span><br><span class="line">    call funcB</span><br><span class="line"></span><br><span class="line">funcB:</span><br><span class="line">    restore()</span><br></pre></td></tr></table></figure>
-<p><strong>Problem 3.4</strong> 假如变量x被存放在栈帧上，在restore操作后，x的值为__；假如变量x被存放在寄存器上，在restore操作后，x的值为__。</p>
-<p>由于变量放在寄存器还是内存是由编译器决定的，根据编译器策略的不同，可能会导致同一份代码产生不同的运行结果。为了简化问题，我们可以做出如下限定：执行save语句的函数结束后，这一份save记录被销毁；我们规定在save语句后修改过的局部变量，在restore后都是未知的，让开发者不要在restore之后直接使用这些变量的值。</p>
-<p>此外还有一个问题。我们可以模拟这个过程：程序首先在funcA中save一次，调用funcB，restore后程序复原到save时的状态，又回到x&#x3D;1这条指令。接下来程序又调用funcB，又执行一次restore，这显然不是我们所期望的。</p>
-<p>为了避免这种“循环”带来的错误，我们可以给save添加一个“返回值”。save记录时返回0，程序正常执行；而执行restore后，程序的执行位置同样会回到save的后一条语句，其表现也像是“在save后返回到该函数”。因此，只需要让此时save的返回值表现为非0，就能区分开save和restore，甚至还能用一些枚举值来表示“程序为什么调用了restore”。</p>
+<p><strong>Problem 3.4</strong>
+假如变量x被存放在栈帧上，在restore操作后，x的值为__；假如变量x被存放在寄存器上，在restore操作后，x的值为__。</p>
+<p>由于变量放在寄存器还是内存是由编译器决定的，根据编译器策略的不同，可能会导致同一份代码产生不同的运行结果。为了简化问题，我们可以做出如下限定：在save语句后修改过的局部变量，在restore后都是未知的，让开发者不要在restore之后直接使用这些变量的值。</p>
+<p>此外还有一个问题。我们可以模拟这个过程：程序首先在funcA中save一次，调用funcB，restore后程序复原到save时的状态，又回到x=1这条指令。接下来程序又调用funcB，又执行一次restore，这显然不是我们所期望的。</p>
+<p>为了避免这种“死循环”，我们可以给save添加一个“返回值”：正常save函数返回0，程序继续向后执行；而执行restore后，程序的执行位置同样会回到save的后一条语句，其表现也像是“在save后返回到该函数”，只需要让此时save的返回值<strong>表现为非0</strong>（想一想，函数返回值的本质是什么？），就能区分开save和restore。甚至，为了让该功能更加实用，还能用一些枚举值来表示“程序为什么调用了restore”。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">funcA:</span><br><span class="line">    x = 0</span><br><span class="line">    if save() == 0:</span><br><span class="line">        x = 1</span><br><span class="line">        call funcB</span><br><span class="line">    else:</span><br><span class="line">        return</span><br><span class="line"></span><br><span class="line">funcB:</span><br><span class="line">    restore()</span><br></pre></td></tr></table></figure>
-
-<p>接下来，我们将通过汇编实现save和restore的功能（显然不考虑内联汇编的C语言难以实现这个功能），不过在此之前我们先着手用汇编语言写一个简单的函数吧。</p>
-<p><strong>Problem 3.5</strong> 请用不超过5条汇编指令<sup>2</sup>实现函数naive_func，直接写在实验报告中。该函数的功能为：将函数的返回地址保存到第一个参数所指定的内存地址，然后返回0。可参考伪代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">naive_func(void **p):</span><br><span class="line">    *p = (return addr);</span><br><span class="line">    return 0;</span><br></pre></td></tr></table></figure>
-
+<p>接下来，我们将通过汇编实现save和restore的功能（显然，不考虑汇编和调用库函数的纯C语言难以实现这个功能），不过在此之前我们先着手用汇编语言写一个简单的函数吧。</p>
+<p><strong>Problem 3.5</strong>
+请用不超过5条汇编指令<sup>2</sup>实现函数naive_func，直接写在实验报告中。该函数的功能为：将函数的返回地址保存到第一个参数所指定的内存地址，然后返回0。可参考伪代码：
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">naive_func(void **p):</span><br><span class="line">    *p = (return addr);</span><br><span class="line">    return 0;</span><br></pre></td></tr></table></figure></p>
 <blockquote>
 <p>[2]不计伪指令。如果可以，请在函数开头加上<code>endbr64</code>，正确做法下指令数量是足够的。</p>
 </blockquote>
-<p><strong>Problem 3.6</strong> 也许你在课上学过函数开头两条指令的固定格式<code>push rbp; mov rbp, rsp</code>。但是前面所写的naive_func显然不遵循这样的格式，为什么这是可以的呢？</p>
+<p><strong>Problem 3.6</strong>
+也许你在课上学过函数开头两条指令的固定格式<code>push rbp; mov rbp, rsp</code>。但是前面所写的naive_func显然不遵循这样的格式，为什么这是可以的呢？</p>
 <p>接下来，我们开始着手实现save和restore函数，为了实现更多后续功能，这两个函数的定义与上文所述有略微不同，请参见API手册。</p>
-<p><strong>Task 3.1</strong> 请在<code>context_asm.S</code>中实现函数<code>__ctx_save</code>和<code>__ctx_restore</code>，分别对应上文所述的save和restore操作。根据函数的定义，你需要仔细考虑哪些数据是需要存储到<code>__ctx</code>中的。你可以自行调整<code>__ctx</code>类型申请的内存大小，但是我们保证原始代码给出的120字节是足够的。如果一切顺利，在完成本节内容后，你将能通过 test1 和 test2。</p>
+<p><strong>Task 3.1</strong>
+请在<code>context_asm.S</code>中实现函数<code>__ctx_save</code>和<code>__ctx_restore</code>，分别对应上文所述的save和restore操作。根据函数的定义，你需要仔细考虑哪些数据是需要存储到<code>__ctx</code>中的。你可以自行调整<code>__ctx</code>类型申请的内存大小，但是我们保证原始代码给出的120字节是足够的。如果一切顺利，在完成本节内容后，你将能通过
+test1 和 test2。</p>
 <blockquote>
-<p>按照 x86-64 调用约定，rdi 和 rsi 分别为函数调用的第一二个参数，rax 为函数调用的返回值。在默认情况下，gcc 使用 AT&amp;T 汇编语法。如果你想要使用 Intel 汇编语法，可以在ctx.S的开头加上一句.intel_syntax noprefix。<br>禁止使用 setjmp 或 __builtin_setjmp 等现成函数，但你也许可以参考它们的实现。</p>
+<p>按照 x86-64 调用约定，rdi 和 rsi 分别为函数调用的第一二个参数，rax
+为函数调用的返回值。在默认情况下，gcc 使用 AT&amp;T
+汇编语法。如果你想要使用 Intel
+汇编语法，可以在ctx.S的开头加上一句.intel_syntax noprefix。 禁止使用
+setjmp 或 __builtin_setjmp 等现成函数，但你也许可以参考它们的实现。</p>
 </blockquote>
-<h3 id="基于上下文回退的异常处理"><a href="#基于上下文回退的异常处理" class="headerlink" title="基于上下文回退的异常处理"></a>基于上下文回退的异常处理</h3><p>现代编程语言基本都支持异常处理机制，即程序包含以try和catch（或except等关键字）开头的代码块，程序员可以将一些代码放到try代码块中，如果遇到除0错误或是其他一些错误，程序不是直接停止运行，而是跳转到catch后面继续运行。</p>
+<h3 id="基于上下文回退的异常处理">基于上下文回退的异常处理</h3>
+<p>现代编程语言基本都支持异常处理机制，即程序包含以try和catch（或except等关键字）开头的代码块，程序员可以将一些代码放到try代码块中，如果遇到除0错误或是其他一些错误，程序不是直接停止运行，而是跳转到catch后面继续运行。</p>
 <p>基于上一部分已经实现的两个操作，我们可以实现一个简单的异常处理机制，不妨参考下面的伪代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">func():</span><br><span class="line">    x = input</span><br><span class="line">    if save() == 0:</span><br><span class="line">        check(x)</span><br><span class="line">        print(input / 2)</span><br><span class="line">    else:</span><br><span class="line">        print(&quot;Input is invalid&quot;)</span><br><span class="line"></span><br><span class="line">check(x):</span><br><span class="line">    if not isdigit(x):</span><br><span class="line">        recover(error_code)</span><br></pre></td></tr></table></figure>
 <p>这实际上等同于使用try-catch机制，它和下面的Python代码是基本等价的：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">func</span>():</span><br><span class="line">    x = <span class="built_in">input</span>()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        check(x)</span><br><span class="line">        <span class="built_in">print</span>(<span class="built_in">int</span>(x) / <span class="number">2</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;Input is invalid&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">check</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> x.isdigit():</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">&quot;Input is invalid&quot;</span>)</span><br></pre></td></tr></table></figure>
-
 <p>借助C语言的宏，我们可以将原始含save和recover的代码包装成类似Python或者C++风格的代码。而且，try-catch是可以嵌套的。在发生try-catch嵌套时，程序中会同时存在许多个try记录的上下文。在执行throw操作时，我们需要恢复到最新的一个上下文，如下面的C++代码：</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">        <span class="keyword">throw</span> Exception;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>该代码会输出1。</p>
-<p>容易看出，这实际上就是一个栈的结构，我们将其称为异常处理栈。对于每个try操作，它记录当前的上下文，并将其加入异常处理栈。对于每个throw操作，它弹出异常处理栈中的栈顶元素，将当前状态恢复成该上下文，并转而执行catch操作。当然，清理也是必须的，对于每个正常完成的try操作，我们需要弹出异常处理栈中的栈顶元素，使之恢复到try操作之前的状态，如下面的代码则会输出2：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> Exception;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<p>容易看出，这实际上就是一个栈的结构，我们将其称为异常处理栈。对于每个try操作，它记录当前的上下文，并将其加入异常处理栈。对于每个throw操作，它弹出异常处理栈中的栈顶元素，将当前状态恢复成该上下文，并转而执行catch操作。当然，清理也是必须的，对于每个正常完成的try操作，我们需要弹出异常处理栈中的栈顶元素，使之恢复到try操作之前的状态，如下面的代码则会输出2：
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    <span class="keyword">try</span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">catch</span>&#123;</span><br><span class="line">        cout &lt;&lt; <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> Exception;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span>&#123;</span><br><span class="line">    cout &lt;&lt; <span class="number">2</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>在本lab中，我们采用单向链表的方式来实现这个栈。在该Task中，你暂时不需要考虑<code>__generator</code>结构体的作用，只需要知道<code>__now_gen-&gt;__err_stk_head</code>是这个单向链表的表头，<code>__err_stk_node</code>结构体用于表示链表的节点。你需要实现<code>__err_stk_push</code>和<code>__err_stk_pop</code>两个函数来实现链表的操作，然后使用我们当前已实现的功能，填充<code>try</code>、<code>catch</code>和<code>throw</code>的宏定义<sup>3</sup>。</p>
 <blockquote>
-<p>[3]C语言提供了cleanup属性，被添加该属性的变量会在生命周期结束时执行对应的函数，可以理解为类似析构函数的功能，可参考<a target="_blank" rel="noopener" href="https://gcc.gnu.org/onlinedocs/gcc/Common-Variable-Attributes.html">https://gcc.gnu.org/onlinedocs/gcc/Common-Variable-Attributes.html</a></p>
+<p>[3]C语言提供了cleanup属性，被添加该属性的变量会在生命周期结束时执行对应的函数，可以理解为类似析构函数的功能，可参考https://gcc.gnu.org/onlinedocs/gcc/Common-Variable-Attributes.html</p>
 </blockquote>
-<p><strong>Task 3.2</strong> 请在<code>context.c</code>中实现函数<code>__err_stk_push</code>和<code>__err_stk_pop</code>，然后在<code>context.h</code>中实现<code>try</code>、<code>catch</code>和<code>throw</code>的宏定义。如果一切顺利，在完成本节内容后，你将能通过test3、test4和test5。</p>
-<h3 id="基于上下文切换的生成器（协程）"><a href="#基于上下文切换的生成器（协程）" class="headerlink" title="基于上下文切换的生成器（协程）"></a>基于上下文切换的生成器（协程）</h3><p>如果你还不熟悉Python的生成器，可以试着跑一下以下程序，观察输出：</p>
+<p><strong>Task 3.2</strong>
+请在<code>context.c</code>中实现函数<code>__err_stk_push</code>和<code>__err_stk_pop</code>，然后在<code>context.h</code>中实现<code>try</code>、<code>catch</code>和<code>throw</code>的宏定义。如果一切顺利，在完成本节内容后，你将能通过test3、test4和test5。</p>
+<h3 id="基于上下文切换的生成器协程">基于上下文切换的生成器（协程）</h3>
+<p>如果你还不熟悉Python的生成器，可以试着跑一下以下程序，观察输出：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">test</span>(<span class="params">x</span>):</span><br><span class="line">    val = x</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">5</span>):</span><br><span class="line">        val = <span class="keyword">yield</span> val</span><br><span class="line">        <span class="built_in">print</span>(val)</span><br><span class="line">        val += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">gen = test(<span class="number">1</span>)</span><br><span class="line">array = [gen.send(<span class="literal">None</span>)]</span><br><span class="line"><span class="built_in">print</span>(array)</span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    array.append(gen.send(array[-<span class="number">1</span>]*<span class="number">10</span>))</span><br><span class="line">    <span class="built_in">print</span>(array)</span><br></pre></td></tr></table></figure>
-
-<p>这段代码里面有关键字<code>yield</code>和函数<code>send</code>。当gen被赋值为一个函数后，程序并没有执行该函数。而第一次调用<code>send</code>方法时，程序跳转到该函数的开头开始执行，执行到第一个<code>yield</code>关键字时，函数将<code>yield</code>后面的值作为<code>send</code>方法的返回值，恢复到主函数继续执行。下次<code>send</code>又被调用时，程序并不是在函数中从头开始，而是接着上次<code>yield</code>返回主函数的位置继续向后执行，且<code>send</code>的值在该函数看来就是<code>yield</code>的返回值。当<code>test</code>函数执行完毕后，程序会抛出一个异常。</p>
+<p>这段代码里面有关键字<code>yield</code>和方法<code>send</code>。当gen被赋值为一个函数后，程序并没有执行该函数。而第一次调用<code>send</code>方法时，程序跳转到该函数的开头开始执行，执行到第一个<code>yield</code>关键字时，函数将<code>yield</code>后面的值作为<code>send</code>方法的返回值，恢复到调用<code>send</code>的地方继续向后执行。下次<code>send</code>又被调用时，程序并不是在函数中从头开始，而是接着上次<code>yield</code>的位置继续向后执行，且<code>send</code>方法的参数在该函数看来就是<code>yield</code>的返回值。当<code>test</code>函数执行完毕后，程序会抛出一个异常。</p>
 <p>这似乎跟我们前面实现的保存上下文很像：<code>yield</code>保存了函数当前的上下文，返回主函数；<code>send</code>保存了主函数的上下文，恢复函数的上下文继续执行。看起来这个功能似乎很好实现？不过先让我们看看下面的伪代码：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ctx a, b;</span><br><span class="line"></span><br><span class="line">funcA:</span><br><span class="line">    for i in 0..10:</span><br><span class="line">    print(&quot;A&quot;, i);</span><br><span class="line">    if(save(&amp;a) == 0):</span><br><span class="line">        restore(&amp;b);</span><br><span class="line"></span><br><span class="line">funcB:</span><br><span class="line">    for i in 0..10:</span><br><span class="line">    print(&quot;B&quot;, i);</span><br><span class="line">    if(save(&amp;b) == 0):</span><br><span class="line">        restore(&amp;a)</span><br></pre></td></tr></table></figure>
-
-<p>容易看出，如果这段代码已经跑起来了，它可以交替执行 A、B 两个循环，只要在此基础上包装出 yield 和 send 函数，即可达到与 Python 中生成器一致的效果。但我们首先要解决一个问题：它是怎么跑起来的？</p>
-<p>请注意我们在之前提出的约定：函数返回之后，不能再使用其调用<code>save</code>保存的上下文。因此，要想使funcA中引用的ctx b有效，必须保证funcB不返回（保证不清除栈帧），这似乎只可能发生在funcB调用了funcA的情况下。但反过来，要想使funcB中引用的ctx a有效，也必须保证funcA不返回（保证不清除栈帧），似乎只可能发生在funcA调用了funcB的情况下。</p>
+<p>容易看出，如果这段代码已经跑起来了，它可以交替执行 A 和 B
+两个循环，只要在此基础上包装出 yield 和 send 函数，即可达到与 Python
+中生成器一致的效果。但我们首先要解决一个问题：它是怎么跑起来的？</p>
+<p>请注意我们在之前提出的约定：函数返回之后，不能再使用其调用<code>save</code>保存的上下文。因此，要想使funcA中引用的ctx
+b有效，必须保证funcB不返回（保证不清除栈帧），这似乎只可能发生在funcB调用了funcA的情况下。但反过来，要想使funcB中引用的ctx
+a有效，也必须保证funcA不返回（保证不清除栈帧），似乎只可能发生在funcA调用了funcB的情况下。</p>
 <p>上面的分析仿佛引出了一个悖论。事实上，这一悖论只会在funcA和funcB使用同一个调用栈的情况下成立。假如我们为funcA和funcB分配两个不同的栈空间，那么执行funcA时，funcB的栈帧保留在它自己的栈空间上，与funcA所在的栈空间并无关联，也就不需要调用关系来保证funcB不返回了。</p>
-<p>为了实现多个栈空间，我们可以手动申请一块内存，配置一段上下文，然后通过我们实现的restore函数让程序跳转到这一段内存开始执行函数，这样这个函数就有了一段独立的栈空间。</p>
-<p>总结一下这个过程：创建生成器时，程序申请一段内存，并在该内存中配置一段初始上下文，等待调用。当生成器第一次被调用时，恢复到这段初始上下文，开始执行生成器对应的函数，直到第一次遇到yield，保存当前生成器的上下文，回到调用该生成器的函数中。如果生成器的函数执行完毕，抛出一个<code>ERR_GENEND</code>异常。在已给出的<code>__generator</code>结构体中，我们使用<code>data</code>变量来传输<code>yield</code>和<code>send</code>的返回值。为方便起见，我们将主函数也视作一个generator（只不过你不需要手动给这个generator制作一个栈空间和初始上下文），因此全局变量<code>__now_gen</code>被初始化为了<code>&amp;__main_gen</code>，且每个generator都有自己的异常处理栈。</p>
-<p><strong>Task 3.3</strong> 请在<code>context.c</code>中实现函数<code>send</code>、<code>yield</code>和<code>generator</code>（你可以理解为构造函数）。允许自行添加一些函数，因为你可能需要一些跳板函数来实现生成器的启动。你可能需要修改<code>throw</code>宏，以在外部处理生成器中未处理的<code>throw</code>。如果一切顺利，在完成本节内容后，你将能通过test6和test7。</p>
-<h3 id="协程的一些实际应用"><a href="#协程的一些实际应用" class="headerlink" title="协程的一些实际应用"></a>协程的一些实际应用</h3><p>协程在现代应用程序中有广泛的应用。比如，手机程序向服务器请求数据时同时显示动画，就可以理解为本机的逻辑处理函数发送网络请求后，上下文恢复到主函数来显示动画，一旦服务器返回了数据，上下文又切换到逻辑处理函数来执行后续操作。这是非常节约资源的一个方法：开辟新线程来进行网络通信也可以达到相同的效果，但开辟新线程本身就会消耗一些系统资源，所以不是最优的选择。</p>
+<p>为了实现多个栈空间，我们可以手动申请一块内存，配置一段自定义的上下文，然后通过我们实现的restore函数来更改寄存器的内容，并让程序跳转到这一段内存开始执行函数，这样这个函数就有了一段独立的栈空间。</p>
+<p>总结一下这个过程：创建生成器时，程序申请一段内存，并在该内存中配置一段初始上下文，等待调用。当生成器第一次被调用时，<code>restore</code>到这段初始上下文，程序在你手动配置的返回地址的位置继续执行，从而跳转到生成器对应的函数，直到第一次遇到<code>yield</code>。此时程序保存当前生成器的上下文，返回到调用该生成器的函数中。如果生成器的函数执行完毕，抛出一个<code>ERR_GENEND</code>异常。</p>
+<p>在已给出的<code>__generator</code>结构体中，我们使用<code>data</code>变量来传输<code>yield</code>和<code>send</code>的参数。为方便起见，我们将程序的主函数也视作一个generator（只不过你不需要手动给这个generator制作一个栈空间和初始上下文），因此全局变量<code>__now_gen</code>被初始化为了<code>&amp;__main_gen</code>，且每个generator都有自己的异常处理栈。</p>
+<p><strong>Task 3.3</strong>
+请在<code>context.c</code>中实现函数<code>send</code>,<code>yield</code>和<code>generator</code>（你可以理解为构造函数）。允许自行添加一些函数，因为你可能需要一些跳板函数来实现生成器的启动。你可能需要修改<code>throw</code>宏，以在外部处理生成器内部未处理的<code>throw</code>。如果一切顺利，在完成本节内容后，你将能通过test6和test7。</p>
+<h3 id="协程的一些实际应用">协程的一些实际应用</h3>
+<p>协程在现代应用程序中有广泛的应用。比如，手机程序向服务器请求数据时同时显示动画，就可以理解为本机的逻辑处理函数发送网络请求后，上下文恢复到主函数来显示动画，一旦服务器返回了数据，上下文又切换到逻辑处理函数来执行后续操作。这是非常节约资源的一个方法：开辟新线程来进行网络通信也可以达到相同的效果，但开辟新线程本身就会消耗一些系统资源，所以不是最优的选择。</p>
 <p>本Lab最后一个部分希望你能自定义一个基于协程的进度条动画。考虑我们平时玩的游戏，游戏画面本身也是多张图片连续快速播放，人眼看起来就变成了连贯的动画，这一过程可以用以下伪代码表示：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">def game():</span><br><span class="line">    record_time = get_time()</span><br><span class="line"></span><br><span class="line">    while True:</span><br><span class="line">        now_time = get_time()</span><br><span class="line">        delta_time = now_time - record_time</span><br><span class="line">        record_time = now_time</span><br><span class="line"></span><br><span class="line">        get_user_input()</span><br><span class="line">        handle_events(delta_time)</span><br><span class="line">        draw_scene()</span><br><span class="line">        sleep_until_next_frame()</span><br></pre></td></tr></table></figure>
-
 <p>其中，<code>delta_time</code>代表游戏两帧之间间隔了多久，游戏场景里面的物件会根据这个时间间隔移动相应的距离。</p>
 <p>当需要给某游戏物件做一个持续若干秒的动画时，我们不能在某函数中写一个循环，每次移动一点物体，然后<code>sleep</code>若干毫秒，循环直到动画结束，这会导致在动画结束前都无法执行到其它代码，会阻碍其他游戏事件的进行。一种解决方法时，开启一个新的协程，每次主函数向协程<code>send(delta_time)</code>，协程就会根据时间变化量少量修改对应物体的坐标，然后<code>yield</code>回到主函数来执行其它代码，等待下一帧到来，主函数继续<code>send</code>，以此类推，直到动画结束。</p>
 <blockquote>
 <p>这是在如Unity等游戏引擎中一种典型的通过代码来制作物体动画的方法。</p>
 </blockquote>
-<p><strong>Task 3.4</strong> 基于上面的讨论，请你完善<code>main.c</code>中的<code>progress_bar</code>函数，实现一个自定义的进度条动画。发挥你的想象力即可。</p>
-<p><img src="/ics24/StackLab/task3_result.gif"></p>
+<p><strong>Task 3.4</strong>
+基于上面的讨论，请你完善<code>main.c</code>中的<code>progress_bar</code>函数，实现一个自定义的进度条动画。发挥你的想象力即可。</p>
+<p><img src="task3_result.gif" /></p>
 
   </div>
 </article>
@@ -328,7 +409,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E3%80%87%E3%80%81%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">〇、实验简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8D%B1%E9%99%A9%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">一、危险的计算器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#RCE-%E6%94%BB%E5%87%BB"><span class="toc-number">2.1.</span> <span class="toc-text">RCE 攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.2.</span> <span class="toc-text">栈溢出漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E%E5%88%B0%E5%8A%AB%E6%8C%81%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E6%B5%81"><span class="toc-number">2.3.</span> <span class="toc-text">从栈溢出漏洞到劫持程序控制流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%8A%AB%E6%8C%81%E4%BA%86%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E6%B5%81%E4%B9%8B%E5%90%8E"><span class="toc-number">2.4.</span> <span class="toc-text">在劫持了程序控制流之后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">2.5.</span> <span class="toc-text">实验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.5.1.</span> <span class="toc-text">实验步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA"><span class="toc-number">2.5.2.</span> <span class="toc-text">提示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B9%8B%E5%90%8E%E7%9A%84%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">2.6.</span> <span class="toc-text">实验之后的思考题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%A0%88%E6%BA%A2%E5%87%BA%E7%9A%84%E9%98%B2%E5%BE%A1"><span class="toc-number">3.</span> <span class="toc-text">二、栈溢出的防御</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%A0%88%E5%B8%A7%E7%9A%84%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8%EF%BC%88%E5%8D%8F%E7%A8%8B%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">三、栈帧的更多应用（协程）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">4.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%9D%E5%AD%98%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-number">4.2.</span> <span class="toc-text">上下文保存与恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%9B%9E%E9%80%80%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">4.3.</span> <span class="toc-text">基于上下文回退的异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E7%9A%84%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88%E5%8D%8F%E7%A8%8B%EF%BC%89"><span class="toc-number">4.4.</span> <span class="toc-text">基于上下文切换的生成器（协程）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">4.5.</span> <span class="toc-text">协程的一些实际应用</span></a></li></ol></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">〇、实验简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E5%8D%B1%E9%99%A9%E7%9A%84%E8%AE%A1%E7%AE%97%E5%99%A8"><span class="toc-number">2.</span> <span class="toc-text">一、危险的计算器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#rce-%E6%94%BB%E5%87%BB"><span class="toc-number">2.1.</span> <span class="toc-text">RCE 攻击</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E"><span class="toc-number">2.2.</span> <span class="toc-text">栈溢出漏洞</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%8E%E6%A0%88%E6%BA%A2%E5%87%BA%E6%BC%8F%E6%B4%9E%E5%88%B0%E5%8A%AB%E6%8C%81%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E6%B5%81"><span class="toc-number">2.3.</span> <span class="toc-text">从栈溢出漏洞到劫持程序控制流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E5%8A%AB%E6%8C%81%E4%BA%86%E7%A8%8B%E5%BA%8F%E6%8E%A7%E5%88%B6%E6%B5%81%E4%B9%8B%E5%90%8E"><span class="toc-number">2.4.</span> <span class="toc-text">在劫持了程序控制流之后</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C"><span class="toc-number">2.5.</span> <span class="toc-text">实验</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.5.1.</span> <span class="toc-text">实验步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8F%90%E7%A4%BA"><span class="toc-number">2.5.2.</span> <span class="toc-text">提示</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E4%B9%8B%E5%90%8E%E7%9A%84%E6%80%9D%E8%80%83%E9%A2%98"><span class="toc-number">2.6.</span> <span class="toc-text">实验之后的思考题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E6%A0%88%E6%BA%A2%E5%87%BA%E7%9A%84%E9%98%B2%E5%BE%A1"><span class="toc-number">3.</span> <span class="toc-text">二、栈溢出的防御</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E6%A0%88%E5%B8%A7%E7%9A%84%E6%9B%B4%E5%A4%9A%E5%BA%94%E7%94%A8%E5%8D%8F%E7%A8%8B"><span class="toc-number">4.</span> <span class="toc-text">三、栈帧的更多应用（协程）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">4.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%B8%8B%E6%96%87%E4%BF%9D%E5%AD%98%E4%B8%8E%E6%81%A2%E5%A4%8D"><span class="toc-number">4.2.</span> <span class="toc-text">上下文保存与恢复</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%9B%9E%E9%80%80%E7%9A%84%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86"><span class="toc-number">4.3.</span> <span class="toc-text">基于上下文回退的异常处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E4%B8%8A%E4%B8%8B%E6%96%87%E5%88%87%E6%8D%A2%E7%9A%84%E7%94%9F%E6%88%90%E5%99%A8%E5%8D%8F%E7%A8%8B"><span class="toc-number">4.4.</span> <span class="toc-text">基于上下文切换的生成器（协程）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%8F%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="toc-number">4.5.</span> <span class="toc-text">协程的一些实际应用</span></a></li></ol></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
