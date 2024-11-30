@@ -13,6 +13,7 @@ School of Computer Science, Fudan University
 
 ## News
 
+- **[Nov 30, 2024]** [CacheLab](CacheLab) is released.
 - **[Nov 25, 2024]** [FinalPJ](FinalPJ) is released.
 - **[Oct 31, 2024]** [StackLab](StackLab) is released.
 - **[Oct 9, 2024]** [BombLab](BombLab) is released.
@@ -47,6 +48,7 @@ School of Computer Science, Fudan University
 | 20   | 11/21/2024 | StackLab答疑                  |                                                     |
 | 21   | 11/22/2023 | 存储器 I                      |                                                     |
 | 22   | 11/25/2024 | Final Project发布             | [Final Project](FinalPJ) (Due: 12/26/2024)          |
+| 22   | 11/30/2024 | CacheLab发布                  | [CacheLab](CacheLab) (Due: 12/12/2024)          |
 ---
 
 ```cpp

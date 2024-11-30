@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Deadline：2024-12-26 23:59:59  一、项目简介 CPU架构相关实验。 本项目旨在帮助大家理解基本的处理器架构和指令执行机制，为后续学习计算机组成和体系结构打下基础。 项目的核心目标是：  实现Y86处理器：根据Y86指令集规范，构建一个简单的CPU处理器模型。 测试正确性：运行测试程序，验证处理器对Y86指令集的支持和执行的正确性。  二、项目要求  项目1~2人完成。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Final PJ">
+<meta property="og:url" content="https://cjinfdu.github.io/ics24/FinalPJ/index.html">
+<meta property="og:site_name" content="COMP130201.02 计算机系统基础">
+<meta property="og:description" content="Deadline：2024-12-26 23:59:59  一、项目简介 CPU架构相关实验。 本项目旨在帮助大家理解基本的处理器架构和指令执行机制，为后续学习计算机组成和体系结构打下基础。 项目的核心目标是：  实现Y86处理器：根据Y86指令集规范，构建一个简单的CPU处理器模型。 测试正确性：运行测试程序，验证处理器对Y86指令集的支持和执行的正确性。  二、项目要求  项目1~2人完成。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ref.xht03.online/202411242148487.png">
+<meta property="og:image" content="https://ref.xht03.online/202411242128727.jpg">
+<meta property="og:image" content="https://ref.xht03.online/202411251154313.png">
+<meta property="article:published_time" content="2024-11-24T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-11-25T07:47:41.001Z">
+<meta property="article:author" content="FDUICS-2024助教组">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ref.xht03.online/202411242148487.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/ics24/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/ics24/images/android-chrome-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/ics24/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>Final PJ</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ics24/css/style.css">
+
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ics24/">Home</a></li>
+         
+          <li><a href="/ics24/staff/">Staff</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/cjinfdu/ics24">Github</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/ics24/StackLab/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://cjinfdu.github.io/ics24/FinalPJ/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://cjinfdu.github.io/ics24/FinalPJ/&text=Final PJ"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://cjinfdu.github.io/ics24/FinalPJ/&is_video=false&description=Final PJ"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Final PJ&body=Check out this article: https://cjinfdu.github.io/ics24/FinalPJ/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://cjinfdu.github.io/ics24/FinalPJ/&name=Final PJ&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">一、项目简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E9%A1%B9%E7%9B%AE%E8%A6%81%E6%B1%82"><span class="toc-number">2.</span> <span class="toc-text">二、项目要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E9%A1%B9%E7%9B%AE%E6%8F%90%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">三、项目提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E9%A1%B9%E7%9B%AE%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">四、项目测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">输出格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E9%A1%B9%E7%9B%AE%E5%B1%95%E7%A4%BA"><span class="toc-number">5.</span> <span class="toc-text">五、项目展示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E6%8F%90%E4%BA%A4%E6%96%B9%E5%BC%8F"><span class="toc-number">6.</span> <span class="toc-text">六、提交方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82"><span class="toc-number">6.1.</span> <span class="toc-text">内容要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0"><span class="toc-number">6.2.</span> <span class="toc-text">上传</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E5%85%B3%E4%BA%8E%E8%AF%84%E5%88%86"><span class="toc-number">7.</span> <span class="toc-text">七、关于评分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">8.</span> <span class="toc-text">八、参考资料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Final PJ
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">胥昊天</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2024-11-24T16:00:00.000Z" itemprop="datePublished">2024-11-25</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>Deadline：2024-12-26 23:59:59</p>
+</blockquote>
+<h2 id="一项目简介">一、项目简介</h2>
+<p>CPU架构相关实验。</p>
+<p>本项目旨在帮助大家理解基本的处理器架构和指令执行机制，为后续学习计算机组成和体系结构打下基础。</p>
+<p>项目的核心目标是：</p>
+<ol type="1">
+<li><strong>实现Y86处理器</strong>：根据Y86指令集规范，构建一个简单的CPU处理器模型。</li>
+<li><strong>测试正确性</strong>：运行测试程序，验证处理器对Y86指令集的支持和执行的正确性。</li>
+</ol>
+<h2 id="二项目要求">二、项目要求</h2>
+<ul>
+<li><strong>项目1~2人完成</strong>。双人完成得分上限为90%，单人完成得分上限为100%。</li>
+<li>设计的CPU需要支持Y86的<strong>基本指令</strong>。</li>
+<li>输入输出符合格式，通过测试程序。</li>
+<li>提交实验代码和报告，简要地描述你的设计思路。</li>
+<li><strong>对CPU架构不做限制</strong>，单周期与流水线架构都是OK的。</li>
+<li><strong>对技术栈不做限制</strong>，可以自由选择编程语言（python,
+c++, verilog……）。</li>
+<li><strong>对前端界面不做要求</strong>。</li>
+<li>满足以上要求，有能力和兴趣的同学可以做额外的完善，如：升级架构、丰富指令集。</li>
+<li>期末之前，完成课堂汇报。</li>
+</ul>
+<h2 id="三项目提示">三、项目提示</h2>
+<p>CPU执行大致分为6个阶段：</p>
+<ul>
+<li><strong>取指（Fetch）</strong>：取指阶段从内存中读取指令的字节，使用程序计数器（PC）作为内存地址。</li>
+<li><strong>译码（Decode）</strong>：从寄存器中读取用于运算的数据。</li>
+<li><strong>执行（Execute）</strong>：算术/逻辑单元（ALU）执行当前指令，或执行算术运算或计算内存引用的有效地址，或增加或减少栈指针。其间可能会设置条件码（condition
+code）。</li>
+<li><strong>访存（Memory）</strong>：可能会将数据写入内存，或者从内存中读取数据。</li>
+<li><strong>写回（Write back）</strong>：将最多两个数据写入寄存器。</li>
+<li><strong>更新PC（PC
+update）</strong>：将PC更新为下一个指令的内存地址。</li>
+</ul>
+<p>一个顺序执行的 Y86 CPU 架构图可能如下：</p>
+<p><img src="https://ref.xht03.online/202411242148487.png" /></p>
+<p>Y86指令集在CSAPP书中第四章有详细的介绍。以下是 Y86
+指令集的概述图。</p>
+<p><img src="https://ref.xht03.online/202411242128727.jpg" /></p>
+<p>为了方便期末pre和CPU运行期间相关信息的展示，同学们可以选择完成前端界面。<strong>前端页面不要求强制完成，完成不能获得额外分数</strong>。这里我们提供一些指南，供感兴趣的同学学习。</p>
+<ul>
+<li>桌面应用：
+<ul>
+<li>QT库：一个非常成熟的跨系统 GUI 库，有 C++ ，Python 等语言的
+API。</li>
+<li><a
+target="_blank" rel="noopener" href="https://www.gtk.org/">GTK库</a>：另一个非常成熟且很有开源精神的GUI库，提供了C,
+JS, Python等语言的API</li>
+<li><a
+target="_blank" rel="noopener" href="https://www.electronjs.org/">Electron</a>：一个用写网页的方法写GUI的库，如果你有web基础，可以考虑用这个。</li>
+</ul></li>
+<li>web应用：
+<ul>
+<li>Django&amp;Flask+HTML/JS：非常成熟的 Python Web
+框架，熟练的话半天时间就能把整个PJ写完。</li>
+<li>NodeJS+HTML：非常成熟的JS后端，性能也不错</li>
+<li>Go/Java/... + HTML</li>
+</ul></li>
+</ul>
+<h2 id="四项目测试">四、项目测试</h2>
+<p>你需要设计实际一个 CPU 模拟器，你的程序将从 <code>test</code>
+目录中，读取机器码<code>.yo</code>文件，然后在按要求输出初始状态和每条指令执行后的CPU状态的日志，输出到<code>output</code>目录下。（回想
+bomblab 的重定向）</p>
+<p>你的程序可能的运行方式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./cpu &lt; example.yo &gt; example.yml</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python cpu.py &lt; example.yo &gt; example.yml</span><br></pre></td></tr></table></figure>
+<p>我们提供了测试脚本
+<code>test.py</code>，在工作目录下运行测试脚本：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ python test.py</span><br></pre></td></tr></table></figure>
+<p><img src="https://ref.xht03.online/202411251154313.png" /></p>
+<h3 id="输入格式">输入格式</h3>
+<p>请以<code>test</code>目录下给出的包含了机器码和汇编码的<code>.yo</code>文件作为模拟器输入，自行编写代码处理。</p>
+<p>样例如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0x00a: 30f23f00000000000000 | irmovq $63, %rdx # src and dst have 63 elements</span><br><span class="line">0x014: 30f69802000000000000 | irmovq dest, %rsi # dst array</span><br><span class="line">0x01e: 30f79000000000000000 | irmovq src, %rdi # src array</span><br></pre></td></tr></table></figure>
+<h3 id="输出格式">输出格式</h3>
+<ul>
+<li><p>对于每一个测试输入，输出一份同名的 <code>yml</code> 格式文件于
+<code>output</code> 目录下，可使用库或自行编写代码。</p></li>
+<li><p>要求在每条指令执行完毕后输出：完整的寄存器信息和内存非零值(八字节对齐，按小端法解释为十进制有符号整数)。内存非零值指{(内存地址,内存值)|内存值
+≠ 0} ，即所有非零内存值的内存地址-值键值对。</p></li>
+<li><p>所有输出(含内存地址、寄存器值、内存值)均以十进制输出</p></li>
+</ul>
+<p>最终完整输出样例如下，不用关心每次 log 内 key-value
+的排列顺序，但要确保列表内 log 的顺序与程序执行顺序一致。</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">PC:</span> <span class="number">0</span> </span><br><span class="line">	<span class="attr">REG:</span> </span><br><span class="line">		<span class="attr">rax:</span> <span class="number">1</span> </span><br><span class="line">		<span class="attr">rcx:</span> <span class="number">-2</span> </span><br><span class="line">		<span class="attr">rdx:</span> <span class="number">3</span> </span><br><span class="line">		<span class="string">...</span> </span><br><span class="line">	<span class="attr">CC:</span> </span><br><span class="line">		<span class="attr">ZF:</span> <span class="number">0</span> </span><br><span class="line">		<span class="attr">SF:</span> <span class="number">0</span> </span><br><span class="line">		<span class="attr">OF:</span> <span class="number">0</span> </span><br><span class="line">	<span class="attr">MEM:</span> </span><br><span class="line">		<span class="attr">64:</span> <span class="number">4294901760</span> </span><br><span class="line">		<span class="attr">72:</span> <span class="number">65535</span> </span><br><span class="line">		<span class="string">...</span> </span><br><span class="line">	<span class="attr">STAT:</span> <span class="number">1</span> </span><br><span class="line"><span class="bullet">-</span> <span class="string">...</span></span><br></pre></td></tr></table></figure>
+<h2 id="五项目展示">五、项目展示</h2>
+<p>项目展示将在课程最后一到两周进行，具体时间待定。希望同学们能尽早完成
+PJ
+方便课上展示。展示形式为<strong>每组五分钟左右</strong>的汇报，需要同学准备相应的ppt，汇报内容可以包括但不限于：</p>
+<ul>
+<li>CPU架构设计</li>
+<li>CPU实机运行效果</li>
+<li>项目亮点</li>
+</ul>
+<h2 id="六提交方式">六、提交方式</h2>
+<h3 id="内容要求">内容要求</h3>
+<p>请将项目报告、项目文件打包提交，命名格式为： 姓名-学号-PJ。
+项目报告内需包含：</p>
+<ul>
+<li>你的CPU的设计</li>
+<li>前端的设计（如果有）</li>
+<li>代码运行的方法（在讲清楚的前提下，越短越好）</li>
+<li>意见+建议（可选）</li>
+</ul>
+<p>项目文件内需包含：</p>
+<ul>
+<li>你所有的代码和静态文件（如前端的图片，设计文档等）</li>
+</ul>
+<h3 id="上传">上传</h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git add -A</span><br><span class="line"><span class="comment"># 提交当前文件夹下的所有更改到暂存区</span></span><br><span class="line">git commit -m <span class="string">&quot;xxx(可以是你的提交注释)&quot;</span></span><br><span class="line"><span class="comment"># 将暂存区的所有更改提交到本地仓库</span></span><br><span class="line">git push</span><br><span class="line"><span class="comment"># 将本地仓库推送到远程</span></span><br></pre></td></tr></table></figure>
+<h2 id="七关于评分">七、关于评分</h2>
+<ul>
+<li>实现Y86处理器（80%）</li>
+<li>项目展示汇报（15%）</li>
+<li>项目亮点和创新（5%）</li>
+</ul>
+<p>本次项目旨在考查同学们对 Y86
+指令集和基本处理器设计思想的掌握程度，满足项目要求即可获得大部分分数。<strong>禁止抄袭代码</strong>，鼓励自行学习相关知识丰富模拟器功能。</p>
+<h2 id="八参考资料">八、参考资料</h2>
+<ul>
+<li>http://csapp.cs.cmu.edu/3e/labs.html</li>
+<li>本文档编写时参考了22, 23年的实验文档。</li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ics24/">Home</a></li>
+         
+          <li><a href="/ics24/staff/">Staff</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/cjinfdu/ics24">Github</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">一、项目简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E9%A1%B9%E7%9B%AE%E8%A6%81%E6%B1%82"><span class="toc-number">2.</span> <span class="toc-text">二、项目要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E9%A1%B9%E7%9B%AE%E6%8F%90%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">三、项目提示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E9%A1%B9%E7%9B%AE%E6%B5%8B%E8%AF%95"><span class="toc-number">4.</span> <span class="toc-text">四、项目测试</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.1.</span> <span class="toc-text">输入格式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.2.</span> <span class="toc-text">输出格式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E9%A1%B9%E7%9B%AE%E5%B1%95%E7%A4%BA"><span class="toc-number">5.</span> <span class="toc-text">五、项目展示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E6%8F%90%E4%BA%A4%E6%96%B9%E5%BC%8F"><span class="toc-number">6.</span> <span class="toc-text">六、提交方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82"><span class="toc-number">6.1.</span> <span class="toc-text">内容要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8A%E4%BC%A0"><span class="toc-number">6.2.</span> <span class="toc-text">上传</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E5%85%B3%E4%BA%8E%E8%AF%84%E5%88%86"><span class="toc-number">7.</span> <span class="toc-text">七、关于评分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">8.</span> <span class="toc-text">八、参考资料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://cjinfdu.github.io/ics24/FinalPJ/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://cjinfdu.github.io/ics24/FinalPJ/&text=Final PJ"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://cjinfdu.github.io/ics24/FinalPJ/&is_video=false&description=Final PJ"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Final PJ&body=Check out this article: https://cjinfdu.github.io/ics24/FinalPJ/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://cjinfdu.github.io/ics24/FinalPJ/&title=Final PJ"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://cjinfdu.github.io/ics24/FinalPJ/&name=Final PJ&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2024 FDUICS-2024助教组
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ics24/">Home</a></li>
+         
+          <li><a href="/ics24/staff/">Staff</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/cjinfdu/ics24">Github</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/ics24/lib/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/ics24/lib/meslo-LG/styles.css">
+
+
+<link rel="stylesheet" href="/ics24/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/ics24/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ics24/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/ics24/js/main.js"></script>
+
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-37473492-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
