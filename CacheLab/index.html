@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="deadline 2024.12.12 00:00  实验简介 前言 CSAPP第6章配套实验。 本实验的目的是加深同学们对高速缓存cache认识。实验分为三个部分：  part A：用c语言设计一个cache模拟器，它能读入特定格式的trace文件（trace文件中模拟了一系列的对存储器的读写操作），并且输出cache的命中、缺失、替换次数；我们会为你提供一部分代码 part B：根据特定的c">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CacheLab">
+<meta property="og:url" content="https://cjinfdu.github.io/ics24/CacheLab/index.html">
+<meta property="og:site_name" content="COMP130201.02 计算机系统基础">
+<meta property="og:description" content="deadline 2024.12.12 00:00  实验简介 前言 CSAPP第6章配套实验。 本实验的目的是加深同学们对高速缓存cache认识。实验分为三个部分：  part A：用c语言设计一个cache模拟器，它能读入特定格式的trace文件（trace文件中模拟了一系列的对存储器的读写操作），并且输出cache的命中、缺失、替换次数；我们会为你提供一部分代码 part B：根据特定的c">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cjinfdu.github.io/ics24/CacheLab/heat.png">
+<meta property="article:published_time" content="2024-11-30T05:54:48.506Z">
+<meta property="article:modified_time" content="2024-11-30T05:56:24.176Z">
+<meta property="article:author" content="FDUICS-2024助教组">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cjinfdu.github.io/ics24/CacheLab/heat.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/ics24/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/ics24/images/android-chrome-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/ics24/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>CacheLab</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/ics24/css/style.css">
+
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/ics24/">Home</a></li>
+         
+          <li><a href="/ics24/staff/">Staff</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/cjinfdu/ics24">Github</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/ics24/FinalPJ/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://cjinfdu.github.io/ics24/CacheLab/"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://cjinfdu.github.io/ics24/CacheLab/&text=CacheLab"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://cjinfdu.github.io/ics24/CacheLab/&is_video=false&description=CacheLab"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CacheLab&body=Check out this article: https://cjinfdu.github.io/ics24/CacheLab/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://cjinfdu.github.io/ics24/CacheLab/&name=CacheLab&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">实验简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%80%BC%E5%88%86%E9%85%8D"><span class="toc-number">1.2.</span> <span class="toc-text">分值分配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">部署实验环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.1.</span> <span class="toc-text">（1）下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.2.</span> <span class="toc-text">（2）准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E5%B7%B2%E5%AE%89%E8%A3%85%E4%BA%86-gcc"><span class="toc-number">2.2.1.</span> <span class="toc-text">确保已安装了 gcc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E5%B7%B2%E5%AE%89%E8%A3%85%E4%BA%86-make"><span class="toc-number">2.2.2.</span> <span class="toc-text">确保已安装了 make</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E5%AE%89%E8%A3%85python3"><span class="toc-number">2.2.3.</span> <span class="toc-text">确保安装python3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85valgrind"><span class="toc-number">2.2.4.</span> <span class="toc-text">安装valgrind</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#part-a"><span class="toc-number">3.</span> <span class="toc-text">part A</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#intro"><span class="toc-number">3.1.</span> <span class="toc-text">intro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#to-do"><span class="toc-number">3.2.</span> <span class="toc-text">to-do</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#q%E7%AE%97%E6%B3%95"><span class="toc-number">3.2.1.</span> <span class="toc-text">2Q算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-number">3.2.2.</span> <span class="toc-text">数据访问时的处理流程：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#requirements"><span class="toc-number">3.3.</span> <span class="toc-text">requirements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#evaluation"><span class="toc-number">3.4.</span> <span class="toc-text">evaluation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hints"><span class="toc-number">3.5.</span> <span class="toc-text">hints</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#part-b"><span class="toc-number">4.</span> <span class="toc-text">part B</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#intro-1"><span class="toc-number">4.1.</span> <span class="toc-text">intro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#to-do-1"><span class="toc-number">4.2.</span> <span class="toc-text">to-do</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#requirements-1"><span class="toc-number">4.3.</span> <span class="toc-text">requirements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#evaluation-1"><span class="toc-number">4.4.</span> <span class="toc-text">evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#step-0"><span class="toc-number">4.4.1.</span> <span class="toc-text">step 0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step-1"><span class="toc-number">4.4.2.</span> <span class="toc-text">step 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step-2"><span class="toc-number">4.4.3.</span> <span class="toc-text">step 2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hints-1"><span class="toc-number">4.5.</span> <span class="toc-text">hints</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#part-c"><span class="toc-number">5.</span> <span class="toc-text">part C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#intro-2"><span class="toc-number">5.1.</span> <span class="toc-text">intro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#requirements-2"><span class="toc-number">5.2.</span> <span class="toc-text">requirements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#evaluation-2"><span class="toc-number">5.3.</span> <span class="toc-text">evaluation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E5%88%86"><span class="toc-number">6.</span> <span class="toc-text">评分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E5%AE%9E%E9%AA%8C"><span class="toc-number">7.</span> <span class="toc-text">提交实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82"><span class="toc-number">7.1.</span> <span class="toc-text">（1）内容要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E8%A6%81%E6%B1%82"><span class="toc-number">7.2.</span> <span class="toc-text">（2）格式要求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CacheLab
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">范意阳 孔令宇 徐厚泽</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2024-11-30T05:54:48.506Z" itemprop="datePublished">2024-11-30</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote>
+<p>deadline 2024.12.12 00:00</p>
+</blockquote>
+<h2 id="实验简介">实验简介</h2>
+<h3 id="前言">前言</h3>
+<p>CSAPP第6章配套实验。<br />
+本实验的目的是加深同学们对高速缓存cache认识。实验分为三个部分：</p>
+<ul>
+<li>part
+A：用c语言设计一个cache模拟器，它能读入特定格式的trace文件（trace文件中模拟了一系列的对存储器的读写操作），并且输出cache的命中、缺失、替换次数；我们会为你提供一部分代码</li>
+<li>part
+B：根据特定的cache参数设计一个矩阵转置的算法，使得矩阵转置运算中cache的miss次数尽可能低。</li>
+<li>part C：设计一个 Cache Oblivious 算法</li>
+</ul>
+<p>本次实验参考CMU CSAPP课程的<a
+target="_blank" rel="noopener" href="http://csapp.cs.cmu.edu/3e/labs.html">Cache Lab</a>。<br />
+考虑到pj将至，助教将本次lab的难度相较于原版调低了一些（除了honor-part，但honor-part的分数很少），而且本次实验全程用c语言（可以不用和抽象的汇编打交道了），所以大家不用过于担心~~~</p>
+<h3 id="分值分配">分值分配</h3>
+<ul>
+<li>part A: <code>40%</code></li>
+<li>part B: <code>34%</code></li>
+<li>part C: <code>11%</code></li>
+<li>实验报告+代码风格：<code>15%</code></li>
+</ul>
+<h2 id="部署实验环境">部署实验环境</h2>
+<h3 id="下载">（1）下载</h3>
+<p>从 Github Classroom 中<code>clone</code>本次作业仓库</p>
+<h3 id="准备工作">（2）准备工作</h3>
+<h4 id="确保已安装了-gcc">确保已安装了 gcc</h4>
+<p>在终端中检查是否安装了 gcc：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>gcc -v</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>如果已安装，终端将会反馈版本信息，否则会反馈
+<code>command not found</code> 。<br />
+如未安装，尝试执行以下命令进行安装：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>sudo apt-get install gcc</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="确保已安装了-make">确保已安装了 make</h4>
+<p>检查是否安装 make，在终端输入：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>make -v</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>同理，如未安装，尝试以此执行以下命令：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br><span>2</span><br><span>3</span><br></pre>
+</td>
+<td>
+<pre><span>sudo apt-get update</span><br><span>sudo apt-get install make</span><br><span>sudo apt-get install libc6 libc6-dev libc6-dev-i386</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="确保安装python3">确保安装python3</h4>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>python3 --version</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>一般情况下系统是自带python的<br />
+如未安装，请自行上网搜索安装教程</p>
+<h4 id="安装valgrind">安装valgrind</h4>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>sudo apt-get install valgrind</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="part-a">part A</h2>
+<h3 id="intro">intro</h3>
+<p>设计一个cache模拟器，读入指定格式的trace文件，模拟cache的运行过程，然后输出cache的命中、缺失、替换次数<br />
+trace文件是通过<code>valgrind</code>的<a
+target="_blank" rel="noopener" href="https://valgrind.org/docs/manual/lk-manual.html">lackey</a>工具生成的，它具有以下格式</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br></pre>
+</td>
+<td>
+<pre><span>I 0400d7d4,8</span><br><span> M 0421c7f0,4</span><br><span> L 04f6b868,8</span><br><span> S 7ff0005c8,8</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>每行格式为</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>[space]operation address,size</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>其中<code>I</code>代表读指令操作，<code>L</code>代表读数据操作，<code>S</code>代表写数据操作，<code>M</code>代表修改数据操作（即读数据后写数据）。<strong>除了<code>I</code>操作外，其他操作都会在开头都会有一个空格</strong>。<code>address</code>为操作的地址，<code>size</code>为操作的大小（单位为字节）。</p>
+<h3 id="to-do">to-do</h3>
+<p>你的所有实现都在<code>csim.c</code>和<code>csim.h</code>中</p>
+<p>你的全局变量和函数需要定义在<code>csim.h</code>中，你的函数实现需要在<code>csim.c</code>中</p>
+<p>我们提供了一个<code>csim-ref</code>的文件，是一个参考实现，你可以通过它来检查你的实现是否正确，它的用法如下：</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>./csim-ref [-hv] -s &lt;s&gt; -E &lt;E&gt; -b &lt;b&gt; -t &lt;tracefile&gt; -q &lt;policy&gt;</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><code>-h</code>代表帮助</li>
+<li><code>-v</code>代表verbose，即输出详细信息</li>
+<li><code>-s</code>代表cache的set数</li>
+<li><code>-E</code>代表每个set中的cache line数</li>
+<li><code>-b</code>代表cache line的大小（单位为字节）</li>
+<li><code>-t</code>代表trace文件的路径</li>
+<li><code>-q</code>代表cache line的替换策略，0代表<code>LRU</code>
+1代表<code>2Q</code></li>
+</ul>
+<p><code>csim-ref</code>会输出cache的命中、缺失、替换次数，比如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_"># </span><span class="language-bash">verbose = <span class="literal">false</span></span></span><br><span class="line">./csim-ref -s 16 -E 1 -b 16 -t traces/yi.trace</span><br><span class="line">hits:4 misses:5 evictions:3</span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">verbose = <span class="literal">true</span></span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim-ref -v -s 16 -E 1 -b 16 -t traces/yi.trace</span></span><br><span class="line">L 10,1 miss </span><br><span class="line">M 20,1 miss hit </span><br><span class="line">L 22,1 hit </span><br><span class="line">S 18,1 hit </span><br><span class="line">L 110,1 miss eviction </span><br><span class="line">L 210,1 miss eviction </span><br><span class="line">M 12,1 miss eviction hit </span><br><span class="line">hits:4 misses:5 evictions:3y</span><br></pre></td></tr></table></figure>
+<p>你的实现需要具有和<code>csim-ref</code>相同的功能，包括verbose模式输出debug信息</p>
+<p>在<code>csim.c</code>中，我们已经为你提供了基本的解析命令行参数的代码，你需要在此基础上进行实现</p>
+<p>你需要将cache的替换策略改为<code>LRU</code>算法与<code>2Q</code>算法</p>
+<h4 id="q算法"><code>2Q</code>算法</h4>
+<p>传统的 LRU 策略虽然简单，但存在以下几个问题：</p>
+<ol type="1">
+<li><strong>缓存污染问题</strong>：
+<ul>
+<li>当访问模式中出现大量 “一次性访问”
+的数据时，这些数据会占据缓存空间，导致真正频繁使用的数据被驱逐。</li>
+<li>例如，如果缓存大小为 4，而访问序列为
+<code>A -&gt; B -&gt; C -&gt; D -&gt; E -&gt; A -&gt; B -&gt; C -&gt; D</code>，则
+<code>E</code> 的一次性访问会导致 <code>A, B, C, D</code>
+被逐出缓存，影响命中率。</li>
+</ul></li>
+<li><strong>短期热点问题</strong>：
+<ul>
+<li>如果某些数据短时间内被频繁访问（称为短期热点），LRU
+会将其直接提升为缓存中的重要数据，但热点可能很快消失，导致缓存效率下降。</li>
+</ul></li>
+</ol>
+<p>2Q 策略通过引入两个队列解决了这些问题：</p>
+<ul>
+<li>短期访问的数据首先进入 <code>A1-in</code>，而不是直接进入长期队列
+<code>Am</code>。</li>
+<li>如果数据再次被访问，才会被提升到长期队列
+<code>Am</code>，表明其具有长期价值。</li>
+</ul>
+<blockquote>
+<p>[!TIP]</p>
+<p>请你思考，相对于<code>LRU</code>的替换策略，为什么<code>2Q</code>有以上优点却没有被大规模使用。
+（1分）</p>
+</blockquote>
+<hr />
+<p>2Q 策略的缓存分为两个队列：</p>
+<ol type="1">
+<li><strong>A1-in</strong>（FIFO 队列）：
+<ul>
+<li>用于存储最近访问的缓存数据。</li>
+<li>这是一个短期队列，本实验的大小设计为与每个set中的cache
+line数相同。</li>
+<li>数据首次访问时会被插入到 <code>A1-in</code>队尾。</li>
+<li>如果 <code>A1-in</code> 已满，采用FIFO（先进先出）策略。</li>
+</ul></li>
+<li><strong>Am</strong>（LRU 队列）：
+<ul>
+<li>用于存储频繁访问的缓存数据。</li>
+<li>这是一个长期队列，本实验的大小设计为与每个set中的cache
+line数相同。</li>
+<li>只有当 <code>A1-in</code> 中的数据被再次访问时，才会被提升到
+<code>Am</code>。</li>
+<li>如果 <code>Am</code> 满了，新数据会替换最久未使用的数据（LRU
+替换）。</li>
+<li>只有从cache中删除，才算eviction。</li>
+</ul></li>
+</ol>
+<hr />
+<h4 id="数据访问时的处理流程">数据访问时的处理流程：</h4>
+<ol type="1">
+<li><strong>检查 Am</strong>：
+<ul>
+<li>如果数据在 <code>Am</code>
+中，命中缓存（<strong>hit</strong>），更新数据在 <code>Am</code> 中的
+LRU 状态，将其移到队尾。</li>
+</ul></li>
+<li><strong>检查 A1-in</strong>：
+<ul>
+<li>如果数据在 <code>A1-in</code>
+中，不算命中（<strong>miss</strong>），但将其从 <code>A1-in</code>
+中移除，并提升到 <code>Am</code>。</li>
+<li>如果 <code>Am</code> 满了，按照 LRU 策略移除最久未使用的数据。</li>
+</ul></li>
+<li><strong>不在缓存中</strong>：
+<ul>
+<li>如果数据既不在 <code>A1-in</code> 也不在
+<code>Am</code>，则是一次完全的未命中（<strong>miss</strong>）。</li>
+<li>将数据插入到 <code>A1-in</code>。</li>
+<li>如果 <code>A1-in</code> 满了，按照 FIFO
+策略移除最早插入的数据。</li>
+</ul></li>
+</ol>
+<hr />
+<h3 id="requirements">requirements</h3>
+<ul>
+<li>你的代码在编译时不能存在warning</li>
+<li>你 <strong>只能</strong>
+使用c语言来实现（助教看不懂c++和python）</li>
+<li>虽然给了测试数据，但不允许面向数据编程，助教会做源码检查；不允许通过直接调用<code>csim-ref</code>来实现</li>
+</ul>
+<h3 id="evaluation">evaluation</h3>
+<p>共有10项测试</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 1 -E 1 -b 12 -t traces/yi2.trace -q LRU</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 4 -E 2 -b 20 -t traces/yi.trace -q LRU</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 2 -E 1 -b 20 -t traces/dave.trace -q LRU</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 2 -E 1 -b 16 -t traces/trans.trace -q LRU</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 2 -E 2 -b 16 -t traces/trans.trace -q LRU</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 2 -E 4 -b 16 -t traces/trans.trace -q LRU</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 5 -E 1 -b 32 -t traces/trans.trace -q LRU</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 5 -E 1 -b 32 -t traces/long.trace -q LRU</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 5 -E 1 -b 32 -t traces/trans.trace -q 2Q</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">./csim -s 5 -E 1 -b 32 -t traces/long.trace -q 2Q</span></span><br></pre></td></tr></table></figure>
+<p>得分为：前7项每项<code>3</code>分，最后3项<code>6</code>分，共<code>39</code>分；对于每一项，<code>hit, miss, eviction</code>的正确性各占<code>1/3</code>的分数</p>
+<p>最终的分数可以通过<code>python3 ./driver.py</code>来查看</p>
+<h3 id="hints">hints</h3>
+<ul>
+<li>使用<code>malloc</code>和<code>free</code>来构造cache</li>
+<li>你可以使用<code>csim-ref</code>来检查你的实现是否正确，通过开启verbose模式可以更好地debug</li>
+<li><code>LRU</code>算法可以简单地使用计数器的实现方式</li>
+<li>你可以使用<code>queue.h</code>来进行构建，也可以自己编写其他的数据结构进行实现</li>
+<li>对于具体如何实现没有太多要求，大家八仙过海各显神通~~~</li>
+</ul>
+<h2 id="part-b">part B</h2>
+<h3 id="intro-1">intro</h3>
+<p>cache为何被称为“高速缓存”，是因为读取cache的速率远快于读取主存的速率（可能大概100倍），因此cache
+miss的次数往往决定了程序的运行速度。因此，我们需要尽可能设计cache-friendly的程序，使得cache
+miss的次数尽可能少。</p>
+<p>在这部分的实验，你将对矩阵转置程序（一个非常容易cache
+miss的程序）进行优化，让cache miss的次数尽可能少。你的分数将由cache
+miss的次数决定</p>
+<h3 id="to-do-1">to-do</h3>
+<p>你的所有实现都将在<code>trans.c</code>中</p>
+<p>你将设计这样的一个函数：它接收四个参数：M，N，一个N * M的矩阵A和一个M
+* N的矩阵B，你需要把A转置后的结果存入B中。</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></pre>
+</td>
+<td>
+<pre><span><span>char</span> trans_desc[] = <span>"some description"</span>;</span><br><span><span>void</span> <span>trans</span><span>(<span>int</span> M, <span>int</span> N, <span>int</span> A[N][M], <span>int</span> B[M][N])</span></span><br><span>{</span><br><span>    </span><br><span>}</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>每设计好一个这样的函数，你都可以在<code>registerFunctions()</code>中为其进行“注册”，只有“注册”了的函数才会被加入之后的评测中，你可以“注册”并评测多个函数；为上面的函数进行注册只需要将下面代码加入<code>registerFunctions()</code>中</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>registerTransFunction(trans, trans_desc);</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>我们提供了一个名为<code>trans()</code>的函数作为示例</p>
+<p>你需要保证<strong>有一个且有唯一一个“注册”的函数用于最终提交</strong>，我们将靠“注册”时的description进行区分，请确保你的提交函数的description是“Transpose
+submission” ，比如</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br><span>2</span><br><span>3</span><br><span>4</span><br><span>5</span><br></pre>
+</td>
+<td>
+<pre><span><span>char</span> transpose_submit_desc[] = <span>"Transpose submission"</span>;</span><br><span><span>void</span> <span>transpose_submit</span><span>(<span>int</span> M, <span>int</span> N, <span>int</span> A[N][M], <span>int</span> B[M][N])</span></span><br><span>{</span><br><span>    </span><br><span>}</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>我们将使用特定形状的矩阵和特定参数的cache来进行评测，所以你
+<strong>可以</strong> 针对这些特殊情况来编写代码</p>
+<h3 id="requirements-1">requirements</h3>
+<ul>
+<li>你的代码在编译时不能存在warning</li>
+<li>在每个矩阵转置函数中，你至多能定义12个int类型的局部变量（不包括循环变量，但你不能将循环变量用作其他用途），且不能使用任何全局变量。你不能定义除int以外类型的变量。你不能使用malloc等方式申请内存块。你可以使用int数组，但等同于数组大小的数量的int类型变量也同样被计入</li>
+<li>你不能使用递归</li>
+<li>你只允许使用一个函数完成矩阵转置的功能，而不能在函数中调用任何辅助函数</li>
+<li>你不能修改原始的矩阵A，但是你可以任意修改矩阵B</li>
+<li>你可以定义宏</li>
+</ul>
+<h3 id="evaluation-1">evaluation</h3>
+<p>我们将使用cache参数为：<code>s = 48, E = 1, b = 48</code>，即每个cache
+line大小为48字节，共有48个cache line，每个set中只有1个cache line。<br />
+我们将使用以下2种矩阵来进行评测</p>
+<ul>
+<li>48 *
+48的矩阵，分值<code>15</code>分，miss次数<code>&lt; 500</code>则满分，miss次数<code>&gt; 800</code>则0分，<code>500~800</code>将按miss次数获取一定比例的分数
+<ul>
+<li>若<code>&lt;450</code>，则获得2分荣誉分</li>
+</ul></li>
+<li>96 *
+96的矩阵，分值<code>15</code>分，miss次数<code>&lt; 2200</code>则满分，miss次数<code>&gt; 3000</code>则0分，<code>2200~3000</code>将按miss次数获取一定比例的分数
+<ul>
+<li>若<code>&lt;1900</code>，则获得2分荣誉分</li>
+</ul></li>
+</ul>
+<p>我们只会针对这两种矩阵进行测试，所以你 <strong>可以</strong>
+只考虑这两种情况</p>
+<h4 id="step-0">step 0</h4>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>make clean &amp;&amp; make</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="step-1">step 1</h4>
+<p>在测试之前，进行算法正确性的测试</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>./tracegen -M &lt;row&gt; -N &lt;col&gt;</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>比如对48 * 48转置函数进行测试</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>./tracegen -M 48 -N 48</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>你也可以对特定的函数进行测试，比如对第0个“注册”的函数</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>./tracegen -M 48 -N 48 -F 0</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<h4 id="step-2">step 2</h4>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>./test-trans -M &lt;row&gt; -N &lt;col&gt;</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>这个程序将使用valgrind工具生成trace文件，然后调用csim-ref程序获取cache命中、缺失、替换的次数</p>
+<h3 id="hints-1">hints</h3>
+<ul>
+<li>在调用<code>./test-trans</code>之后，可以使用如下命令查看你的cache命中/缺失情况；你可以把<code>f0</code>替换为<code>fi</code>来查看第
+i 个“注册”的函数带来的cache命中/缺失情况</li>
+</ul>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>./csim-ref -v -s 48 -E 1 -b 48 -t trace.f0 &gt; result.txt</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a
+target="_blank" rel="noopener" href="http://csapp.cs.cmu.edu/public/waside/waside-blocking.pdf">这篇文章可能对你有所启发</a></li>
+<li>cache的关联度为1，你可能需要考虑冲突带来的miss</li>
+<li>脑测一下你的miss次数或许是一个很好的选择，你可以计算一下大概有多少比例的miss，然后乘以总的读写次数；你可以在上面生成的<code>result.txt</code>文件中验证你的想法</li>
+<li>你可以认为A和B矩阵的起始地址位于某个cacheline的开始（即A和B二维数组的起始地址能被48整除）</li>
+</ul>
+<h2 id="part-c">part C</h2>
+<h3 id="intro-2">intro</h3>
+<p>在 part B 的矩阵转置算法中，我们指定了 cache
+的参数，并进行了有针对性的优化。然而，在现实世界中，开发者是难以获取
+cache 的具体参数的。我们希望在各种不同的 cache setting
+下，一个算法都能尽可能地高效利用缓存。这就是所谓的 <a
+href="%5BCache-oblivious%20algorithm%20-%20Wikipedia%5D(https://en.wikipedia.org/wiki/Cache-oblivious_algorithm)">Cache
+Oblivious Algorithm</a>。</p>
+<p>在这部分的实验，我们将会尝试实现 Cache Oblivious
+的一维物体热传递数值模拟算法。</p>
+<p>一维物体的热传递可以由下面的公式给出：<span
+class="math display">\[\frac{\partial u}{\partial t} = \alpha
+\frac{\partial^2 u}{\partial x^2}\]</span>，其中 <span
+class="math inline">\(u(x,t)\)</span>表示温度分布，<span
+class="math inline">\(\alpha\)</span> 为热扩散系数。</p>
+<p>进行一些<del>简单的</del>数学推导，我们可以得到：<span
+class="math display">\[\frac{u(t + \Delta t, x) - u(t, x)}{\Delta t}
+=  \alpha \left( \frac{u(t, x + \Delta x) - 2u(t, x) + u(t, x - \Delta
+x)}{(\Delta x)^2} \right)\]</span></p>
+<p>更形象化地来说，记<code>u[t][x]</code>表示点<code>x</code>在<code>t</code>时间的温度，那么<code>t+1</code>时刻的温度可以如下计算：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">u[t+<span class="number">1</span>][x] = u[t][x] + ALPHA *(u[t][x+<span class="number">1</span>] <span class="number">-2</span>*u[t][x] + u[t][x<span class="number">-1</span>]);</span><br></pre></td></tr></table></figure>
+<figure>
+<img src="heat.png" alt="image-20241128021702077" />
+<figcaption aria-hidden="true">image-20241128021702077</figcaption>
+</figure>
+<p>给定<code>t=0</code>时刻各点的初始温度，我们希望计算出<code>t=T</code>时刻各点的温度。</p>
+<h3 id="requirements-2">requirements</h3>
+<p>你需要在<code>heat-sim/heatsim.c</code>中实现函数<code>void heat_sim(int T, int N, int A[T][N])</code>，尽可能地降低Cache
+Miss次数。</p>
+<p>传入的<code>A[0][0]~A[0][N-1]</code>表示初始状态各点的温度。在<span
+class="math inline">\(\alpha=1,\Delta
+t=1\)</span>参数下，你需要计算出每个时刻每点的温度，并保存在<code>A</code>中。</p>
+<ul>
+<li><p>你可以调用给出的<code>kernel</code>函数计算下一时刻某一点处的温度。</p></li>
+<li><p>由于计算<code>A[t+1][x]</code>需要用到<code>A[t][x-1]</code>和<code>A[t][x+1]</code>，为了避免数组越界，对于<code>1&lt;=t&lt;T</code>，你只需要计算<code>A[t][1~N-2]</code>，无需计算<code>A[t][0]</code>和<code>A[t][N-1]</code>。</p></li>
+<li><p>你的算法不应该有针对 Cache
+参数（<code>s</code>，<code>E</code>，<code>b</code>）的优化</p></li>
+</ul>
+<h3 id="evaluation-2">evaluation</h3>
+<p>为了实现 Cache Oblivious
+性质，我们将会在<code>s=16, b=16, E=&#123;1,4,8&#125;</code>，替换策略为<code>LRU</code>三种
+cache setting
+下分别对你的算法进行测试，测试参数为<code>T=100, N=512</code>。</p>
+<p>由于不同算法的访存次数可能不同，我们用 miss rate=<span
+class="math inline">\(miss/(miss+hit)\)</span>来评估算法对缓存的利用效率。</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>cd heat-sim && make && ./test-heat</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>我们在<code>heat_sim_example</code>中提供了最朴素的算法。不妨先运行一下，观察miss随
+cache setting 的变化情况。为什么会有这种情况？（2分）</p>
+<p>实现你的算法后，重新编译并运行<code>test-heat</code>。</p>
+<p>若你的miss小于等于下面的条件，该测试点将获得3分。（共9分）</p>
+<table>
+<thead>
+<tr>
+<th>E</th>
+<th>miss</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>16</td>
+<td>22500</td>
+</tr>
+<tr>
+<td>32</td>
+<td>18000</td>
+</tr>
+<tr>
+<td>64</td>
+<td>15720</td>
+</tr>
+</tbody>
+</table>
+<h2 id="评分">评分</h2>
+<p>在项目根目录下</p>
+<table>
+<tbody>
+<tr>
+<td>
+<pre><span>1</span><br></pre>
+</td>
+<td>
+<pre><span>python3 ./driver.py</span><br></pre>
+</td>
+</tr>
+</tbody>
+</table>
+<p>注意请保证在项目根目录和<code>./heat-sim</code>目录下都已经<code>make</code>过了</p>
+<p><code>heatsim</code>运行略慢，<del>请耐心等待</del></p>
+<h2 id="提交实验">提交实验</h2>
+<h3 id="内容要求">（1）内容要求</h3>
+<p>你需要提交：</p>
+<ul>
+<li>csim.c</li>
+<li>csim.h</li>
+<li>trans.c</li>
+<li>heatsim.c</li>
+<li>一份实验报告</li>
+</ul>
+<p>实验报告应该包含以下内容：</p>
+<ul>
+<li>实验标题，你的姓名，学号。</li>
+<li>你在终端中执行<code>.python3 /driver.py</code>后的截图。</li>
+<li>描述你每个部分实现的思路，要求简洁清晰。</li>
+<li>如果有，请务必在报告中列出引用的内容以及参考的资料。</li>
+<li>对本实验的感受（可选）。</li>
+<li>对助教们的建议（可选）。</li>
+</ul>
+<h3 id="格式要求">（2）格式要求</h3>
+<p>可提交<code>.md</code>文件或者<code>.pdf</code>文件。不要提交<code>.doc</code>或<code>.docx</code>文件。</p>
+<h2 id="参考资料">参考资料</h2>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://csapp.cs.cmu.edu/3e/labs.html">原版Cache
+Lab</a></li>
+<li><a
+target="_blank" rel="noopener" href="https://blog.csdn.net/rangfei/article/details/126845978">C语言处理参数的
+getopt() 函数</a></li>
+</ul>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/ics24/">Home</a></li>
+         
+          <li><a href="/ics24/staff/">Staff</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/cjinfdu/ics24">Github</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">实验简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%86%E5%80%BC%E5%88%86%E9%85%8D"><span class="toc-number">1.2.</span> <span class="toc-text">分值分配</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.</span> <span class="toc-text">部署实验环境</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%8B%E8%BD%BD"><span class="toc-number">2.1.</span> <span class="toc-text">（1）下载</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">2.2.</span> <span class="toc-text">（2）准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E5%B7%B2%E5%AE%89%E8%A3%85%E4%BA%86-gcc"><span class="toc-number">2.2.1.</span> <span class="toc-text">确保已安装了 gcc</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E5%B7%B2%E5%AE%89%E8%A3%85%E4%BA%86-make"><span class="toc-number">2.2.2.</span> <span class="toc-text">确保已安装了 make</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A1%AE%E4%BF%9D%E5%AE%89%E8%A3%85python3"><span class="toc-number">2.2.3.</span> <span class="toc-text">确保安装python3</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85valgrind"><span class="toc-number">2.2.4.</span> <span class="toc-text">安装valgrind</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#part-a"><span class="toc-number">3.</span> <span class="toc-text">part A</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#intro"><span class="toc-number">3.1.</span> <span class="toc-text">intro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#to-do"><span class="toc-number">3.2.</span> <span class="toc-text">to-do</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#q%E7%AE%97%E6%B3%95"><span class="toc-number">3.2.1.</span> <span class="toc-text">2Q算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%AE%BF%E9%97%AE%E6%97%B6%E7%9A%84%E5%A4%84%E7%90%86%E6%B5%81%E7%A8%8B"><span class="toc-number">3.2.2.</span> <span class="toc-text">数据访问时的处理流程：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#requirements"><span class="toc-number">3.3.</span> <span class="toc-text">requirements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#evaluation"><span class="toc-number">3.4.</span> <span class="toc-text">evaluation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hints"><span class="toc-number">3.5.</span> <span class="toc-text">hints</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#part-b"><span class="toc-number">4.</span> <span class="toc-text">part B</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#intro-1"><span class="toc-number">4.1.</span> <span class="toc-text">intro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#to-do-1"><span class="toc-number">4.2.</span> <span class="toc-text">to-do</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#requirements-1"><span class="toc-number">4.3.</span> <span class="toc-text">requirements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#evaluation-1"><span class="toc-number">4.4.</span> <span class="toc-text">evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#step-0"><span class="toc-number">4.4.1.</span> <span class="toc-text">step 0</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step-1"><span class="toc-number">4.4.2.</span> <span class="toc-text">step 1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#step-2"><span class="toc-number">4.4.3.</span> <span class="toc-text">step 2</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#hints-1"><span class="toc-number">4.5.</span> <span class="toc-text">hints</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#part-c"><span class="toc-number">5.</span> <span class="toc-text">part C</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#intro-2"><span class="toc-number">5.1.</span> <span class="toc-text">intro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#requirements-2"><span class="toc-number">5.2.</span> <span class="toc-text">requirements</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#evaluation-2"><span class="toc-number">5.3.</span> <span class="toc-text">evaluation</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%84%E5%88%86"><span class="toc-number">6.</span> <span class="toc-text">评分</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E4%BA%A4%E5%AE%9E%E9%AA%8C"><span class="toc-number">7.</span> <span class="toc-text">提交实验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%86%85%E5%AE%B9%E8%A6%81%E6%B1%82"><span class="toc-number">7.1.</span> <span class="toc-text">（1）内容要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%BC%E5%BC%8F%E8%A6%81%E6%B1%82"><span class="toc-number">7.2.</span> <span class="toc-text">（2）格式要求</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://cjinfdu.github.io/ics24/CacheLab/"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://cjinfdu.github.io/ics24/CacheLab/&text=CacheLab"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://cjinfdu.github.io/ics24/CacheLab/&is_video=false&description=CacheLab"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CacheLab&body=Check out this article: https://cjinfdu.github.io/ics24/CacheLab/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://cjinfdu.github.io/ics24/CacheLab/&title=CacheLab"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://cjinfdu.github.io/ics24/CacheLab/&name=CacheLab&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2024 FDUICS-2024助教组
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/ics24/">Home</a></li>
+         
+          <li><a href="/ics24/staff/">Staff</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="https://github.com/cjinfdu/ics24">Github</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/ics24/lib/font-awesome/css/font-awesome.min.css">
+
+
+<link rel="stylesheet" href="/ics24/lib/meslo-LG/styles.css">
+
+
+<link rel="stylesheet" href="/ics24/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+
+<script src="/ics24/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/ics24/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+
+
+<script src="/ics24/js/main.js"></script>
+
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-37473492-6', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+
+
